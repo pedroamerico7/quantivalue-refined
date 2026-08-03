@@ -201,6 +201,8 @@ function formatViews(value) {
 
 export default function App() {
   const [views, setViews] = useState(null);
+  const [displayedViews, setDisplayedViews] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [offerOpen, setOfferOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [cursorPosition, setCursorPosition] = useState({ x: -200, y: -200 });
@@ -245,6 +247,58 @@ export default function App() {
         }
       })
       .catch(() => setViews(null));
+  }, []);
+
+  useEffect(() => {
+    if (views === null) return undefined;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setDisplayedViews(views);
+      return undefined;
+    }
+
+    const duration = 1100;
+    const startedAt = performance.now();
+    const startValue = Math.max(0, views - Math.min(views, 140));
+
+    let frameId;
+
+    function animateCounter(now) {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayedViews(Math.round(startValue + (views - startValue) * eased));
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(animateCounter);
+      }
+    }
+
+    frameId = requestAnimationFrame(animateCounter);
+    return () => cancelAnimationFrame(frameId);
+  }, [views]);
+
+  useEffect(() => {
+    function updateScrollProgress() {
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      setScrollProgress(
+        scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0
+      );
+    }
+
+    updateScrollProgress();
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
+    };
   }, []);
 
   useEffect(() => {
@@ -323,8 +377,28 @@ Typical response time: one business day.`,
     }
   }
 
+  const viewportWidth =
+    typeof window !== "undefined" ? Math.max(window.innerWidth, 1) : 1;
+  const viewportHeight =
+    typeof window !== "undefined" ? Math.max(window.innerHeight, 1) : 1;
+
+  const pointerX = (cursorPosition.x / viewportWidth - 0.5) * 2;
+  const pointerY = (cursorPosition.y / viewportHeight - 0.5) * 2;
+
   return (
-    <div className="app-shell">
+    <div
+      className="app-shell"
+      style={{
+        "--pointer-x": pointerX,
+        "--pointer-y": pointerY,
+      }}
+    >
+      <div
+        className="scroll-progress"
+        aria-hidden="true"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+      />
+
       <div
         className="cursor-glow"
         aria-hidden="true"
@@ -392,7 +466,7 @@ Typical response time: one business day.`,
 
             <div className="hero-proof">
               <div>
-                <strong>{formatViews(views)}+</strong>
+                <strong>{views === null ? "—" : formatViews(displayedViews)}+</strong>
                 <span>recorded visits</span>
               </div>
 
@@ -427,6 +501,10 @@ Typical response time: one business day.`,
             <span className="system-label label-a">SIGNAL_01</span>
             <span className="system-label label-b">VALUE_∞</span>
             <span className="system-label label-c">AI / FINANCE</span>
+
+            <span className="data-orbit data-orbit-a" />
+            <span className="data-orbit data-orbit-b" />
+            <span className="data-orbit data-orbit-c" />
           </div>
         </section>
 
@@ -457,11 +535,12 @@ Typical response time: one business day.`,
   </div>
 
   <div className="advantage-grid">
-    {advantages.map((advantage) => (
+    {advantages.map((advantage, index) => (
       <article
         className="advantage-card"
         key={advantage.title}
         data-reveal
+        style={{ "--reveal-delay": `${index * 80}ms` }}
       >
         <span className="advantage-icon">
           <AdvantageIcon name={advantage.icon} />
@@ -655,6 +734,34 @@ Typical response time: one business day.`,
           </div>
         </section>
 
+
+        <section className="domain-monument" aria-label="QuantiValue.com">
+          <div className="domain-monument-grid" aria-hidden="true" />
+          <div className="domain-monument-aura" aria-hidden="true" />
+
+          <div className="domain-monument-top" data-reveal>
+            <p className="section-tag light">The digital asset</p>
+            <span>Premium global .COM</span>
+          </div>
+
+          <div className="domain-wordmark" data-reveal>
+            <span>QUANTI</span>
+            <span>VALUE</span>
+            <small>.COM</small>
+          </div>
+
+          <div className="domain-monument-bottom" data-reveal>
+            <p>
+              A rare category-ready identity for AI-powered financial
+              intelligence, valuation and quantitative enterprise software.
+            </p>
+
+            <button type="button" onClick={() => setOfferOpen(true)}>
+              Start private acquisition <Arrow />
+            </button>
+          </div>
+        </section>
+
         <section className="acquisition-process" id="process">
           <div className="process-heading" data-reveal>
             <p className="section-tag">Private acquisition process</p>
@@ -670,8 +777,12 @@ Typical response time: one business day.`,
           </div>
 
           <div className="process-steps">
-            {acquisitionSteps.map((step) => (
-              <article key={step.number} data-reveal>
+            {acquisitionSteps.map((step, index) => (
+              <article
+                key={step.number}
+                data-reveal
+                style={{ "--reveal-delay": `${index * 90}ms` }}
+              >
                 <div className="process-number">{step.number}</div>
                 <div>
                   <h3>{step.title}</h3>
@@ -836,7 +947,7 @@ Typical response time: one business day.`,
 
               <div className="modal-stat">
                 <span className="live-dot" />
-                <strong>{formatViews(views)}+ recorded visits</strong>
+                <strong>{views === null ? "—" : formatViews(displayedViews)}+ recorded visits</strong>
               </div>
             </div>
 

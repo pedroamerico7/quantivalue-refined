@@ -1,18 +1,24 @@
-QuantiValue V3.2
+QuantiValue V3.3 — Motion & Luxury Polish
 
-Substitute:
+Replace:
 - src/App.jsx
 - src/styles.css
 
 Preserved:
-- /api/views
-- /api/offer
-- VISITS KV binding
-- OFFERS_DB D1 binding
+- Public KV visit counter
+- D1 private acquisition form
+- V3.2 Market Opportunity
+- FAQ
+- Acquisition process
+- Premium footer
 
 New:
-- Market Opportunity section
-- Interactive institutional FAQ
-- Premium footer
-- Cursor glow on fine-pointer devices
-- Refined motion and responsive behavior
+- Animated visit counter
+- Scroll progress indicator
+- Subtle hero pointer parallax
+- Additional orbit data particles
+- Monumental QUANTIVALUE.COM section
+- Staggered reveal animations
+- Premium button light sweep
+- Unified card hover effects
+- Reduced-motion accessibility
