@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050812"/>
+      <stop offset=".65" stop-color="#0d1730"/>
+      <stop offset="1" stop-color="#17386d"/>
+    </linearGradient>
+    <radialGradient id="aura">
+      <stop offset="0" stop-color="#3b63ff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#3b63ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#fff" stroke-opacity=".055"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="960" cy="110" r="360" fill="url(#aura)"/>
+  <circle cx="1040" cy="315" r="178" fill="none" stroke="#8aa1ff" stroke-opacity=".25"/>
+  <circle cx="1040" cy="315" r="114" fill="none" stroke="#8aa1ff" stroke-opacity=".22"/>
+  <circle cx="1040" cy="315" r="55" fill="#070b14" stroke="#8aa1ff" stroke-opacity=".35"/>
+  <text x="1040" y="335" text-anchor="middle" font-family="Georgia,serif" font-size="62" fill="#fff">Q</text>
+
+  <text x="76" y="90" font-family="Arial,sans-serif" font-size="19" font-weight="600" letter-spacing="5" fill="#9fb2ff">PREMIUM GLOBAL .COM</text>
+  <text x="72" y="250" font-family="Arial,sans-serif" font-size="102" font-weight="800" letter-spacing="-7" fill="#fff">QuantiValue</text>
+  <text x="76" y="330" font-family="Georgia,serif" font-style="italic" font-size="52" fill="#8aa1ff">Intelligence behind every valuation.</text>
+  <text x="76" y="440" font-family="Arial,sans-serif" font-size="26" fill="#c4cee2">AI Valuation • Financial Intelligence • Quantitative Finance</text>
+  <line x1="76" y1="505" x2="760" y2="505" stroke="#fff" stroke-opacity=".18"/>
+  <text x="76" y="557" font-family="Arial,sans-serif" font-size="19" letter-spacing="3" fill="#aeb9cf">AVAILABLE FOR STRATEGIC ACQUISITION</text>
+</svg>

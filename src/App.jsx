@@ -393,6 +393,10 @@ Typical response time: one business day.`,
         "--pointer-y": pointerY,
       }}
     >
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+
       <div
         className="scroll-progress"
         aria-hidden="true"
@@ -407,7 +411,7 @@ Typical response time: one business day.`,
         }}
       />
       <header className="site-header">
-        <a className="logo" href="#top" aria-label="QuantiValue home">
+        <a className="logo" href="#main-content" aria-label="QuantiValue home">
           <span className="logo-symbol">Q</span>
           <span className="logo-name">QuantiValue</span>
         </a>
@@ -428,7 +432,7 @@ Typical response time: one business day.`,
         </button>
       </header>
 
-      <main id="top">
+      <main id="main-content">
         <section className="hero">
           <div className="hero-noise" aria-hidden="true" />
           <div className="hero-aura aura-one" aria-hidden="true" />
@@ -875,7 +879,7 @@ Typical response time: one business day.`,
 
       <footer className="premium-footer">
         <div className="footer-primary">
-          <a className="logo footer-logo" href="#top">
+          <a className="logo footer-logo" href="#main-content">
             <span className="logo-symbol">Q</span>
             <span className="logo-name">QuantiValue</span>
           </a>
@@ -893,6 +897,7 @@ Typical response time: one business day.`,
             <a href="#why">Why QuantiValue</a>
             <a href="#opportunity">Opportunity</a>
             <a href="#process">Acquisition process</a>
+            <a href="/acquisition.html">Acquirer information</a>
           </div>
 
           <div>
@@ -903,13 +908,17 @@ Typical response time: one business day.`,
             <a href="mailto:sales@quantivalue.com">
               sales@quantivalue.com
             </a>
+            <a href="/privacy.html">Privacy</a>
           </div>
         </div>
 
         <div className="footer-bottom">
           <span>© 2026 QuantiValue</span>
           <span>Premium digital asset available for acquisition</span>
-          <a href="#top">Back to top ↑</a>
+          <div className="footer-legal">
+            <a href="/privacy.html">Privacy</a>
+            <a href="#main-content">Back to top ↑</a>
+          </div>
         </div>
       </footer>
 
