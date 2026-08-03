@@ -73,7 +73,17 @@ export async function onRequestPost({ request, env }) {
   )
  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
-      .bind(name, company, email, amount, message, ip, country, userAgent)
+      .bind(
+  name,
+  company,
+  position,
+  buyerCountry,
+  email,
+  amount,
+  message,
+  ip,
+  country,
+  userAgent)
       .run();
 
     const id = result.meta?.last_row_id;
