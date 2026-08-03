@@ -473,6 +473,73 @@ footer {
 }
 
 .advantage-card:hover{
+  .advantage-card:hover{
+    transform:translateY(-8px);
+    border-color:#3B63FF;
+    box-shadow:0 24px 60px rgba(59,99,255,.12);
+}
+
+.advantage-icon{
+    display:block;
+    font-size:34px;
+    margin-bottom:22px;
+}
+
+.advantage-card h3{
+    margin:0 0 14px;
+    font-size:28px;
+    letter-spacing:-.03em;
+}
+
+.advantage-card p{
+    margin:0;
+    color:#6d7688;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.why-statement{
+    margin-top:90px;
+    text-align:center;
+}
+
+.why-statement p{
+    margin:0;
+    font-size:clamp(36px,5vw,64px);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-.05em;
+}
+
+@media(max-width:900px){
+
+    .advantage-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .why-quantivalue{
+        margin:90px auto;
+        padding:0 20px;
+    }
+
+    .why-heading{
+        margin-bottom:45px;
+    }
+
+    .advantage-card{
+        padding:28px;
+    }
+
+    .why-statement{
+        margin-top:60px;
+        text-align:left;
+    }
+
+}
 
     transform:translateY(-8px);
 
