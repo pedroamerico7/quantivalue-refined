@@ -58,9 +58,20 @@ export async function onRequestPost({ request, env }) {
 
   try {
     const result = await env.OFFERS_DB.prepare(
-      `INSERT INTO offers
-        (name, company, email, amount_usd, message, ip_address, country, user_agent)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+     `INSERT INTO offers
+  (
+    name,
+    company,
+    position,
+    buyer_country,
+    email,
+    amount_usd,
+    message,
+    ip_address,
+    country,
+    user_agent
+  )
+ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
       .bind(name, company, email, amount, message, ip, country, userAgent)
       .run();
