@@ -23,6 +23,7 @@ function Arrow() {
 export default function App() {
   const [submitted, setSubmitted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [viewCount, setViewCount] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,6 +32,30 @@ export default function App() {
     );
     document.querySelectorAll("[data-reveal]").forEach(el => observer.observe(el));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const key = "quantivalue-view-counted-at";
+    const lastCounted = Number(localStorage.getItem(key) || 0);
+    const oneDay = 24 * 60 * 60 * 1000;
+    const shouldIncrement = Date.now() - lastCounted > oneDay;
+
+    async function loadViews() {
+      try {
+        const response = await fetch("/api/views", {
+          method: shouldIncrement ? "POST" : "GET",
+          headers: { "Accept": "application/json" },
+        });
+        if (!response.ok) throw new Error("Unable to load view count");
+        const data = await response.json();
+        setViewCount(Number(data.views) || 0);
+        if (shouldIncrement) localStorage.setItem(key, String(Date.now()));
+      } catch {
+        setViewCount(null);
+      }
+    }
+
+    loadViews();
   }, []);
 
   function handleSubmit(event) {
@@ -68,8 +93,13 @@ export default function App() {
             <h1>Intelligence<br />behind every<br /><em>valuation.</em></h1>
             <p className="lede">A distinctive global brand for AI-powered valuation, financial intelligence and quantitative decision systems.</p>
             <div className="hero-actions">
-              <a className="button button-dark" href="#acquisition">Start a confidential conversation <Arrow /></a>
+              <a className="button button-dark" href="#acquisition">Make an offer <Arrow /></a>
               <a className="text-link" href="#rationale">Explore the brand <span>↓</span></a>
+            </div>
+            <div className="public-counter" aria-live="polite">
+              <span className="counter-pulse" aria-hidden="true" />
+              <strong>{viewCount === null ? "—" : viewCount.toLocaleString("en-US") + "+"}</strong>
+              <span>visits to QuantiValue.com</span>
             </div>
           </div>
 
@@ -116,7 +146,7 @@ export default function App() {
           <div className="applications-intro" data-reveal>
             <div>
               <p className="section-label">Potential applications</p>
-              <h2>A category-ready brand for modern financial technology.</h2>
+              <h2>Built for AI, Fintech & Quantitative Finance.</h2>
             </div>
             <p>QuantiValue gives its buyer room to build across high-value markets without sacrificing clarity, authority or international appeal.</p>
           </div>
@@ -183,12 +213,12 @@ export default function App() {
             <a className="direct-email" href="mailto:sales@quantivalue.com">sales@quantivalue.com <Arrow /></a>
           </div>
           <form className="inquiry-form" onSubmit={handleSubmit} data-reveal>
-            <div className="form-head"><span>PRIVATE INQUIRY</span><small>01 / 01</small></div>
+            <div className="form-head"><span>MAKE AN OFFER</span><small>01 / 01</small></div>
             <label>Name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
             <label>Company<input name="company" required autoComplete="organization" placeholder="Organization" /></label>
             <label>Business email<input name="email" type="email" required autoComplete="email" placeholder="name@company.com" /></label>
-            <label>Message<textarea name="message" rows={4} required defaultValue="I would like to discuss the acquisition of QuantiValue.com." /></label>
-            <button type="submit">Request confidential discussion <Arrow /></button>
+            <label>Offer or message<textarea name="message" rows={4} required defaultValue="I would like to discuss an offer for QuantiValue.com." /></label>
+            <button type="submit">Submit acquisition offer <Arrow /></button>
             <p className="form-note">This prepares a private email addressed to sales@quantivalue.com.</p>
             {submitted && <p className="form-status">Your email application should open now.</p>}
           </form>
