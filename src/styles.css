@@ -791,3 +791,445 @@ footer {
     padding: 34px 24px;
   }
 }
+
+/* ===========================
+   V3.2 — INSTITUTIONAL FINISH
+=========================== */
+
+.cursor-glow {
+  position: fixed;
+  top: -170px;
+  left: -170px;
+  z-index: 2;
+  width: 340px;
+  height: 340px;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.24;
+  background: radial-gradient(
+    circle,
+    rgba(59, 99, 255, 0.17) 0%,
+    rgba(59, 99, 255, 0.07) 34%,
+    transparent 70%
+  );
+  filter: blur(4px);
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.site-header,
+main,
+.premium-footer {
+  position: relative;
+  z-index: 3;
+}
+
+/* Market opportunity */
+
+.market-opportunity {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 132px 4.5vw;
+  color: white;
+  background:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    #070b14;
+  background-size: 74px 74px;
+}
+
+.opportunity-aura {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(16px);
+}
+
+.opportunity-aura-one {
+  width: 680px;
+  height: 680px;
+  top: -260px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(59,99,255,0.38), transparent 68%);
+}
+
+.opportunity-aura-two {
+  width: 520px;
+  height: 520px;
+  bottom: -260px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(97,69,255,0.22), transparent 68%);
+}
+
+.opportunity-heading {
+  display: grid;
+  grid-template-columns: 0.45fr 1.55fr;
+  gap: 5vw;
+  align-items: start;
+  margin-bottom: 78px;
+}
+
+.opportunity-heading h2 {
+  margin: 0;
+  max-width: 1150px;
+  font-size: clamp(50px, 6vw, 98px);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+
+.opportunity-equation {
+  display: grid;
+  grid-template-columns: 1fr 72px 1fr 72px 1fr;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.opportunity-equation article {
+  min-height: 300px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.opportunity-equation small {
+  font: 500 9px var(--mono);
+  color: #a9b9ff;
+  letter-spacing: 0.15em;
+}
+
+.opportunity-equation strong {
+  margin: auto 0 18px;
+  font-size: clamp(25px, 2.3vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.opportunity-equation span {
+  color: rgba(224,231,246,0.65);
+  line-height: 1.7;
+}
+
+.opportunity-operator {
+  display: grid;
+  place-items: center;
+  border-left: 1px solid rgba(255,255,255,0.15);
+  border-right: 1px solid rgba(255,255,255,0.15);
+  color: #9fb2ff;
+  font-size: 34px;
+}
+
+.opportunity-result {
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: 0.45fr 1fr 0.8fr;
+  gap: 5vw;
+  align-items: end;
+}
+
+.opportunity-result > span {
+  font: 500 9px var(--mono);
+  color: #9fb2ff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.opportunity-result strong {
+  font-size: clamp(62px, 9vw, 155px);
+  line-height: 0.8;
+  letter-spacing: -0.085em;
+}
+
+.opportunity-result p {
+  margin: 0;
+  color: rgba(224,231,246,0.68);
+  line-height: 1.75;
+}
+
+/* FAQ */
+
+.faq-section {
+  padding: 128px 4.5vw;
+  background: #eef1f6;
+}
+
+.faq-heading {
+  display: grid;
+  grid-template-columns: 0.45fr 1.15fr 0.72fr;
+  gap: 5vw;
+  align-items: start;
+  margin-bottom: 76px;
+}
+
+.faq-heading h2 {
+  margin: 0;
+  font-size: clamp(46px, 5.4vw, 86px);
+  line-height: 1;
+  letter-spacing: -0.065em;
+}
+
+.faq-heading > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.faq-list {
+  border-top: 1px solid var(--ink);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(7,11,20,0.17);
+}
+
+.faq-item button {
+  width: 100%;
+  min-height: 105px;
+  padding: 24px 2px;
+  display: grid;
+  grid-template-columns: 74px 1fr 40px;
+  gap: 22px;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-item button > span {
+  font: 500 9px var(--mono);
+  color: var(--blue);
+  letter-spacing: 0.12em;
+}
+
+.faq-item button strong {
+  font-size: clamp(20px, 2vw, 30px);
+  letter-spacing: -0.04em;
+}
+
+.faq-item button i {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  justify-self: end;
+  border: 1px solid rgba(7,11,20,0.16);
+  border-radius: 50%;
+  font-style: normal;
+  font-size: 21px;
+  transition: transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.faq-item.open button i {
+  transform: rotate(180deg);
+  color: var(--blue);
+  border-color: rgba(59,99,255,0.5);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.faq-answer > p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 40px 0 98px;
+  max-width: 960px;
+  color: var(--muted);
+  line-height: 1.8;
+  transition: padding 0.35s ease;
+}
+
+.faq-item.open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-item.open .faq-answer > p {
+  padding-bottom: 34px;
+}
+
+/* Premium footer */
+
+.premium-footer {
+  min-height: auto;
+  padding: 82px 4.5vw 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  color: white;
+  border-top: 0;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(59,99,255,0.2), transparent 26%),
+    #070b14;
+}
+
+.footer-primary p {
+  margin: 38px 0 0;
+  max-width: 620px;
+  font-size: clamp(38px, 5vw, 76px);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.065em;
+}
+
+.premium-footer .footer-logo {
+  color: white;
+}
+
+.premium-footer .footer-logo .logo-symbol {
+  background: white;
+  color: var(--ink);
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+  align-content: start;
+  padding-top: 6px;
+}
+
+.footer-links > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer-links small {
+  margin-bottom: 10px;
+  color: #9fb2ff;
+  font: 500 9px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.footer-links a,
+.footer-links button {
+  padding: 0;
+  border: 0;
+  color: rgba(230,236,249,0.73);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-links button:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  margin-top: 32px;
+  padding-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 28px;
+  border-top: 1px solid rgba(255,255,255,0.13);
+  color: rgba(230,236,249,0.48);
+  font: 500 9px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.footer-bottom a {
+  color: rgba(230,236,249,0.7);
+}
+
+/* Subtle motion refinements */
+
+.system-ring {
+  will-change: transform;
+}
+
+.advantage-card,
+.brand-advantage-list article,
+.process-steps article,
+.faq-item {
+  backface-visibility: hidden;
+}
+
+@media (max-width: 980px) {
+  .opportunity-heading,
+  .opportunity-result,
+  .faq-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-equation {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-operator {
+    min-height: 70px;
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .opportunity-equation article {
+    min-height: 235px;
+  }
+
+  .premium-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .cursor-glow {
+    display: none;
+  }
+
+  .market-opportunity,
+  .faq-section {
+    padding: 88px 20px;
+  }
+
+  .opportunity-heading {
+    margin-bottom: 52px;
+  }
+
+  .opportunity-equation article {
+    min-height: 220px;
+    padding: 26px 20px;
+  }
+
+  .opportunity-result {
+    margin-top: 54px;
+  }
+
+  .opportunity-result strong {
+    font-size: 66px;
+  }
+
+  .faq-item button {
+    min-height: 92px;
+    grid-template-columns: 42px 1fr 34px;
+    gap: 14px;
+  }
+
+  .faq-answer > p {
+    padding-left: 56px;
+    padding-right: 8px;
+  }
+
+  .premium-footer {
+    padding: 68px 20px 28px;
+    gap: 55px;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    grid-template-columns: 1fr;
+  }
+}

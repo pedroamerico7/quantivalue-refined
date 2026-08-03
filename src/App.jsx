@@ -82,6 +82,34 @@ const acquisitionSteps = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Is QuantiValue.com currently available?",
+    answer:
+      "Yes. QuantiValue.com is available for direct strategic acquisition from the owner.",
+  },
+  {
+    question: "Is there a public asking price?",
+    answer:
+      "No fixed public price is listed. Serious proposals are reviewed individually based on buyer profile, strategic fit and transaction terms.",
+  },
+  {
+    question: "Can the transaction use third-party escrow?",
+    answer:
+      "Yes. A mutually agreed secure escrow provider may be used to protect both parties during payment and transfer.",
+  },
+  {
+    question: "Are acquisition inquiries confidential?",
+    answer:
+      "Yes. Submitted information is stored privately for owner review and is not displayed publicly.",
+  },
+  {
+    question: "What is included in the acquisition?",
+    answer:
+      "The primary asset is the QuantiValue.com domain. Associated brand materials may also be discussed as part of a negotiated transaction.",
+  },
+];
+
 const pillars = [
   {
     number: "01",
@@ -174,6 +202,8 @@ function formatViews(value) {
 export default function App() {
   const [views, setViews] = useState(null);
   const [offerOpen, setOfferOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
+  const [cursorPosition, setCursorPosition] = useState({ x: -200, y: -200 });
   const [offerStatus, setOfferStatus] = useState({
     state: "idle",
     message: "",
@@ -227,6 +257,18 @@ export default function App() {
     window.addEventListener("keydown", closeOnEscape);
 
     return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  useEffect(() => {
+    const finePointer = window.matchMedia("(pointer: fine)");
+    if (!finePointer.matches) return undefined;
+
+    function trackPointer(event) {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+    }
+
+    window.addEventListener("pointermove", trackPointer, { passive: true });
+    return () => window.removeEventListener("pointermove", trackPointer);
   }, []);
 
   async function submitOffer(event) {
@@ -283,6 +325,13 @@ Typical response time: one business day.`,
 
   return (
     <div className="app-shell">
+      <div
+        className="cursor-glow"
+        aria-hidden="true"
+        style={{
+          transform: `translate3d(${cursorPosition.x}px, ${cursorPosition.y}px, 0)`,
+        }}
+      />
       <header className="site-header">
         <a className="logo" href="#top" aria-label="QuantiValue home">
           <span className="logo-symbol">Q</span>
@@ -291,9 +340,9 @@ Typical response time: one business day.`,
 
         <nav aria-label="Primary navigation">
           <a href="#why">Why</a>
-          <a href="#advantages">Advantages</a>
+          <a href="#opportunity">Opportunity</a>
           <a href="#process">Process</a>
-          <a href="#acquire">Acquire</a>
+          <a href="#faq">FAQ</a>
         </nav>
 
         <button
@@ -433,6 +482,54 @@ Typical response time: one business day.`,
     </p>
   </div>
 </section>
+
+
+        <section className="market-opportunity" id="opportunity">
+          <div className="opportunity-aura opportunity-aura-one" aria-hidden="true" />
+          <div className="opportunity-aura opportunity-aura-two" aria-hidden="true" />
+
+          <div className="opportunity-heading" data-reveal>
+            <p className="section-tag light">Market opportunity</p>
+            <h2>
+              Positioned at the convergence
+              <br />
+              of intelligence and value.
+            </h2>
+          </div>
+
+          <div className="opportunity-equation" data-reveal>
+            <article>
+              <small>01</small>
+              <strong>Artificial Intelligence</strong>
+              <span>Models, automation and intelligent decision systems.</span>
+            </article>
+
+            <div className="opportunity-operator">×</div>
+
+            <article>
+              <small>02</small>
+              <strong>Financial Intelligence</strong>
+              <span>Valuation, capital allocation and investment insight.</span>
+            </article>
+
+            <div className="opportunity-operator">×</div>
+
+            <article>
+              <small>03</small>
+              <strong>Enterprise Software</strong>
+              <span>Scalable infrastructure for institutional users.</span>
+            </article>
+          </div>
+
+          <div className="opportunity-result" data-reveal>
+            <span>Category identity</span>
+            <strong>QuantiValue</strong>
+            <p>
+              A name engineered for the point where quantitative technology
+              meets commercial value.
+            </p>
+          </div>
+        </section>
 
         <section className="brand-advantages" id="advantages">
           <div className="brand-advantages-heading" data-reveal>
@@ -589,6 +686,50 @@ Typical response time: one business day.`,
           </div>
         </section>
 
+
+        <section className="faq-section" id="faq">
+          <div className="faq-heading" data-reveal>
+            <p className="section-tag">Acquisition FAQ</p>
+            <h2>
+              Clear answers for
+              <br />
+              serious buyers.
+            </h2>
+            <p>
+              Essential information about availability, confidentiality,
+              negotiation and secure transfer.
+            </p>
+          </div>
+
+          <div className="faq-list">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+
+              return (
+                <article
+                  className={`faq-item ${isOpen ? "open" : ""}`}
+                  key={faq.question}
+                  data-reveal
+                >
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{faq.question}</strong>
+                    <i aria-hidden="true">{isOpen ? "−" : "+"}</i>
+                  </button>
+
+                  <div className="faq-answer">
+                    <p>{faq.answer}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
         <section className="acquire" id="acquire">
           <div className="acquire-grid" aria-hidden="true" />
 
@@ -621,17 +762,44 @@ Typical response time: one business day.`,
         </section>
       </main>
 
-      <footer>
-        <a className="logo footer-logo" href="#top">
-          <span className="logo-symbol">Q</span>
-          <span className="logo-name">QuantiValue</span>
-        </a>
+      <footer className="premium-footer">
+        <div className="footer-primary">
+          <a className="logo footer-logo" href="#top">
+            <span className="logo-symbol">Q</span>
+            <span className="logo-name">QuantiValue</span>
+          </a>
 
-        <span>Premium brand available for acquisition</span>
+          <p>
+            A premium global identity
+            <br />
+            for intelligent finance.
+          </p>
+        </div>
 
-        <a href="mailto:sales@quantivalue.com">
-          sales@quantivalue.com
-        </a>
+        <div className="footer-links">
+          <div>
+            <small>Navigate</small>
+            <a href="#why">Why QuantiValue</a>
+            <a href="#opportunity">Opportunity</a>
+            <a href="#process">Acquisition process</a>
+          </div>
+
+          <div>
+            <small>Acquisition</small>
+            <button type="button" onClick={() => setOfferOpen(true)}>
+              Submit private inquiry
+            </button>
+            <a href="mailto:sales@quantivalue.com">
+              sales@quantivalue.com
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© 2026 QuantiValue</span>
+          <span>Premium digital asset available for acquisition</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
       </footer>
 
       {offerOpen && (
