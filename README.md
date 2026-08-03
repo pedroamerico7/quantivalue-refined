@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="./assets/github-banner.png" width="100%" alt="QuantiValue Banner">
+
+<br><br>
+
 # QUANTIVALUE
 
 ### Intelligence behind every valuation
