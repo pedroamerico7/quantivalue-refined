@@ -10,24 +10,75 @@ const sectors = [
 ];
 const advantages = [
   {
-    icon: "🌍",
+    icon: "globe",
     title: "Global .COM",
-    text: "Recognized worldwide and built for international expansion.",
+    text: "Built for international expansion with immediate global recognition.",
   },
   {
-    icon: "🤖",
+    icon: "brain",
     title: "AI Native",
-    text: "Naturally positioned for artificial intelligence and quantitative systems.",
+    text: "Naturally aligned with artificial intelligence, data and quantitative systems.",
   },
   {
-    icon: "🏢",
+    icon: "building",
     title: "Enterprise Ready",
-    text: "Professional enough for fintechs, research platforms and institutional products.",
+    text: "Designed for institutional products, fintechs and global software companies.",
   },
   {
-    icon: "💎",
+    icon: "gem",
     title: "Long-Term Brand",
-    text: "Timeless, memorable and independent of short-term technology trends.",
+    text: "Built to remain relevant beyond technology cycles and short-term market trends.",
+  },
+];
+
+const brandAdvantages = [
+  {
+    number: "01",
+    title: "Category clarity",
+    text: "The name instantly connects quantitative intelligence with commercial value.",
+  },
+  {
+    number: "02",
+    title: "Institutional credibility",
+    text: "A serious identity for financial infrastructure, analytics and investment technology.",
+  },
+  {
+    number: "03",
+    title: "Global usability",
+    text: "Clear, pronounceable and commercially legible across international markets.",
+  },
+  {
+    number: "04",
+    title: "Strategic longevity",
+    text: "Broad enough to scale across products without being tied to a single technology cycle.",
+  },
+];
+
+const acquisitionSteps = [
+  {
+    number: "01",
+    title: "Private inquiry",
+    text: "Submit a confidential proposal directly to the owner.",
+  },
+  {
+    number: "02",
+    title: "Owner review",
+    text: "Strategic fit, buyer profile and proposal terms are reviewed privately.",
+  },
+  {
+    number: "03",
+    title: "Confidential discussion",
+    text: "Qualified parties may proceed to direct negotiation or an optional NDA.",
+  },
+  {
+    number: "04",
+    title: "Secure escrow",
+    text: "A mutually agreed third-party escrow process protects both sides.",
+  },
+  {
+    number: "05",
+    title: "Domain transfer",
+    text: "Ownership is transferred after funds and transaction terms are confirmed.",
   },
 ];
 
@@ -51,6 +102,69 @@ const pillars = [
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
+}
+
+function AdvantageIcon({ name }) {
+  const common = {
+    width: 28,
+    height: 28,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": true,
+  };
+
+  if (name === "globe") {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18" />
+        <path d="M12 3c2.7 2.5 4 5.5 4 9s-1.3 6.5-4 9" />
+        <path d="M12 3c-2.7 2.5-4 5.5-4 9s1.3 6.5 4 9" />
+      </svg>
+    );
+  }
+
+  if (name === "brain") {
+    return (
+      <svg {...common}>
+        <path d="M9.5 4.5A3.5 3.5 0 0 0 6 8v.5A3.5 3.5 0 0 0 4.5 15 3.5 3.5 0 0 0 8 19.5h1.5" />
+        <path d="M14.5 4.5A3.5 3.5 0 0 1 18 8v.5a3.5 3.5 0 0 1 1.5 6.5 3.5 3.5 0 0 1-3.5 4.5h-1.5" />
+        <path d="M9.5 4.5v15" />
+        <path d="M14.5 4.5v15" />
+        <path d="M6 9.5h3.5" />
+        <path d="M14.5 9.5H18" />
+        <path d="M6.5 15h3" />
+        <path d="M14.5 15h3" />
+      </svg>
+    );
+  }
+
+  if (name === "building") {
+    return (
+      <svg {...common}>
+        <path d="M4 21V7l8-4 8 4v14" />
+        <path d="M8 21v-4h8v4" />
+        <path d="M8 9h.01" />
+        <path d="M12 9h.01" />
+        <path d="M16 9h.01" />
+        <path d="M8 13h.01" />
+        <path d="M12 13h.01" />
+        <path d="M16 13h.01" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <path d="M12 3 20 9l-8 12L4 9l8-6Z" />
+      <path d="m4 9 8 4 8-4" />
+      <path d="m9 4 3 9 3-9" />
+    </svg>
+  );
 }
 
 function formatViews(value) {
@@ -176,8 +290,9 @@ Typical response time: one business day.`,
         </a>
 
         <nav aria-label="Primary navigation">
-          <a href="#thesis">Thesis</a>
-          <a href="#markets">Markets</a>
+          <a href="#why">Why</a>
+          <a href="#advantages">Advantages</a>
+          <a href="#process">Process</a>
           <a href="#acquire">Acquire</a>
         </nav>
 
@@ -300,7 +415,7 @@ Typical response time: one business day.`,
         data-reveal
       >
         <span className="advantage-icon">
-          {advantage.icon}
+          <AdvantageIcon name={advantage.icon} />
         </span>
 
         <h3>{advantage.title}</h3>
@@ -318,6 +433,33 @@ Typical response time: one business day.`,
     </p>
   </div>
 </section>
+
+        <section className="brand-advantages" id="advantages">
+          <div className="brand-advantages-heading" data-reveal>
+            <p className="section-tag">Brand advantages</p>
+            <h2>
+              Designed to become
+              <br />
+              a category-defining company.
+            </h2>
+            <p>
+              QuantiValue is more than a descriptive name. It is a flexible
+              strategic identity built for credibility, scale and long-term relevance.
+            </p>
+          </div>
+
+          <div className="brand-advantage-list">
+            {brandAdvantages.map((item) => (
+              <article key={item.number} data-reveal>
+                <small>{item.number}</small>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <span aria-hidden="true">↗</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="thesis" id="thesis">
           <div className="section-intro" data-reveal>
             <p className="section-tag">Brand thesis</p>
@@ -413,6 +555,37 @@ Typical response time: one business day.`,
                 <p>{pillar.copy}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="acquisition-process" id="process">
+          <div className="process-heading" data-reveal>
+            <p className="section-tag">Private acquisition process</p>
+            <h2>
+              A clear path from
+              <br />
+              inquiry to ownership.
+            </h2>
+            <p>
+              Every serious inquiry is reviewed individually and handled through
+              a direct, confidential transaction process.
+            </p>
+          </div>
+
+          <div className="process-steps">
+            {acquisitionSteps.map((step) => (
+              <article key={step.number} data-reveal>
+                <div className="process-number">{step.number}</div>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="process-note" data-reveal>
+            Serious strategic buyers only. Secure third-party escrow is available.
           </div>
         </section>
 
