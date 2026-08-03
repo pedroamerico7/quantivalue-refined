@@ -327,3 +327,80 @@ footer {
   .modal-brand h2 { font-size:48px; }
   .form-row { grid-template-columns:1fr; gap:0; }
 }
+/* ===== V3 Premium Acquisition ===== */
+
+.offer-form-column{
+    display:flex;
+    flex-direction:column;
+    padding:45px;
+}
+
+.offer-form{
+    padding:0;
+}
+
+.offer-premium-box{
+
+    background:rgba(59,99,255,.04);
+
+    border:1px solid rgba(59,99,255,.12);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:28px;
+
+}
+
+.offer-premium-box strong{
+
+    display:block;
+
+    font-size:18px;
+
+    margin-bottom:10px;
+
+    letter-spacing:-.03em;
+
+}
+
+.offer-premium-box p{
+
+    margin:0;
+
+    color:#737d90;
+
+    line-height:1.7;
+
+}
+
+.offer-trust{
+
+    display:grid;
+
+    gap:8px;
+
+    margin-top:20px;
+
+    color:#737d90;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+}
+
+.offer-trust span{
+
+    display:block;
+
+}
+
+.status.success{
+
+    line-height:1.7;
+
+    white-space:pre-line;
+
+}
