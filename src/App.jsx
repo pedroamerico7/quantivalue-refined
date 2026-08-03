@@ -8,6 +8,28 @@ const sectors = [
   "M&A Technology",
   "Enterprise Analytics",
 ];
+const advantages = [
+  {
+    icon: "🌍",
+    title: "Global .COM",
+    text: "Recognized worldwide and built for international expansion.",
+  },
+  {
+    icon: "🤖",
+    title: "AI Native",
+    text: "Naturally positioned for artificial intelligence and quantitative systems.",
+  },
+  {
+    icon: "🏢",
+    title: "Enterprise Ready",
+    text: "Professional enough for fintechs, research platforms and institutional products.",
+  },
+  {
+    icon: "💎",
+    title: "Long-Term Brand",
+    text: "Timeless, memorable and independent of short-term technology trends.",
+  },
+];
 
 const pillars = [
   {
