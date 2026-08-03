@@ -276,7 +276,48 @@ Typical response time: one business day.`,
             ))}
           </div>
         </section>
+<section className="why-quantivalue" id="why">
+  <div className="why-heading" data-reveal>
+    <p className="section-tag">Why QuantiValue</p>
 
+    <h2>
+      The right name creates
+      <br />
+      an immediate strategic advantage.
+    </h2>
+
+    <p>
+      QuantiValue combines quantitative intelligence with commercial value
+      in a memorable, enterprise-ready global brand.
+    </p>
+  </div>
+
+  <div className="advantage-grid">
+    {advantages.map((advantage) => (
+      <article
+        className="advantage-card"
+        key={advantage.title}
+        data-reveal
+      >
+        <span className="advantage-icon">
+          {advantage.icon}
+        </span>
+
+        <h3>{advantage.title}</h3>
+
+        <p>{advantage.text}</p>
+      </article>
+    ))}
+  </div>
+
+  <div className="why-statement" data-reveal>
+    <p>
+      A premium brand designed
+      <br />
+      for intelligent finance.
+    </p>
+  </div>
+</section>
         <section className="thesis" id="thesis">
           <div className="section-intro" data-reveal>
             <p className="section-tag">Brand thesis</p>
