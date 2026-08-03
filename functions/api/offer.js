@@ -83,7 +83,8 @@ export async function onRequestPost({ request, env }) {
   message,
   ip,
   country,
-  userAgent)
+  userAgent
+      )
       .run();
 
     const id = result.meta?.last_row_id;
