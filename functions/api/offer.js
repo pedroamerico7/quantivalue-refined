@@ -38,6 +38,8 @@ export async function onRequestPost({ request, env }) {
 
   const name = clean(input.name, 100);
   const company = clean(input.company, 120);
+  const position = clean(input.position, 120);
+  const buyerCountry = clean(input.country, 100);
   const email = clean(input.email, 160).toLowerCase();
   const message = clean(input.message, 2000);
   const amount = Number.parseInt(String(input.amount ?? ""), 10);
