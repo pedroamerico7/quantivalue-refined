@@ -473,7 +473,6 @@ footer {
 }
 
 .advantage-card:hover{
-  .advantage-card:hover{
     transform:translateY(-8px);
     border-color:#3B63FF;
     box-shadow:0 24px 60px rgba(59,99,255,.12);
@@ -540,6 +539,3 @@ footer {
     }
 
 }
-
-    transform:translateY(-8px);
-
