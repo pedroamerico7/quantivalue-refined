@@ -2,24 +2,6 @@
 
 <img src="./assets/github-banner.png" width="100%" alt="QuantiValue Banner">
 
-<br><br>
-
-# QUANTIVALUE
-
-### Intelligence behind every valuation
-
-Enterprise identity built for artificial intelligence, quantitative finance and intelligent decision-making.
-
-[Website](https://quantivalue.com) • Brand Book • Make an Offer
-
----
-
-AI Valuation • Quantitative Finance • Enterprise Intelligence
-
-</div>
-
----
-
 # About
 
 QuantiValue is a premium global brand positioned at the intersection of artificial intelligence, quantitative finance and enterprise intelligence.
