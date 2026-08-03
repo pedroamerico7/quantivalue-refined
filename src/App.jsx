@@ -1,235 +1,390 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const applications = [
-  ["01", "AI Valuation", "Business, asset and portfolio valuation powered by intelligent models."],
-  ["02", "Investment Intelligence", "Research, screening and decision support for modern investors."],
-  ["03", "Quantitative Finance", "Analytics, risk systems and data-driven financial infrastructure."],
-  ["04", "Enterprise Analytics", "Financial copilots and intelligence platforms for global organizations."],
-  ["05", "M&A Intelligence", "Due diligence, transaction analysis and strategic valuation software."],
-  ["06", "Private Markets", "Technology for venture capital, private equity and institutional finance."],
+const sectors = [
+  "AI Valuation",
+  "Fintech Infrastructure",
+  "Quantitative Finance",
+  "Investment Intelligence",
+  "M&A Technology",
+  "Enterprise Analytics",
 ];
 
-const reasons = [
-  ["01", "Category clarity", "The name immediately evokes quantitative analysis, valuation and financial intelligence."],
-  ["02", "Global authority", "A professional English-language brand designed for international enterprise markets."],
-  ["03", "Strategic flexibility", "Natural across fintech, SaaS, enterprise AI, investing, M&A and research."],
-  ["04", "Premium ownership", "A concise .com asset with the institutional character to become a category leader."],
+const pillars = [
+  {
+    number: "01",
+    title: "Immediate category signal",
+    copy: "QuantiValue naturally connects quantitative intelligence with valuation, capital allocation and financial decision-making.",
+  },
+  {
+    number: "02",
+    title: "Institutional character",
+    copy: "The name feels credible for enterprise software, investment platforms, research systems and global financial products.",
+  },
+  {
+    number: "03",
+    title: "Global brand architecture",
+    copy: "Concise, pronounceable and commercially clear across international English-language markets.",
+  },
 ];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
+function formatViews(value) {
+  return value === null ? "—" : value.toLocaleString("en-US");
+}
+
 export default function App() {
-  const [submitted, setSubmitted] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [viewCount, setViewCount] = useState(null);
+  const [views, setViews] = useState(null);
+  const [offerOpen, setOfferOpen] = useState(false);
+  const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("is-visible")),
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      }),
       { threshold: 0.12 }
     );
-    document.querySelectorAll("[data-reveal]").forEach(el => observer.observe(el));
+
+    document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const key = "quantivalue-view-counted-at";
-    const lastCounted = Number(localStorage.getItem(key) || 0);
-    const oneDay = 24 * 60 * 60 * 1000;
-    const shouldIncrement = Date.now() - lastCounted > oneDay;
+    const storageKey = "quantivalue-view-counted-at";
+    const last = Number(localStorage.getItem(storageKey) || 0);
+    const shouldIncrement = Date.now() - last > 24 * 60 * 60 * 1000;
 
-    async function loadViews() {
-      try {
-        const response = await fetch("/api/views", {
-          method: shouldIncrement ? "POST" : "GET",
-          headers: { "Accept": "application/json" },
-        });
-        if (!response.ok) throw new Error("Unable to load view count");
-        const data = await response.json();
-        setViewCount(Number(data.views) || 0);
-        if (shouldIncrement) localStorage.setItem(key, String(Date.now()));
-      } catch {
-        setViewCount(null);
-      }
-    }
-
-    loadViews();
+    fetch("/api/views", {
+      method: shouldIncrement ? "POST" : "GET",
+      headers: { Accept: "application/json" },
+    })
+      .then((res) => res.ok ? res.json() : Promise.reject())
+      .then((data) => {
+        setViews(Number(data.views) || 0);
+        if (shouldIncrement) localStorage.setItem(storageKey, String(Date.now()));
+      })
+      .catch(() => setViews(null));
   }, []);
 
-  function handleSubmit(event) {
+  useEffect(() => {
+    function closeOnEscape(event) {
+      if (event.key === "Escape") setOfferOpen(false);
+    }
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  async function submitOffer(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = encodeURIComponent("Confidential QuantiValue.com acquisition inquiry");
-    const body = encodeURIComponent(
-      `Name: ${data.get("name") || ""}\nCompany: ${data.get("company") || ""}\nBusiness email: ${data.get("email") || ""}\n\nMessage:\n${data.get("message") || ""}`
-    );
-    setSubmitted(true);
-    window.location.href = `mailto:sales@quantivalue.com?subject=${subject}&body=${body}`;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const payload = Object.fromEntries(data.entries());
+
+    setOfferStatus({ state: "sending", message: "Encrypting and submitting your offer…" });
+
+    try {
+      const response = await fetch("/api/offer", {
+        method: "POST",
+        headers: { "content-type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Unable to submit the offer.");
+
+      form.reset();
+      setOfferStatus({
+        state: "success",
+        message: `Offer received. Confidential reference: ${result.reference}`,
+      });
+    } catch (error) {
+      setOfferStatus({
+        state: "error",
+        message: error instanceof Error ? error.message : "Unable to submit the offer.",
+      });
+    }
   }
 
   return (
-    <div className="site-shell">
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="QuantiValue home">
-          <span className="brand-mark"><i />Q</span>
-          <span>QuantiValue</span>
+    <div className="app-shell">
+      <header className="site-header">
+        <a className="logo" href="#top" aria-label="QuantiValue home">
+          <span className="logo-symbol">Q</span>
+          <span className="logo-name">QuantiValue</span>
         </a>
-        <nav className={menuOpen ? "desktop-nav open" : "desktop-nav"} aria-label="Primary navigation">
-          <a href="#rationale" onClick={() => setMenuOpen(false)}>Rationale</a>
-          <a href="#applications" onClick={() => setMenuOpen(false)}>Applications</a>
-          <a href="#acquisition" onClick={() => setMenuOpen(false)}>Acquisition</a>
+
+        <nav aria-label="Primary navigation">
+          <a href="#thesis">Thesis</a>
+          <a href="#markets">Markets</a>
+          <a href="#acquire">Acquire</a>
         </nav>
-        <a className="nav-cta" href="#acquisition">Private inquiry <Arrow /></a>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? "×" : "☰"}</button>
+
+        <button className="header-offer" type="button" onClick={() => setOfferOpen(true)}>
+          Private acquisition <Arrow />
+        </button>
       </header>
 
       <main id="top">
         <section className="hero">
-          <div className="hero-grid" aria-hidden="true" />
-          <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span /> Premium .com brand available for acquisition</div>
-            <h1>Intelligence<br />behind every<br /><em>valuation.</em></h1>
-            <p className="lede">A distinctive global brand for AI-powered valuation, financial intelligence and quantitative decision systems.</p>
+          <div className="hero-noise" aria-hidden="true" />
+          <div className="hero-aura aura-one" aria-hidden="true" />
+          <div className="hero-aura aura-two" aria-hidden="true" />
+
+          <div className="hero-content" data-reveal>
+            <div className="availability">
+              <span className="live-dot" />
+              Premium .COM available for acquisition
+            </div>
+
+            <h1>
+              The brand for
+              <span>intelligent value.</span>
+            </h1>
+
+            <p className="hero-description">
+              QuantiValue.com is a premium global identity for AI-powered valuation,
+              quantitative finance and financial intelligence.
+            </p>
+
             <div className="hero-actions">
-              <a className="button button-dark" href="#acquisition">Make an offer <Arrow /></a>
-              <a className="text-link" href="#rationale">Explore the brand <span>↓</span></a>
+              <button className="primary-cta" type="button" onClick={() => setOfferOpen(true)}>
+                Make an Offer <Arrow />
+              </button>
+              <a className="secondary-cta" href="#thesis">
+                Explore the opportunity <span>↓</span>
+              </a>
             </div>
-            <div className="public-counter" aria-live="polite">
-              <span className="counter-pulse" aria-hidden="true" />
-              <strong>{viewCount === null ? "—" : viewCount.toLocaleString("en-US") + "+"}</strong>
-              <span>visits to QuantiValue.com</span>
+
+            <div className="hero-proof">
+              <div>
+                <strong>{formatViews(views)}+</strong>
+                <span>recorded visits</span>
+              </div>
+              <div>
+                <strong>.COM</strong>
+                <span>global standard</span>
+              </div>
+              <div>
+                <strong>Direct</strong>
+                <span>owner acquisition</span>
+              </div>
             </div>
           </div>
 
-          <div className="hero-visual" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit orbit-three" />
-            <div className="visual-core"><small>Quantitative</small><strong>Q</strong><small>Value</small></div>
-            <span className="data-chip chip-a">SIGNAL / 01</span>
-            <span className="data-chip chip-b">VALUE / ∞</span>
-            <span className="data-chip chip-c">AI × FINANCE</span>
+          <div className="hero-system" aria-hidden="true">
+            <div className="system-grid" />
+            <div className="system-ring ring-a" />
+            <div className="system-ring ring-b" />
+            <div className="system-ring ring-c" />
+            <div className="system-core">
+              <small>QUANTITATIVE</small>
+              <strong>Q</strong>
+              <small>VALUE</small>
+            </div>
+            <span className="system-node node-a" />
+            <span className="system-node node-b" />
+            <span className="system-node node-c" />
+            <span className="system-label label-a">SIGNAL_01</span>
+            <span className="system-label label-b">VALUE_∞</span>
+            <span className="system-label label-c">AI / FINANCE</span>
           </div>
         </section>
 
-        <section className="trust-strip" data-reveal aria-label="Brand qualities">
-          <div><small>01</small><strong>Premium .COM</strong><span>Global commercial standard</span></div>
-          <div><small>02</small><strong>Enterprise Ready</strong><span>Institutional brand character</span></div>
-          <div><small>03</small><strong>Category Native</strong><span>AI, valuation and finance</span></div>
-          <div><small>04</small><strong>Privately Held</strong><span>Direct owner transaction</span></div>
+        <section className="sector-rail" aria-label="Target markets">
+          <div className="sector-track">
+            {[...sectors, ...sectors].map((sector, index) => (
+              <span key={`${sector}-${index}`}>{sector}<i /></span>
+            ))}
+          </div>
         </section>
 
-        <section className="rationale section-dark" id="rationale">
-          <div className="section-head" data-reveal>
-            <p className="section-label">Brand rationale</p>
-            <h2>Two powerful ideas.<br /><span>One ownable name.</span></h2>
+        <section className="thesis" id="thesis">
+          <div className="section-intro" data-reveal>
+            <p className="section-tag">Brand thesis</p>
+            <h2>Quantitative intelligence.<br />Commercial value.</h2>
+            <p>
+              A category-ready name that makes the product promise legible before
+              the first demo, model or transaction.
+            </p>
           </div>
-          <div className="rationale-stage" data-reveal>
+
+          <div className="equation" data-reveal>
             <article>
               <small>QUANTI</small>
-              <h3>Quantitative Intelligence</h3>
-              <p>Models, data, forecasting, analytical precision and machine intelligence.</p>
+              <strong>Models</strong>
+              <span>Data, forecasting, precision and machine intelligence.</span>
             </article>
-            <div className="rationale-symbol">×</div>
+            <div className="equation-mark">×</div>
             <article>
               <small>VALUE</small>
-              <h3>Value Creation</h3>
-              <p>Valuation, investment insight, strategic decisions and financial outcomes.</p>
+              <strong>Outcomes</strong>
+              <span>Valuation, investment insight and strategic decisions.</span>
             </article>
-          </div>
-          <div className="wordmark-line" data-reveal><span>QUANTI</span><i /><span>VALUE</span></div>
-        </section>
-
-        <section className="applications" id="applications">
-          <div className="applications-intro" data-reveal>
-            <div>
-              <p className="section-label">Potential applications</p>
-              <h2>Built for AI, Fintech & Quantitative Finance.</h2>
+            <div className="equation-result">
+              <small>RESULT</small>
+              <strong>QuantiValue</strong>
             </div>
-            <p>QuantiValue gives its buyer room to build across high-value markets without sacrificing clarity, authority or international appeal.</p>
           </div>
-          <div className="application-grid">
-            {applications.map(([n, title, text]) => (
-              <article key={n} data-reveal>
-                <div className="card-top"><small>{n}</small><Arrow /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
+        </section>
+
+        <section className="markets" id="markets">
+          <div className="markets-title" data-reveal>
+            <p className="section-tag">Built for valuable markets</p>
+            <h2>One name.<br />Multiple billion-dollar categories.</h2>
+          </div>
+
+          <div className="market-grid">
+            {sectors.map((sector, index) => (
+              <article key={sector} data-reveal>
+                <small>{String(index + 1).padStart(2, "0")}</small>
+                <h3>{sector}</h3>
+                <span className="market-arrow">↗</span>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="manifesto">
-          <div className="manifesto-copy" data-reveal>
-            <p className="section-label">Positioning</p>
-            <blockquote>“A name that sounds established before the company is built.”</blockquote>
+        <section className="brand-film">
+          <div className="film-light film-light-a" aria-hidden="true" />
+          <div className="film-light film-light-b" aria-hidden="true" />
+          <div className="film-copy" data-reveal>
+            <p className="section-tag light">Positioning</p>
+            <blockquote>
+              “A name that sounds established before the company is built.”
+            </blockquote>
           </div>
-          <div className="manifesto-metric" data-reveal>
-            <span>AI</span><i />
-            <span>FINANCE</span><i />
-            <span>VALUE</span>
-          </div>
+          <div className="film-word" aria-hidden="true">QV</div>
         </section>
 
-        <section className="reasons">
-          <div className="reasons-heading" data-reveal>
-            <p className="section-label">Why QuantiValue</p>
-            <h2>Designed to scale from product to institution.</h2>
-            <p>Concise enough for software. Credible enough for enterprise. Broad enough for a category-defining platform.</p>
+        <section className="pillars">
+          <div className="pillars-heading" data-reveal>
+            <p className="section-tag">Why it works</p>
+            <h2>Designed for institutional ambition.</h2>
           </div>
-          <div className="reason-list">
-            {reasons.map(([n, title, text]) => (
-              <article key={n} data-reveal>
-                <small>{n}</small>
-                <div><h3>{title}</h3><p>{text}</p></div>
-                <span className="reason-arrow">↗</span>
+
+          <div className="pillar-list">
+            {pillars.map((pillar) => (
+              <article key={pillar.number} data-reveal>
+                <small>{pillar.number}</small>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.copy}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="asset-profile">
-          <div className="asset-copy" data-reveal>
-            <p className="section-label">Private acquisition opportunity</p>
-            <h2>A strategic name, ready for its category leader.</h2>
-            <p>QuantiValue is an independently conceived digital brand created to unite quantitative intelligence with value creation.</p>
+        <section className="acquire" id="acquire">
+          <div className="acquire-grid" aria-hidden="true" />
+          <div className="acquire-copy" data-reveal>
+            <p className="section-tag light">Private acquisition</p>
+            <h2>Acquire the name behind intelligent valuation.</h2>
+            <p>
+              QuantiValue.com is available through a direct, confidential owner
+              transaction. Serious strategic inquiries are welcome.
+            </p>
+            <div className="acquire-details">
+              <span>Premium .COM</span>
+              <span>Secure transfer</span>
+              <span>Global rights</span>
+            </div>
           </div>
-          <div className="asset-panel" data-reveal>
-            <div><small>Digital asset</small><strong>QuantiValue.com</strong><span>Premium global brand</span></div>
-            <div><small>Extension</small><strong>.COM</strong><span>Commercial gold standard</span></div>
-            <div><small>Positioning</small><strong>AI × FINANCE</strong><span>Immediate category relevance</span></div>
-            <div><small>Transaction</small><strong>CONFIDENTIAL</strong><span>Direct owner acquisition</span></div>
-          </div>
-        </section>
 
-        <section className="acquisition" id="acquisition">
-          <div className="acquisition-glow" aria-hidden="true" />
-          <div className="acquisition-copy" data-reveal>
-            <p className="section-label">Confidential acquisition</p>
-            <h2>Own the name behind the next financial intelligence platform.</h2>
-            <p>QuantiValue.com is privately held and available for acquisition by a qualified organization.</p>
-            <a className="direct-email" href="mailto:sales@quantivalue.com">sales@quantivalue.com <Arrow /></a>
-          </div>
-          <form className="inquiry-form" onSubmit={handleSubmit} data-reveal>
-            <div className="form-head"><span>MAKE AN OFFER</span><small>01 / 01</small></div>
-            <label>Name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
-            <label>Company<input name="company" required autoComplete="organization" placeholder="Organization" /></label>
-            <label>Business email<input name="email" type="email" required autoComplete="email" placeholder="name@company.com" /></label>
-            <label>Offer or message<textarea name="message" rows={4} required defaultValue="I would like to discuss an offer for QuantiValue.com." /></label>
-            <button type="submit">Submit acquisition offer <Arrow /></button>
-            <p className="form-note">This prepares a private email addressed to sales@quantivalue.com.</p>
-            {submitted && <p className="form-status">Your email application should open now.</p>}
-          </form>
+          <button className="acquire-button" type="button" onClick={() => setOfferOpen(true)}>
+            <span>Start a confidential conversation</span>
+            <strong>Make an Offer</strong>
+            <Arrow />
+          </button>
         </section>
       </main>
 
       <footer>
-        <a className="brand" href="#top"><span className="brand-mark"><i />Q</span><span>QuantiValue</span></a>
-        <p>Premium AI & Financial Intelligence Brand</p>
-        <span>© 2026 QuantiValue</span>
+        <a className="logo footer-logo" href="#top">
+          <span className="logo-symbol">Q</span>
+          <span className="logo-name">QuantiValue</span>
+        </a>
+        <span>Premium brand available for acquisition</span>
+        <a href="mailto:sales@quantivalue.com">sales@quantivalue.com</a>
       </footer>
+
+      {offerOpen && (
+        <div className="modal-backdrop" onMouseDown={() => setOfferOpen(false)}>
+          <section
+            className="offer-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="offer-title"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button className="modal-close" type="button" onClick={() => setOfferOpen(false)} aria-label="Close">
+              ×
+            </button>
+
+            <div className="modal-brand">
+              <p className="section-tag light">Confidential acquisition</p>
+              <h2 id="offer-title">Make an Offer</h2>
+              <p>
+                Submit a serious proposal for QuantiValue.com. Details are encrypted
+                in transit and stored privately for owner review.
+              </p>
+              <div className="modal-stat">
+                <span className="live-dot" />
+                <strong>{formatViews(views)}+ recorded visits</strong>
+              </div>
+            </div>
+
+            <form className="offer-form" onSubmit={submitOffer}>
+              <div className="form-row">
+                <label>
+                  Name
+                  <input name="name" required minLength="2" maxLength="100" placeholder="Your name" />
+                </label>
+                <label>
+                  Company
+                  <input name="company" required minLength="2" maxLength="120" placeholder="Organization" />
+                </label>
+              </div>
+              <label>
+                Business email
+                <input name="email" type="email" required maxLength="160" placeholder="name@company.com" />
+              </label>
+              <label>
+                Offer amount (USD)
+                <input name="amount" type="number" min="1" step="1" required placeholder="25000" />
+              </label>
+              <label>
+                Message
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  minLength="10"
+                  maxLength="2000"
+                  defaultValue="I would like to discuss an acquisition of QuantiValue.com."
+                />
+              </label>
+              <label className="honeypot" aria-hidden="true">
+                Website
+                <input name="website" tabIndex="-1" autoComplete="off" />
+              </label>
+
+              <button type="submit" disabled={offerStatus.state === "sending"}>
+                {offerStatus.state === "sending" ? "Submitting securely…" : "Submit confidential offer"}
+                <Arrow />
+              </button>
+
+              <p className="privacy-note">Private owner review • No public disclosure</p>
+
+              {offerStatus.state !== "idle" && (
+                <p className={`status ${offerStatus.state}`} role="status">
+                  {offerStatus.message}
+                </p>
+              )}
+            </form>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
