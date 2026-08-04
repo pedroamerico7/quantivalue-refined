@@ -52,6 +52,39 @@ function parseRecipients(value) {
     .filter(Boolean);
 }
 
+function cleanAttribution(input) {
+  const data = input && typeof input === "object" ? input : {};
+
+  return {
+    source: clean(data.source, 120),
+    medium: clean(data.medium, 120),
+    campaign: clean(data.campaign, 160),
+    content: clean(data.content, 160),
+    term: clean(data.term, 160),
+    prospect: clean(data.prospect, 160),
+    targetCompany: clean(data.targetCompany, 160),
+    landingPage: clean(data.landingPage, 240),
+    referrer: clean(data.referrer, 500),
+    firstSeenAt: clean(data.firstSeenAt, 40),
+    lastSeenAt: clean(data.lastSeenAt, 40),
+  };
+}
+
+function attributionSummary(attribution) {
+  const rows = [
+    ["Source", attribution.source],
+    ["Medium", attribution.medium],
+    ["Campaign", attribution.campaign],
+    ["Content", attribution.content],
+    ["Prospect", attribution.prospect],
+    ["Target company", attribution.targetCompany],
+    ["Landing page", attribution.landingPage],
+    ["Referrer", attribution.referrer],
+  ].filter(([, value]) => value);
+
+  return rows;
+}
+
 async function sendOfferNotification(env, offer) {
   const apiKey = String(env.RESEND_API_KEY || "").trim();
   const from = String(env.OFFER_FROM_EMAIL || "").trim();
@@ -122,7 +155,27 @@ async function sendOfferNotification(env, offer) {
             </tr>
           </table>
 
-          <p style="font-size:12px;color:#8a95a8;margin-bottom:0">
+          ${
+            attributionSummary(offer.attribution).length
+              ? `
+                <h2 style="font-size:16px;margin:28px 0 10px">Campaign attribution</h2>
+                <table style="width:100%;border-collapse:collapse">
+                  ${attributionSummary(offer.attribution)
+                    .map(
+                      ([label, value]) => `
+                        <tr>
+                          <td style="padding:8px 12px;border-bottom:1px solid #edf0f6"><strong>${escapeHtml(label)}</strong></td>
+                          <td style="padding:8px 12px;border-bottom:1px solid #edf0f6">${escapeHtml(value)}</td>
+                        </tr>
+                      `
+                    )
+                    .join("")}
+                </table>
+              `
+              : ""
+          }
+
+          <p style="font-size:12px;color:#8a95a8;margin:24px 0 0">
             Country: ${escapeHtml(offer.country || "Unknown")} ·
             Received: ${escapeHtml(offer.receivedAt)}
           </p>
@@ -138,6 +191,7 @@ async function sendOfferNotification(env, offer) {
       `Offer: ${formatUsd(offer.amount)}`,
       `Strategic notes: ${offer.message || "No notes provided."}`,
       `Country: ${offer.country || "Unknown"}`,
+      ...attributionSummary(offer.attribution).map(([label, value]) => `${label}: ${value}`),
       `Received: ${offer.receivedAt}`,
     ].join("\n"),
     tags: [
@@ -230,6 +284,7 @@ export async function onRequestPost({ request, env }) {
   const email = clean(input.email, 160).toLowerCase();
   const message = clean(input.message, 2000);
   const amount = Number.parseInt(String(input.amount ?? ""), 10);
+  const attribution = cleanAttribution(input.attribution);
 
   if (name.length < 2) return json({ error: "Please enter your name." }, 400);
   if (company.length < 2) return json({ error: "Please enter your company." }, 400);
@@ -255,6 +310,48 @@ export async function onRequestPost({ request, env }) {
     const reference = id ? createPublicReference() : "QV-RECEIVED";
     const receivedAt = new Date().toISOString();
 
+    if (id) {
+      await env.OFFERS_DB.prepare(
+        `CREATE TABLE IF NOT EXISTS offer_attribution (
+          offer_id INTEGER PRIMARY KEY,
+          source TEXT,
+          medium TEXT,
+          campaign TEXT,
+          content TEXT,
+          term TEXT,
+          prospect TEXT,
+          target_company TEXT,
+          landing_page TEXT,
+          referrer TEXT,
+          first_seen_at TEXT,
+          last_seen_at TEXT,
+          FOREIGN KEY (offer_id) REFERENCES offers(id)
+        )`
+      ).run();
+
+      await env.OFFERS_DB.prepare(
+        `INSERT OR REPLACE INTO offer_attribution
+          (offer_id, source, medium, campaign, content, term, prospect, target_company,
+           landing_page, referrer, first_seen_at, last_seen_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      )
+        .bind(
+          id,
+          attribution.source,
+          attribution.medium,
+          attribution.campaign,
+          attribution.content,
+          attribution.term,
+          attribution.prospect,
+          attribution.targetCompany,
+          attribution.landingPage,
+          attribution.referrer,
+          attribution.firstSeenAt,
+          attribution.lastSeenAt
+        )
+        .run();
+    }
+
     let notification = { sent: false, reason: "not_attempted" };
     try {
       notification = await sendOfferNotification(env, {
@@ -266,6 +363,7 @@ export async function onRequestPost({ request, env }) {
         amount,
         message,
         country,
+        attribution,
       });
     } catch (error) {
       console.error("Unexpected offer notification error", error);

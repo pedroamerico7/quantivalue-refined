@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
 import BuyerConfidence from "./components/BuyerConfidence";
+import { attributionPayload, captureAttribution } from "./utils/attribution";
 
 const sectors = [
   "AI Valuation",
@@ -358,6 +359,10 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   function openAcquisitionModal() {
     setOfferStatus({ state: "idle", message: "" });
     setOfferReference("");
@@ -398,6 +403,7 @@ export default function App() {
     payload.email = email;
     payload.amount = String(amount);
     payload.message = String(payload.message || "").trim();
+    payload.attribution = attributionPayload();
 
     setOfferErrors({});
     setOfferReference("");

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuantiValue Campaign Link Builder</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fc;color:#07101f;margin:0;padding:40px}
+main{max-width:760px;margin:auto;background:#fff;border:1px solid #dfe5f2;border-radius:20px;padding:28px}
+h1{margin-top:0}label{display:grid;gap:7px;margin:15px 0;font-weight:700}
+input,select{min-height:44px;border:1px solid #cad3e3;border-radius:10px;padding:0 12px;font:inherit}
+button{min-height:46px;border:0;border-radius:10px;padding:0 18px;background:#07101f;color:#fff;font-weight:800;cursor:pointer}
+.output{margin-top:22px;padding:16px;border-radius:12px;background:#eef3ff;word-break:break-all}
+small{color:#667189}
+</style>
+</head>
+<body>
+<main>
+<h1>Campaign Link Builder</h1>
+<p>Create a unique, trackable link for each prospect. Open this file locally in your browser.</p>
+<label>Landing page
+<select id="page"><option value="https://quantivalue.com/enterprise.html">Enterprise overview</option><option value="https://quantivalue.com/">Main site</option></select>
+</label>
+<label>Source<input id="source" value="outbound"></label>
+<label>Medium<input id="medium" value="email"></label>
+<label>Campaign<input id="campaign" value="strategic-buyers-2026"></label>
+<label>Prospect name<input id="prospect" placeholder="Jane Smith"></label>
+<label>Company<input id="company" placeholder="Company Inc."></label>
+<label>Content / message variant<input id="content" placeholder="ceo-email-v1"></label>
+<button id="build">Build link</button>
+<div class="output" id="output">Your link will appear here.</div>
+<p><small>Never put confidential data in the URL. Prospect and company are for internal attribution only.</small></p>
+</main>
+<script>
+document.getElementById("build").addEventListener("click", async () => {
+  const url = new URL(document.getElementById("page").value);
+  const fields = {
+    utm_source: "source",
+    utm_medium: "medium",
+    utm_campaign: "campaign",
+    utm_content: "content",
+    prospect: "prospect",
+    company: "company"
+  };
+  Object.entries(fields).forEach(([key,id]) => {
+    const value = document.getElementById(id).value.trim();
+    if (value) url.searchParams.set(key,value);
+  });
+  const text = url.toString();
+  document.getElementById("output").textContent = text;
+  try { await navigator.clipboard.writeText(text); } catch {}
+});
+</script>
+</body>
+</html>
