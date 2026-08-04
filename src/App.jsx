@@ -3,6 +3,7 @@ import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
 import BuyerConfidence from "./components/BuyerConfidence";
 import InstitutionalTrust from "./components/InstitutionalTrust";
+import CorporateOverview from "./components/CorporateOverview";
 import { attributionPayload, captureAttribution } from "./utils/attribution";
 
 const sectors = [
@@ -473,11 +474,11 @@ export default function App() {
           className={mobileMenuOpen ? "mobile-open" : ""}
           aria-label="Primary navigation"
         >
-          <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>Platform</a>
-          <a className={activeSection === "technology" ? "active" : ""} href="#technology" onClick={() => setMobileMenuOpen(false)}>Technology</a>
+          <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>AI Platform</a>
+          <a className={activeSection === "technology" ? "active" : ""} href="#technology" onClick={() => setMobileMenuOpen(false)}>Applications</a>
           <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" onClick={() => setMobileMenuOpen(false)}>Assets</a>
           <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room" onClick={() => setMobileMenuOpen(false)}>Brief</a>
-          <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Trust</a>
+          <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Acquisition</a>
           <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
           <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
           <a className={activeSection === "acquire" ? "active" : ""} href="#acquire" onClick={() => setMobileMenuOpen(false)}>Contact</a>
@@ -521,8 +522,8 @@ export default function App() {
             </div>
 
             <h1>
-              <span className="hero-title-main">A premium global brand.</span>
-              <span className="hero-title-signature">Available for acquisition.</span>
+              <span className="hero-title-main">A strategic global brand.</span>
+              <span className="hero-title-signature">For AI and financial intelligence.</span>
             </h1>
 
             <p className="hero-description">
@@ -724,6 +725,8 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <CorporateOverview onOpenDiscussion={openAcquisitionModal} />
 
         <section className="technology" id="technology">
           <div className="technology-heading" data-reveal>

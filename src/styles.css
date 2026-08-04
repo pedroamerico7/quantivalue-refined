@@ -5302,3 +5302,360 @@ main{
   .institutional-cta{align-items:flex-start;flex-direction:column;padding:24px 20px}
   .institutional-cta button{width:100%}
 }
+
+
+/* Sprint 57 — Corporate Visual System */
+:root{
+  --corp-navy:#0b1730;
+  --corp-blue:#2854c7;
+  --corp-blue-2:#416bd5;
+  --corp-ink:#172033;
+  --corp-muted:#647087;
+  --corp-line:#d8deea;
+  --corp-soft:#f3f6fb;
+  --corp-white:#ffffff;
+  --corp-radius:4px;
+}
+
+/* Reduce the startup/futuristic feel. */
+.hero-noise,
+.hero-aura,
+.hero-grid,
+.film-particles,
+.dashboard-glow,
+.demo-orbit,
+.demo-pulse{
+  opacity:.18!important;
+}
+
+.hero-title-signature,
+.section-title em,
+.thesis-title em{
+  color:var(--corp-blue)!important;
+  text-shadow:none!important;
+}
+
+.section-tag,
+.eyebrow,
+.kicker,
+.modal-kicker{
+  color:var(--corp-blue)!important;
+  letter-spacing:.11em!important;
+}
+
+h1,h2,h3,h4{
+  text-rendering:optimizeLegibility;
+}
+
+p{
+  text-wrap:pretty;
+}
+
+/* Corporate header: calm, readable, and consistent. */
+.site-header,
+.site-header.is-compact{
+  background:rgba(239,244,252,.94)!important;
+  border-bottom:1px solid rgba(40,84,199,.18)!important;
+  box-shadow:0 6px 18px rgba(20,42,86,.07)!important;
+  backdrop-filter:blur(16px) saturate(115%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(115%)!important;
+}
+
+.site-header nav a{
+  color:#47546c!important;
+  font-size:9px!important;
+  letter-spacing:.10em!important;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active{
+  color:var(--corp-blue)!important;
+}
+
+.header-offer,
+.mobile-nav-offer{
+  border-radius:var(--corp-radius)!important;
+  background:var(--corp-blue)!important;
+  box-shadow:none!important;
+}
+
+.header-offer:hover,
+.mobile-nav-offer:hover{
+  background:#1f46ad!important;
+  transform:none!important;
+}
+
+/* Executive overview */
+.corporate-overview{
+  padding:clamp(72px,8vw,112px) clamp(22px,7vw,112px);
+  background:var(--corp-white);
+  border-bottom:1px solid var(--corp-line);
+}
+
+.corporate-overview-inner{
+  width:min(1240px,100%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.72fr);
+  gap:clamp(46px,7vw,105px);
+  align-items:start;
+}
+
+.corporate-overview-copy h2{
+  max-width:820px;
+  margin:12px 0 20px;
+  color:var(--corp-ink);
+  font-size:clamp(42px,5.1vw,70px);
+  line-height:1;
+  letter-spacing:-.055em;
+}
+
+.corporate-overview-copy>p:not(.section-tag){
+  max-width:760px;
+  margin:0;
+  color:var(--corp-muted);
+  font-size:16px;
+  line-height:1.75;
+}
+
+.corporate-overview-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
+}
+
+.corporate-overview-actions button,
+.corporate-overview-actions a{
+  min-height:48px;
+  padding:0 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border-radius:var(--corp-radius);
+  font-size:11px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.corporate-overview-actions button{
+  border:1px solid var(--corp-blue);
+  color:#fff;
+  background:var(--corp-blue);
+  cursor:pointer;
+}
+
+.corporate-overview-actions a{
+  border:1px solid #b9c5da;
+  color:var(--corp-ink);
+  background:#fff;
+}
+
+.corporate-facts{
+  margin:0;
+  border-top:1px solid var(--corp-line);
+}
+
+.corporate-facts div{
+  min-height:62px;
+  padding:13px 0;
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:20px;
+  align-items:center;
+  border-bottom:1px solid var(--corp-line);
+}
+
+.corporate-facts dt{
+  color:#778197;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.corporate-facts dd{
+  margin:0;
+  color:var(--corp-ink);
+  font-size:13px;
+  font-weight:750;
+  text-align:right;
+}
+
+/* Straighter enterprise modules. */
+.technology-card,
+.asset-card,
+.investor-room article,
+.strategic-thesis-panel,
+.strategic-highlights article,
+.strategic-application-grid article,
+.strategic-validation,
+.strategic-final-cta,
+.product-demo-shell,
+.demo-control-panel,
+.demo-output-panel,
+.buyer-trust-grid article,
+.buyer-secure-transaction,
+.buyer-faq-list details,
+.buyer-enterprise-cta,
+.institutional-signal-grid article,
+.institutional-timeline,
+.institutional-cta,
+.command-readiness,
+.command-metrics,
+.command-checklist,
+.command-downloads,
+.command-download-card,
+.command-transaction,
+.transaction-faq details,
+.acquisition-modal,
+.offer-success-card,
+.modal-card{
+  border-radius:var(--corp-radius)!important;
+}
+
+/* Lower visual noise and shadow depth. */
+.technology-card,
+.asset-card,
+.investor-room article,
+.strategic-highlights article,
+.strategic-application-grid article,
+.buyer-trust-grid article,
+.institutional-signal-grid article,
+.command-download-card{
+  box-shadow:none!important;
+  border-color:var(--corp-line)!important;
+}
+
+.technology,
+.thesis,
+.market-opportunity,
+.pillars,
+.asset-package,
+.investor-room,
+.strategic-buyer-suite,
+.buyer-confidence,
+.transaction-faq{
+  background-image:none!important;
+}
+
+/* Corporate sections use disciplined neutral surfaces. */
+.technology,
+.market-opportunity,
+.asset-package,
+.strategic-buyer-suite,
+.transaction-faq{
+  background:var(--corp-soft)!important;
+}
+
+.thesis,
+.pillars,
+.investor-room,
+.product-demo,
+.buyer-confidence{
+  background:var(--corp-white)!important;
+}
+
+.technology-card,
+.asset-card,
+.investor-room article,
+.strategic-highlights article,
+.strategic-application-grid article{
+  background:#fff!important;
+}
+
+/* Dashboard and AI demo become an enterprise product exhibit. */
+.dashboard-showcase,
+.product-demo-shell{
+  border:1px solid #263655!important;
+  border-radius:var(--corp-radius)!important;
+  box-shadow:0 18px 44px rgba(11,23,48,.12)!important;
+}
+
+.dashboard-topbar,
+.product-demo-topbar{
+  border-radius:0!important;
+}
+
+.demo-control-panel,
+.demo-output-panel{
+  border-color:rgba(135,158,205,.18)!important;
+  box-shadow:none!important;
+}
+
+/* Buttons: fewer gradients and restrained motion. */
+.hero-primary,
+.primary-cta,
+.strategic-thesis-actions button,
+.strategic-final-cta button,
+.buyer-enterprise-cta button,
+.institutional-cta button,
+.command-open-button,
+.modal-submit{
+  border-radius:var(--corp-radius)!important;
+  background:var(--corp-blue)!important;
+  box-shadow:none!important;
+}
+
+.hero-secondary,
+.strategic-thesis-actions a,
+.buyer-enterprise-cta a,
+.corporate-overview-actions a{
+  border-radius:var(--corp-radius)!important;
+}
+
+button,
+a{
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease,opacity .16s ease!important;
+}
+
+/* Remove decorative movement for a more serious enterprise presentation. */
+@media(prefers-reduced-motion:no-preference){
+  .hero-orb,
+  .hero-aura,
+  .dashboard-glow,
+  .demo-orbit,
+  .demo-pulse{
+    animation:none!important;
+  }
+}
+
+@media(max-width:900px){
+  .corporate-overview-inner{
+    grid-template-columns:1fr;
+    gap:38px;
+  }
+}
+
+@media(max-width:700px){
+  .corporate-overview{
+    padding:58px 16px;
+  }
+
+  .corporate-overview-copy h2{
+    font-size:clamp(38px,12vw,52px);
+  }
+
+  .corporate-overview-actions{
+    display:grid;
+  }
+
+  .corporate-overview-actions button,
+  .corporate-overview-actions a{
+    width:100%;
+  }
+
+  .corporate-facts div{
+    grid-template-columns:105px 1fr;
+    gap:12px;
+  }
+
+  .corporate-facts dd{
+    font-size:12px;
+  }
+
+  .site-header nav{
+    background:rgba(239,244,252,.99)!important;
+  }
+}

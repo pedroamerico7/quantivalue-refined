@@ -1,0 +1,11 @@
+STATIC VALIDATION PASSED
+PASS: CorporateOverview import
+PASS: CorporateOverview render
+PASS: InstitutionalTrust preserved
+PASS: AcquisitionCenter preserved
+PASS: Offer API preserved
+PASS: Corporate component exists
+PASS: App braces balanced
+PASS: Component braces balanced
+
+Production build was not executed because the environment npm registry does not currently provide @vitejs/plugin-react@latest. No package or dependency files were modified.
