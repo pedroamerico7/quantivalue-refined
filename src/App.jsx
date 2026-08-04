@@ -1291,16 +1291,14 @@ export default function App() {
                 />
               </label>
               <label>
-                Strategic Notes
-                <textarea
-                  name="message"
-                  rows="4"
-                  required
-                  minLength="10"
-                  maxLength="2000"
-                  placeholder="Share your strategic intent, timeline, and acquisition context."
-                />
-              </label>
+  Strategic Notes
+  <textarea
+    name="message"
+    rows="4"
+    maxLength="2000"
+    placeholder="Strategic Notes (optional)"
+  />
+</label>
               <label className="honeypot" aria-hidden="true">
                 Website
                 <input name="website" tabIndex="-1" autoComplete="off" />
