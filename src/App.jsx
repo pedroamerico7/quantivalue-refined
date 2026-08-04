@@ -115,6 +115,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectProgressOpen, setProjectProgressOpen] = useState(false);
   const [headerCompact, setHeaderCompact] = useState(false);
+  const [atlasNearFooter, setAtlasNearFooter] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -329,6 +330,23 @@ export default function App() {
     updateHeaderCompact();
     window.addEventListener("scroll", updateHeaderCompact, { passive: true });
     return () => window.removeEventListener("scroll", updateHeaderCompact);
+  }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer || !("IntersectionObserver" in window)) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setAtlasNearFooter(entry.isIntersecting),
+      {
+        root: null,
+        threshold: 0.05,
+        rootMargin: "0px 0px 100px 0px",
+      }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -1053,7 +1071,7 @@ export default function App() {
       </footer>
 
       <button
-        className="project-progress-trigger"
+        className={`project-progress-trigger ${atlasNearFooter ? "near-footer" : ""}`}
         type="button"
         onClick={() => setProjectProgressOpen(true)}
         aria-label="Open Project Atlas progress"

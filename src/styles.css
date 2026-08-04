@@ -3338,3 +3338,119 @@ footer {
     transition:none !important;
   }
 }
+
+
+/* Sprint 35 — footer-safe Atlas, softer sticky header, stable scroll progress */
+
+/* The reading-progress track now has its own stable surface instead of
+   visually mixing with whatever section is moving underneath it. */
+.scroll-progress{
+  top:0 !important;
+  height:4px !important;
+  z-index:1200 !important;
+  background:rgba(226,233,249,.96) !important;
+  border-bottom:1px solid rgba(59,99,255,.10);
+  box-shadow:0 1px 7px rgba(24,45,96,.08);
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.scroll-progress span{
+  background:linear-gradient(
+    90deg,
+    #3158e7 0%,
+    #5275f5 52%,
+    #7e99ff 100%
+  ) !important;
+  box-shadow:0 0 8px rgba(59,99,255,.36) !important;
+}
+
+/* The header remains readable but becomes much lighter while scrolling. */
+.site-header.is-compact{
+  min-height:54px !important;
+  padding-top:2px !important;
+  padding-bottom:2px !important;
+  background:rgba(244,248,255,.48) !important;
+  border-bottom-color:rgba(59,99,255,.08) !important;
+  box-shadow:0 5px 18px rgba(44,66,118,.035) !important;
+  backdrop-filter:blur(18px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%) !important;
+}
+
+.site-header.is-compact .logo{
+  opacity:.84;
+}
+
+.site-header.is-compact nav{
+  opacity:.76;
+}
+
+.site-header.is-compact .header-offer{
+  opacity:.78;
+  background:rgba(255,255,255,.28) !important;
+  border-color:rgba(59,99,255,.10) !important;
+  box-shadow:none !important;
+}
+
+.site-header.is-compact:hover,
+.site-header.is-compact:focus-within{
+  background:rgba(244,248,255,.82) !important;
+  box-shadow:0 8px 24px rgba(44,66,118,.06) !important;
+}
+
+.site-header.is-compact:hover .logo,
+.site-header.is-compact:hover nav,
+.site-header.is-compact:hover .header-offer,
+.site-header.is-compact:focus-within .logo,
+.site-header.is-compact:focus-within nav,
+.site-header.is-compact:focus-within .header-offer{
+  opacity:1;
+}
+
+/* Default Atlas position stays clear of the footer e-mail.
+   When the footer enters the viewport, the button rises automatically. */
+.project-progress-trigger{
+  right:84px !important;
+  bottom:18px !important;
+  transition:
+    bottom .28s ease,
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease !important;
+}
+
+.project-progress-trigger.near-footer{
+  bottom:132px !important;
+}
+
+@media(max-width:900px){
+  .project-progress-trigger.near-footer{
+    bottom:142px !important;
+  }
+}
+
+@media(max-width:700px){
+  .site-header.is-compact{
+    min-height:48px !important;
+    background:rgba(244,248,255,.55) !important;
+  }
+
+  .site-header.is-compact .logo{
+    opacity:.9;
+  }
+
+  .project-progress-trigger{
+    right:10px !important;
+    bottom:82px !important;
+  }
+
+  .project-progress-trigger.near-footer{
+    bottom:154px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .project-progress-trigger{
+    transition:none !important;
+  }
+}

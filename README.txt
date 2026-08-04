@@ -1,33 +1,22 @@
-QUANTIVALUE REFINED — SPRINT 34
-STYLE RESTORE + COMPACT STICKY HEADER
+QUANTIVALUE REFINED — SPRINT 35
+SCROLL UI FIX
 
-Atualize todos estes arquivos:
+Atualize:
 - src/App.jsx
 - src/styles.css
-- src/components/AcquisitionCenter.jsx
-- src/components/ReadinessScore.jsx
-- src/components/MetricsPanel.jsx
-- src/components/DownloadCard.jsx
-- src/components/TransactionTimeline.jsx
 
 Correções:
-1. O Acquisition Command Center volta a receber todos os estilos.
-   A tela sem formatação ocorreu porque um styles.css antigo substituiu o CSS
-   completo da Sprint 32.
+1. Project Atlas não cobre mais o e-mail do rodapé.
+   Quando o footer entra na tela, o botão sobe automaticamente.
 
-2. A top bar continua fixa, porém fica mais compacta e transparente depois
-   de 56 px de rolagem:
-   - altura reduzida;
-   - logo menor;
-   - menu menor;
-   - botão Private Discussion mais baixo;
-   - sombra e fundo mais sutis.
+2. A top bar fica mais desvanecida durante a rolagem:
+   - mais transparente;
+   - menos sombra;
+   - elementos com opacidade reduzida;
+   - recupera contraste ao passar o mouse ou focar.
 
-3. O Project Atlas permanece afastado da logo do rodapé.
-
-Importante:
-Substitua App.jsx, styles.css e a pasta components juntos. Não envie somente
-o styles.css de uma sprint antiga, pois isso remove os estilos dos componentes.
+3. A barra superior de progresso recebeu uma base própria opaca e estável,
+   evitando conflito visual com as cores das seções que passam por trás.
 
 Commit sugerido:
-fix: restore command center styles and compact sticky header
+fix: prevent footer overlap and soften sticky scroll UI
