@@ -1,46 +1,29 @@
-QUANTIVALUE REFINED — SPRINT 41
-URGENT OFFER EMAIL NOTIFICATIONS
+QUANTIVALUE REFINED — SPRINT 42
+FINAL RESEND PATCH
 
-PROBLEMA ENCONTRADO
-O formulário salvava as propostas no banco D1, mas não existia nenhum código
-para enviar e-mail. Por isso a tela mostrava sucesso, porém nenhuma notificação
-chegava à caixa de entrada.
-
-ATUALIZE
+Atualize:
 - functions/api/offer.js
 
-CONFIGURAÇÃO OBRIGATÓRIA NO CLOUDFLARE PAGES
-Adicione estas variáveis em Production:
+Este patch:
+- exige RESEND_API_KEY, OFFER_FROM_EMAIL e OFFER_NOTIFICATION_TO;
+- aceita mais de um destinatário separado por vírgula;
+- usa Reply-To com o e-mail do comprador;
+- tenta novamente uma vez em erros temporários 429/5xx;
+- registra no Cloudflare Logs o ID da mensagem enviada pela Resend;
+- retorna notificationSent, notificationId e notificationError na resposta da API;
+- mantém a oferta salva no D1 mesmo se a notificação falhar.
 
-1. RESEND_API_KEY
-   Tipo: Secret
-   Valor: sua chave da Resend, começando com re_
+Variáveis esperadas no Cloudflare Pages — Production:
+RESEND_API_KEY = re_...
+OFFER_NOTIFICATION_TO = seuemail@gmail.com
+OFFER_FROM_EMAIL = QuantiValue Offers <offers@send.quantivalue.com>
 
-2. OFFER_NOTIFICATION_TO
-   Tipo: Variable
-   Exemplo: seuemail@gmail.com
-   Use um endereço que você realmente acompanha.
+Depois de subir:
+1. Faça novo deploy.
+2. Envie uma oferta de teste.
+3. Abra Resend > Emails.
+4. Abra Cloudflare > Deployments > Functions > Logs.
+5. Procure por "Offer notification sent".
 
-3. OFFER_FROM_EMAIL
-   Tipo: Variable
-   Recomendado depois de verificar quantivalue.com na Resend:
-   QuantiValue Offers <offers@quantivalue.com>
-
-IMPORTANTE
-- acquisition@quantivalue.com pode continuar sendo o endereço público.
-- Para garantir o recebimento imediato, OFFER_NOTIFICATION_TO pode ser seu Gmail.
-- O campo Reply-To usa o e-mail informado pelo comprador, então basta clicar em
-  responder para responder diretamente a ele.
-- A oferta continua salva no D1 mesmo se o serviço de e-mail falhar.
-
-COMO VER OFERTAS JÁ RECEBIDAS
-No Cloudflare:
-Workers & Pages > D1 > seu banco OFFERS_DB > Console
-
-Execute:
-SELECT id, name, company, email, amount_usd, message, created_at
-FROM offers
-ORDER BY id DESC;
-
-COMMIT
-fix: send email notifications for confidential offers
+Commit sugerido:
+fix: finalize reliable Resend offer notifications
