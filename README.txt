@@ -1,22 +1,36 @@
-QUANTIVALUE REFINED — SPRINT 35
-SCROLL UI FIX
+QUANTIVALUE REFINED — SPRINT 37
+ACQUISITION COPY & CONTACT UPDATE
 
 Atualize:
 - src/App.jsx
 - src/styles.css
 
-Correções:
-1. Project Atlas não cobre mais o e-mail do rodapé.
-   Quando o footer entra na tela, o botão sobe automaticamente.
+Alterações:
+- E-mail do rodapé:
+  Private acquisition
+  acquisition@quantivalue.com
 
-2. A top bar fica mais desvanecida durante a rolagem:
-   - mais transparente;
-   - menos sombra;
-   - elementos com opacidade reduzida;
-   - recupera contraste ao passar o mouse ou focar.
+- Botão superior:
+  BEGIN ACQUISITION
 
-3. A barra superior de progresso recebeu uma base própria opaca e estável,
-   evitando conflito visual com as cores das seções que passam por trás.
+- CTAs principais:
+  Begin Acquisition
+
+- Modal:
+  Confidential Offer
+  Your Name
+  Company
+  Business Email
+  Enter your offer (USD)
+  Strategic Notes
+  Submit Confidential Offer
+
+- Campo de oferta:
+  vazio, sem valor pré-preenchido;
+  placeholder: Enter your offer (USD)
+
+- Nota:
+  All inquiries are handled confidentially. Qualified buyers receive a response within 48 hours.
 
 Commit sugerido:
-fix: prevent footer overlap and soften sticky scroll UI
+feat: refine acquisition contact and confidential offer flow

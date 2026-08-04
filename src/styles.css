@@ -3454,3 +3454,123 @@ footer {
     transition:none !important;
   }
 }
+
+
+/* Sprint 36 — remove app-install prompt + accessibility polish */
+.skip-link{
+  position:fixed;
+  top:10px;
+  left:12px;
+  z-index:2000;
+  padding:11px 15px;
+  border-radius:10px;
+  background:#07101f;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+  transform:translateY(-150%);
+  transition:transform .18s ease;
+}
+.skip-link:focus{
+  transform:translateY(0);
+}
+
+:where(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid rgba(59,99,255,.52);
+  outline-offset:3px;
+}
+
+.footer-email{
+  position:relative;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 12px;
+  border:1px solid transparent;
+  border-radius:999px;
+  transition:background .2s ease,border-color .2s ease,color .2s ease;
+}
+.footer-email:hover{
+  color:#2f56dc;
+  background:rgba(59,99,255,.07);
+  border-color:rgba(59,99,255,.13);
+}
+
+/* Extra footer breathing room so floating controls never visually crowd
+   the contact information, even while transitioning away from the footer. */
+footer{
+  min-height:108px;
+  padding-right:clamp(190px,16vw,280px) !important;
+}
+
+@media(max-width:900px){
+  footer{
+    min-height:138px;
+    padding-right:110px !important;
+  }
+}
+
+@media(max-width:700px){
+  footer{
+    min-height:170px;
+    padding-right:20px !important;
+    padding-bottom:100px !important;
+  }
+
+  .footer-email{
+    padding-left:0;
+    padding-right:0;
+  }
+}
+
+
+/* Sprint 37 — acquisition language and contact refinement */
+.footer-acquisition-contact{
+  display:grid;
+  justify-items:end;
+  gap:3px;
+  min-width:0;
+}
+
+.footer-acquisition-contact > small{
+  color:#7b879d;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.footer-acquisition-contact .footer-email{
+  padding-left:0;
+  padding-right:0;
+  font-weight:750;
+}
+
+.offer-form input::placeholder,
+.offer-form textarea::placeholder{
+  color:#98a2b3;
+  opacity:1;
+}
+
+.offer-form .privacy-note{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+  line-height:1.55;
+}
+
+@media(max-width:700px){
+  .footer-acquisition-contact{
+    justify-items:start;
+  }
+
+  .footer-acquisition-contact > small{
+    font-size:8px;
+  }
+
+  .footer-acquisition-contact .footer-email{
+    overflow-wrap:anywhere;
+  }
+}

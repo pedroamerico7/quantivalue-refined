@@ -454,12 +454,12 @@ export default function App() {
               setOfferOpen(true);
             }}
           >
-            Request private discussion <Arrow />
+            Begin Acquisition <Arrow />
           </button>
         </nav>
 
         <button className="header-offer" type="button" onClick={() => setOfferOpen(true)}>
-          Private discussion <Arrow />
+          BEGIN ACQUISITION <Arrow />
         </button>
       </header>
 
@@ -498,7 +498,7 @@ export default function App() {
 
             <div className="hero-actions">
               <button className="primary-cta" type="button" onClick={() => setOfferOpen(true)}>
-                Request private discussion <Arrow />
+                Begin Acquisition <Arrow />
               </button>
               <a className="secondary-cta" href="#thesis">
                 Read the brand thesis <span>↓</span>
@@ -950,7 +950,7 @@ export default function App() {
               Download PDF
             </a>
             <button className="investor-discussion-button" type="button" onClick={() => setOfferOpen(true)}>
-              Request private discussion
+              Begin Acquisition
             </button>
           </div>
         </section>
@@ -1054,8 +1054,8 @@ export default function App() {
           </div>
 
           <button className="acquire-button" type="button" onClick={() => setOfferOpen(true)}>
-            <span>Start a confidential conversation</span>
-            <strong>Make an Offer</strong>
+            <span>Private acquisition</span>
+            <strong>Begin Acquisition</strong>
             <Arrow />
           </button>
         </section>
@@ -1067,7 +1067,16 @@ export default function App() {
           <span className="logo-name">QuantiValue</span>
         </a>
         <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>
-        <a href="mailto:sales@quantivalue.com">sales@quantivalue.com</a>
+        <div className="footer-acquisition-contact">
+          <small>Private acquisition</small>
+          <a
+            className="footer-email"
+            href="mailto:acquisition@quantivalue.com"
+            aria-label="Email QuantiValue acquisition team at acquisition@quantivalue.com"
+          >
+            acquisition@quantivalue.com
+          </a>
+        </div>
       </footer>
 
       <button
@@ -1198,11 +1207,11 @@ export default function App() {
             </button>
 
             <div className="modal-brand">
-              <p className="section-tag light">Confidential acquisition</p>
-              <h2 id="offer-title">Make an Offer</h2>
+              <p className="section-tag light">Private acquisition</p>
+              <h2 id="offer-title">Confidential Offer</h2>
               <p>
-                Submit a serious proposal for QuantiValue.com. Details are encrypted
-                in transit and stored privately for owner review.
+                Submit a confidential proposal for QuantiValue.com. Your information
+                is reviewed privately by the owner.
               </p>
               <div className="modal-stat">
                 <span className="live-dot" />
@@ -1213,8 +1222,8 @@ export default function App() {
             <form className="offer-form" onSubmit={submitOffer}>
               <div className="form-row">
                 <label>
-                  Name
-                  <input name="name" required minLength="2" maxLength="100" placeholder="Your name" />
+                  Your Name
+                  <input name="name" required minLength="2" maxLength="100" placeholder="Your Name" />
                 </label>
                 <label>
                   Company
@@ -1222,23 +1231,30 @@ export default function App() {
                 </label>
               </div>
               <label>
-                Business email
+                Business Email
                 <input name="email" type="email" required maxLength="160" placeholder="name@company.com" />
               </label>
               <label>
-                Offer amount (USD)
-                <input name="amount" type="number" min="50000" step="1000" required defaultValue="75000" />
-                <span className="field-hint">Suggested opening proposal: US$75,000. Minimum: US$50,000.</span>
+                Enter your offer (USD)
+                <input
+                  name="amount"
+                  type="number"
+                  min="1"
+                  step="1000"
+                  inputMode="numeric"
+                  required
+                  placeholder="Enter your offer (USD)"
+                />
               </label>
               <label>
-                Message
+                Strategic Notes
                 <textarea
                   name="message"
                   rows="4"
                   required
                   minLength="10"
                   maxLength="2000"
-                  defaultValue="I would like to discuss an acquisition of QuantiValue.com."
+                  placeholder="Share your strategic intent, timeline, and acquisition context."
                 />
               </label>
               <label className="honeypot" aria-hidden="true">
@@ -1247,11 +1263,13 @@ export default function App() {
               </label>
 
               <button type="submit" disabled={offerStatus.state === "sending"}>
-                {offerStatus.state === "sending" ? "Submitting securely…" : "Submit confidential offer"}
+                {offerStatus.state === "sending" ? "Submitting securely…" : "Submit Confidential Offer"}
                 <Arrow />
               </button>
 
-              <p className="privacy-note">Private owner review • No public disclosure</p>
+              <p className="privacy-note">
+                All inquiries are handled confidentially. Qualified buyers receive a response within 48 hours.
+              </p>
 
               {offerStatus.state !== "idle" && (
                 <p className={`status ${offerStatus.state}`} role="status">
