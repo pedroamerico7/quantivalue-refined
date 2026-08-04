@@ -107,6 +107,7 @@ export default function App() {
     industry: "Software",
   });
   const [demoRunning, setDemoRunning] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -173,6 +174,36 @@ export default function App() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
 
+  useEffect(() => {
+    let frameId = null;
+
+    function updateScrollProgress() {
+      const documentElement = document.documentElement;
+      const scrollableHeight = documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollableHeight > 0
+        ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight))
+        : 0;
+      setScrollProgress(progress);
+      frameId = null;
+    }
+
+    function onScroll() {
+      if (frameId === null) {
+        frameId = window.requestAnimationFrame(updateScrollProgress);
+      }
+    }
+
+    updateScrollProgress();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
   async function submitOffer(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -205,6 +236,17 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <div
+        className="scroll-progress"
+        role="progressbar"
+        aria-label="Page reading progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={Math.round(scrollProgress * 100)}
+      >
+        <span style={{ transform: `scaleX(${scrollProgress})` }} />
+      </div>
+
       <header className="site-header">
         <a className="logo" href="#top" aria-label="QuantiValue home">
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />

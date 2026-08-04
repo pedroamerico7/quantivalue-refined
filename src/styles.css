@@ -30,6 +30,28 @@ a { color: inherit; text-decoration: none; }
 button { color: inherit; }
 .app-shell { overflow: hidden; }
 
+
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: rgba(7, 11, 20, 0.08);
+  z-index: 1000;
+  pointer-events: none;
+  overflow: hidden;
+}
+.scroll-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, #3b63ff 0%, #6f8cff 58%, #9fb0ff 100%);
+  box-shadow: 0 0 14px rgba(59, 99, 255, 0.58);
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+
 .site-header {
   height: 82px;
   padding: 0 4.5vw;
@@ -39,7 +61,7 @@ button { color: inherit; }
   background: rgba(246,247,250,0.86);
   backdrop-filter: blur(18px);
   position: sticky;
-  top: 0;
+  top: 4px;
   z-index: 100;
 }
 
@@ -328,7 +350,8 @@ footer {
 }
 
 @media (max-width:650px) {
-  .site-header { height:70px; padding:0 20px; }
+  
+.site-header { height:70px; padding:0 20px; }
   .header-offer { padding:0 13px; gap:10px; }
   .logo-name { display:none; }
   .hero,.thesis,.markets,.pillars,.acquire { padding-left:20px; padding-right:20px; }
@@ -468,6 +491,7 @@ footer {
 }
 
 /* Sprint 04 — Luxury finish */
+
 .site-header {
   background: rgba(246,247,250,.76);
   backdrop-filter: blur(24px) saturate(145%);
@@ -1487,4 +1511,8 @@ footer {
   .product-demo { padding-inline: 22px; }
   .demo-results-top, .demo-explainability ul { grid-template-columns: 1fr; }
   .demo-timeline { grid-template-columns: repeat(5,minmax(54px,1fr)); overflow-x: auto; padding-bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress span { transition: none; }
 }
