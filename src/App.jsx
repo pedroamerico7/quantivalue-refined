@@ -77,6 +77,14 @@ const pillars = [
   },
 ];
 
+const industryMultiples = {
+  Software: 8.4,
+  Fintech: 7.2,
+  Healthcare: 6.5,
+  Industrial: 5.1,
+  Consumer: 4.6,
+};
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -92,6 +100,40 @@ export default function App() {
   const [views, setViews] = useState(FALLBACK_VIEWS);
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
+  const [demoInputs, setDemoInputs] = useState({
+    revenue: 420,
+    margin: 24,
+    growth: 18,
+    industry: "Software",
+  });
+  const [demoRunning, setDemoRunning] = useState(false);
+
+  const valuationDemo = useMemo(() => {
+    const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
+    const margin = Math.max(1, Number(demoInputs.margin) || 1);
+    const growth = Math.max(0, Number(demoInputs.growth) || 0);
+    const baseMultiple = industryMultiples[demoInputs.industry] || 6;
+    const qualityAdjustment = 1 + margin / 100 * 0.8 + growth / 100 * 1.15;
+    const enterpriseValue = revenue * baseMultiple * qualityAdjustment;
+    const confidence = Math.min(98, Math.round(78 + margin * 0.35 + growth * 0.25));
+    return {
+      enterpriseValue,
+      low: enterpriseValue * 0.88,
+      high: enterpriseValue * 1.12,
+      confidence,
+      multiple: baseMultiple * qualityAdjustment,
+    };
+  }, [demoInputs]);
+
+  function updateDemoInput(event) {
+    const { name, value } = event.target;
+    setDemoInputs((current) => ({ ...current, [name]: value }));
+  }
+
+  function runValuationDemo() {
+    setDemoRunning(true);
+    window.setTimeout(() => setDemoRunning(false), 850);
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -170,7 +212,7 @@ export default function App() {
         </a>
 
         <nav aria-label="Primary navigation">
-          <a href="#thesis">Platform</a>
+          <a href="#platform">Platform</a>
           <a href="#technology">Technology</a>
           <a href="#asset-package">Assets</a>
           <a href="#acquire">Contact</a>
@@ -312,6 +354,97 @@ export default function App() {
           </div>
         </section>
 
+
+        <section className="product-demo" id="platform">
+          <div className="product-demo-heading" data-reveal>
+            <div>
+              <p className="section-tag light">Interactive product demo</p>
+              <h2>Model value. Trace the reasoning.</h2>
+            </div>
+            <p>
+              Adjust the operating assumptions to preview how an explainable valuation
+              system can translate financial inputs into a reviewable enterprise value range.
+            </p>
+          </div>
+
+          <div className={`product-demo-shell ${demoRunning ? "is-running" : ""}`} data-reveal>
+            <form className="demo-controls" onSubmit={(event) => { event.preventDefault(); runValuationDemo(); }}>
+              <div className="demo-panel-label">Model inputs</div>
+              <label>
+                Annual revenue
+                <span className="demo-input-wrap">
+                  <i>$</i>
+                  <input name="revenue" type="number" min="10" step="10" value={demoInputs.revenue} onChange={updateDemoInput} />
+                  <b>M</b>
+                </span>
+              </label>
+              <label>
+                EBITDA margin
+                <span className="demo-input-wrap">
+                  <input name="margin" type="number" min="1" max="70" step="1" value={demoInputs.margin} onChange={updateDemoInput} />
+                  <b>%</b>
+                </span>
+              </label>
+              <label>
+                Revenue growth
+                <span className="demo-input-wrap">
+                  <input name="growth" type="number" min="0" max="100" step="1" value={demoInputs.growth} onChange={updateDemoInput} />
+                  <b>%</b>
+                </span>
+              </label>
+              <label>
+                Industry
+                <select name="industry" value={demoInputs.industry} onChange={updateDemoInput}>
+                  {Object.keys(industryMultiples).map((industry) => (
+                    <option key={industry} value={industry}>{industry}</option>
+                  ))}
+                </select>
+              </label>
+              <button type="submit">
+                {demoRunning ? "Running explainable model…" : "Run AI valuation"}
+                <Arrow />
+              </button>
+              <small>Illustrative demo only — not investment advice.</small>
+            </form>
+
+            <div className="demo-results" aria-live="polite">
+              <div className="demo-results-top">
+                <div>
+                  <span>Enterprise value</span>
+                  <strong>${(valuationDemo.enterpriseValue / 1000).toFixed(2)}B</strong>
+                </div>
+                <div>
+                  <span>AI confidence</span>
+                  <strong>{valuationDemo.confidence}%</strong>
+                </div>
+              </div>
+              <div className="demo-range-card">
+                <div>
+                  <span>Comparable range</span>
+                  <strong>${(valuationDemo.low / 1000).toFixed(2)}B — ${(valuationDemo.high / 1000).toFixed(2)}B</strong>
+                </div>
+                <div className="demo-range-track" aria-hidden="true">
+                  <i style={{ width: `${Math.min(92, valuationDemo.confidence)}%` }} />
+                  <b style={{ left: `${Math.min(90, Math.max(18, valuationDemo.confidence - 8))}%` }} />
+                </div>
+              </div>
+              <div className="demo-explainability">
+                <div className="demo-panel-label">Explainability trace</div>
+                <ul>
+                  <li><span>01</span><p><strong>Industry multiple</strong>{valuationDemo.multiple.toFixed(1)}× adjusted revenue basis</p></li>
+                  <li><span>02</span><p><strong>Profitability premium</strong>{demoInputs.margin}% EBITDA margin improves model quality</p></li>
+                  <li><span>03</span><p><strong>Growth adjustment</strong>{demoInputs.growth}% growth expands the valuation range</p></li>
+                  <li><span>04</span><p><strong>Reviewable output</strong>Assumptions remain visible and auditable</p></li>
+                </ul>
+              </div>
+              <div className="demo-timeline" aria-label="Valuation process">
+                {['Input','Normalize','Model','Explain','Decide'].map((step, index) => (
+                  <span key={step}><i>{String(index + 1).padStart(2, '0')}</i>{step}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="technology" id="technology">
           <div className="technology-heading" data-reveal>
@@ -611,8 +744,8 @@ export default function App() {
               </label>
               <label>
                 Offer amount (USD)
-                <input name="amount" type="number" min="50000" step="1000" required placeholder="50000" />
-                <span className="field-hint">Suggested opening proposal: US$50,000 or above.</span>
+                <input name="amount" type="number" min="50000" step="1000" required defaultValue="75000" />
+                <span className="field-hint">Suggested opening proposal: US$75,000. Minimum: US$50,000.</span>
               </label>
               <label>
                 Message

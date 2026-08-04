@@ -1,18 +1,25 @@
-QUANTIVALUE — SPRINT 15
-Included Asset Package
+QUANTIVALUE REFINED — SPRINT 17
+URGENT INTERACTIVE DEMO FIX
 
-FILES TO REPLACE
+Substitua no repositório quantivalue-refined:
 - src/App.jsx
 - src/styles.css
 
-WHAT CHANGED
-- Added a new dark premium section before the acquisition CTA.
-- Presents the domain, identity system, live codebase and product vision as an integrated acquisition package.
-- Added an Assets navigation link.
-- Added responsive desktop, tablet and mobile layouts.
+O que foi corrigido:
+- simulador interativo adicionado de forma visível entre o Hero e Technology;
+- link Platform aponta para #platform;
+- campos Revenue, EBITDA margin, Revenue growth e Industry;
+- cálculo ilustrativo em tempo real;
+- Enterprise Value, Comparable Range e AI Confidence;
+- Explainability Trace e timeline;
+- erro JSX de fechamento duplicado de botão removido;
+- oferta preenchida com US$75.000;
+- mínimo de oferta mantido em US$50.000.
 
-COMMIT
-feat: present included brand and product asset package
+Commit sugerido:
+fix: restore visible interactive valuation demo
 
-VALIDATION NOTE
-The files were edited from the current Sprint 14 package. Build execution was unavailable because this environment's npm registry does not provide @vitejs/plugin-react. No dependencies or build configuration were changed.
+Observação:
+Não foi possível executar npm install neste ambiente porque o registro interno
+não disponibiliza @vitejs/plugin-react. As mudanças foram aplicadas diretamente
+ao último ZIP quantivalue-refined-main enviado.
