@@ -359,7 +359,7 @@ export default function App() {
       {isLoading && (
         <div className="brand-loader" role="status" aria-label="Loading QuantiValue">
           <div className="brand-loader-mark" aria-hidden="true">
-            <img src="/quantum-ring.svg" alt="" />
+            <img src="/quantum-ring.svg" alt="" width="64" height="64" decoding="async" />
             <span />
           </div>
           <strong>QuantiValue</strong>
@@ -388,7 +388,7 @@ export default function App() {
 
       <header className="site-header">
         <a className="logo" href="#top" aria-label="QuantiValue home" onClick={() => setMobileMenuOpen(false)}>
-          <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />
+          <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
         </a>
 
@@ -502,7 +502,7 @@ export default function App() {
           <div className="dashboard-showcase" data-reveal aria-label="Conceptual QuantiValue dashboard preview">
             <div className="dashboard-chrome">
               <div className="dashboard-brand">
-                <img src="/quantum-ring.svg" alt="" aria-hidden="true" />
+                <img src="/quantum-ring.svg" alt="" aria-hidden="true" width="48" height="48" decoding="async" />
                 <span>QuantiValue Intelligence</span>
               </div>
               <div className="dashboard-status"><i /> Live model</div>
@@ -1091,7 +1091,7 @@ export default function App() {
 
       <footer>
         <a className="logo footer-logo" href="#top">
-          <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />
+          <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
         </a>
         <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>

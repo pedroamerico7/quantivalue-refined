@@ -2734,3 +2734,81 @@ footer {
     transition:none!important;
   }
 }
+
+
+/* Sprint 31 — performance and rendering hardening */
+.product-demo,
+.technology,
+.thesis,
+.market-opportunity,
+.film-strip,
+.pillars,
+.asset-package,
+.investor-room,
+.diligence-room,
+.transaction-faq,
+.acquire{
+  content-visibility:auto;
+  contain-intrinsic-size:900px;
+}
+
+.dashboard-showcase,
+.product-demo-shell,
+.technology-card,
+.asset-card,
+.investor-room article,
+.diligence-grid article{
+  contain:layout paint;
+}
+
+.logo-symbol,
+.dashboard-logo img,
+.loader-mark img{
+  aspect-ratio:1 / 1;
+}
+
+[data-reveal]{
+  will-change:auto;
+}
+
+[data-reveal].visible{
+  will-change:opacity,transform;
+}
+
+@media (hover:none), (pointer:coarse){
+  .dashboard-showcase{
+    transform:none!important;
+  }
+
+  .dashboard-glow{
+    opacity:.45;
+  }
+
+  .technology-card:hover,
+  .asset-card:hover,
+  .investor-room article:hover,
+  .diligence-grid article:hover{
+    transform:none;
+  }
+}
+
+@media (max-width:700px){
+  .product-demo,
+  .technology,
+  .thesis,
+  .market-opportunity,
+  .film-strip,
+  .pillars,
+  .asset-package,
+  .investor-room,
+  .diligence-room,
+  .transaction-faq,
+  .acquire{
+    contain-intrinsic-size:720px;
+  }
+
+  .hero-orbit,
+  .dashboard-glow{
+    filter:none;
+  }
+}
