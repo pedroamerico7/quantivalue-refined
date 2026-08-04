@@ -114,10 +114,13 @@ export default function App() {
   });
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("top");
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [projectProgressOpen, setProjectProgressOpen] = useState(false);
   const [headerCompact, setHeaderCompact] = useState(false);
+  const [atlasNearFooter, setAtlasNearFooter] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -147,37 +150,20 @@ export default function App() {
   }
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll("[data-reveal]"));
-
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add("visible"));
-      return undefined;
-    }
-
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) entry.target.classList.add("visible");
       }),
-      { threshold: 0.04, rootMargin: "0px 0px 120px 0px" }
+      { threshold: 0.12 }
     );
 
-    elements.forEach((element) => observer.observe(element));
+    document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     const storageKey = "quantivalue-view-counted-at";
-    let last = 0;
-
-    try {
-      last = Number(window.localStorage.getItem(storageKey) || 0);
-    } catch {
-      last = 0;
-    }
-
+    const last = Number(localStorage.getItem(storageKey) || 0);
     const shouldIncrement = Date.now() - last > 24 * 60 * 60 * 1000;
 
     fetch("/api/views", {
@@ -188,13 +174,8 @@ export default function App() {
       .then((data) => {
         const reportedViews = Number(data?.views);
         setViews(Number.isFinite(reportedViews) ? reportedViews : FALLBACK_VIEWS);
-
         if (shouldIncrement && data?.persistent !== false) {
-          try {
-            window.localStorage.setItem(storageKey, String(Date.now()));
-          } catch {
-            // Storage can be unavailable in private browsing.
-          }
+          localStorage.setItem(storageKey, String(Date.now()));
         }
       })
       .catch(() => setViews(FALLBACK_VIEWS));
@@ -205,6 +186,7 @@ export default function App() {
       if (event.key === "Escape") {
         setOfferOpen(false);
         setMobileMenuOpen(false);
+        setProjectProgressOpen(false);
       }
     }
     window.addEventListener("keydown", closeOnEscape);
@@ -355,7 +337,27 @@ export default function App() {
     return () => window.removeEventListener("scroll", updateHeaderCompact);
   }, []);
 
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer || !("IntersectionObserver" in window)) return undefined;
 
+    const observer = new IntersectionObserver(
+      ([entry]) => setAtlasNearFooter(entry.isIntersecting),
+      {
+        root: null,
+        threshold: 0.05,
+        rootMargin: "0px 0px 100px 0px",
+      }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 720);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     captureAttribution();
@@ -432,6 +434,16 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {isLoading && (
+        <div className="brand-loader" role="status" aria-label="Loading QuantiValue">
+          <div className="brand-loader-mark" aria-hidden="true">
+            <img src="/quantum-ring.svg" alt="" width="64" height="64" decoding="async" />
+            <span />
+          </div>
+          <strong>QuantiValue</strong>
+          <small>Financial intelligence · Built on explainability</small>
+        </div>
+      )}
       <div
         className="scroll-progress"
         role="progressbar"
@@ -1119,6 +1131,21 @@ export default function App() {
         </div>
       </footer>
 
+      <button
+        className={`project-progress-trigger ${atlasNearFooter ? "near-footer" : ""}`}
+        type="button"
+        onClick={() => setProjectProgressOpen(true)}
+        aria-label="Open Project Atlas progress"
+      >
+        <span className="project-progress-trigger-ring" aria-hidden="true">
+          <i style={{ "--project-progress": "93%" }} />
+          <b>93</b>
+        </span>
+        <span>
+          <small>Project Atlas</small>
+          <strong>93% complete</strong>
+        </span>
+      </button>
 
       <div className="mobile-conversion-bar">
         <div>
@@ -1139,6 +1166,84 @@ export default function App() {
         ↑
       </button>
 
+      {projectProgressOpen && (
+        <div className="modal-backdrop project-progress-backdrop" onMouseDown={() => setProjectProgressOpen(false)}>
+          <section
+            className="project-progress-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-progress-title"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button
+              className="modal-close"
+              type="button"
+              onClick={() => setProjectProgressOpen(false)}
+              aria-label="Close project progress"
+            >
+              ×
+            </button>
+
+            <div className="project-progress-summary">
+              <p className="section-tag light">Project Atlas</p>
+              <h2 id="project-progress-title">A premium acquisition asset, nearly complete.</h2>
+              <p>
+                This dashboard summarizes the current maturity of the QuantiValue brand,
+                product experience, acquisition materials and technical foundation.
+              </p>
+
+              <div className="project-progress-total">
+                <div className="project-progress-total-ring" aria-hidden="true">
+                  <span>93%</span>
+                </div>
+                <div>
+                  <strong>Overall completion</strong>
+                  <small>Production-ready core with final optimization remaining.</small>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-progress-list">
+              {[
+                ["Identity & brand system", 100],
+                ["Hero & dashboard experience", 96],
+                ["Interactive valuation demo", 100],
+                ["Technology & market narrative", 100],
+                ["Investor brief & diligence room", 100],
+                ["Acquisition workflow", 95],
+                ["SEO & search presence", 96],
+                ["Responsive experience", 96],
+                ["Motion & microinteractions", 92],
+                ["Performance optimization", 80],
+                ["Brand book & sales materials", 74],
+              ].map(([label, value]) => (
+                <div className="project-progress-item" key={label}>
+                  <div>
+                    <span>{label}</span>
+                    <strong>{value}%</strong>
+                  </div>
+                  <div className="project-progress-track" aria-hidden="true">
+                    <span style={{ width: `${value}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="project-progress-footer">
+              <span>Next milestone: performance, final brand book and sales package.</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setProjectProgressOpen(false);
+                  document.querySelector("#acquire")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                View acquisition path <Arrow />
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
 
       {offerOpen && (
         <div className="modal-backdrop" onMouseDown={() => setOfferOpen(false)}>
