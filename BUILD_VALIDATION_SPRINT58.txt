@@ -1,0 +1,14 @@
+STATIC VALIDATION PASSED
+PASS: Interactive AI panel preserved
+PASS: Corporate Overview preserved
+PASS: Strategic section preserved
+PASS: Institutional section preserved
+PASS: Acquisition Center preserved
+PASS: FAQ preserved
+PASS: Offer form preserved
+PASS: Offer API preserved
+PASS: BuyerConfidence removed from flow
+PASS: Legacy technology removed
+PASS: App braces balanced
+
+The production build was not executed because the environment npm registry does not provide @vitejs/plugin-react@latest. No package or dependency files were modified.

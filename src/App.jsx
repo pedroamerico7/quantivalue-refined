@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
-import BuyerConfidence from "./components/BuyerConfidence";
 import InstitutionalTrust from "./components/InstitutionalTrust";
 import CorporateOverview from "./components/CorporateOverview";
 import { attributionPayload, captureAttribution } from "./utils/attribution";
@@ -474,23 +473,21 @@ export default function App() {
           className={mobileMenuOpen ? "mobile-open" : ""}
           aria-label="Primary navigation"
         >
+          <a href="#overview" onClick={() => setMobileMenuOpen(false)}>Overview</a>
+          <a href="#strategic-opportunity" onClick={() => setMobileMenuOpen(false)}>Applications</a>
           <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>AI Platform</a>
-          <a className={activeSection === "technology" ? "active" : ""} href="#technology" onClick={() => setMobileMenuOpen(false)}>Applications</a>
-          <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" onClick={() => setMobileMenuOpen(false)}>Assets</a>
-          <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room" onClick={() => setMobileMenuOpen(false)}>Brief</a>
           <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Acquisition</a>
           <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
           <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-          <a className={activeSection === "acquire" ? "active" : ""} href="#acquire" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           <button
             className="mobile-nav-offer"
             type="button"
             onClick={() => {
               setMobileMenuOpen(false);
-              setOfferOpen(true);
+              openAcquisitionModal();
             }}
           >
-            Request Confidential Discussion <Arrow />
+            Request Discussion <Arrow />
           </button>
         </nav>
 
@@ -631,10 +628,9 @@ export default function App() {
         </section>
 
 
+        <CorporateOverview onOpenDiscussion={openAcquisitionModal} />
+
         <StrategicBuyerAcquisition onOpenDiscussion={openAcquisitionModal} />
-
-        <BuyerConfidence onOpenDiscussion={openAcquisitionModal} />
-
         <section className="product-demo" id="platform">
           <div className="product-demo-heading" data-reveal>
             <div>
@@ -725,278 +721,6 @@ export default function App() {
             </div>
           </div>
         </section>
-
-        <CorporateOverview onOpenDiscussion={openAcquisitionModal} />
-
-        <section className="technology" id="technology">
-          <div className="technology-heading" data-reveal>
-            <p className="section-tag">Technology vision</p>
-            <h2>Three systems.<br />One verifiable decision.</h2>
-            <p>
-              QuantiValue is positioned around the infrastructure required to turn
-              complex financial information into decisions that can be reviewed,
-              challenged and trusted.
-            </p>
-          </div>
-
-          <div className="technology-grid">
-            <article className="technology-card" data-reveal>
-              <div className="technology-visual explainable-visual" aria-hidden="true">
-                <span className="tech-core">AI</span>
-                <span className="tech-node tech-node-a">Data</span>
-                <span className="tech-node tech-node-b">Logic</span>
-                <span className="tech-node tech-node-c">Evidence</span>
-                <i className="tech-line tech-line-a" />
-                <i className="tech-line tech-line-b" />
-                <i className="tech-line tech-line-c" />
-              </div>
-              <small>01 · EXPLAINABILITY</small>
-              <h3>Explainable AI Engine</h3>
-              <p>
-                Models designed to reveal assumptions, evidence and reasoning — not
-                just produce an opaque output.
-              </p>
-              <span className="technology-link">Trace every conclusion <Arrow /></span>
-            </article>
-
-            <article className="technology-card" data-reveal>
-              <div className="technology-visual valuation-visual" aria-hidden="true">
-                <span className="valuation-axis axis-y" />
-                <span className="valuation-axis axis-x" />
-                <span className="valuation-bar bar-one" />
-                <span className="valuation-bar bar-two" />
-                <span className="valuation-bar bar-three" />
-                <span className="valuation-range">$2.18B — $2.67B</span>
-              </div>
-              <small>02 · VALUATION</small>
-              <h3>Institutional Valuation</h3>
-              <p>
-                A brand architecture built for DCF, comparables, scenario analysis
-                and enterprise-grade financial modeling.
-              </p>
-              <span className="technology-link">Model with discipline <Arrow /></span>
-            </article>
-
-            <article className="technology-card" data-reveal>
-              <div className="technology-visual decision-visual" aria-hidden="true">
-                <span className="decision-ring ring-one" />
-                <span className="decision-ring ring-two" />
-                <span className="decision-dot dot-one" />
-                <span className="decision-dot dot-two" />
-                <span className="decision-dot dot-three" />
-                <span className="decision-center">QV</span>
-              </div>
-              <small>03 · DECISIONS</small>
-              <h3>Decision Intelligence</h3>
-              <p>
-                A system positioned to connect valuation outputs with risk,
-                confidence and strategic action.
-              </p>
-              <span className="technology-link">Move from model to action <Arrow /></span>
-            </article>
-          </div>
-        </section>
-
-        <section className="thesis" id="thesis">
-          <div className="section-intro" data-reveal>
-            <p className="section-tag">Brand thesis</p>
-            <h2>Quantitative intelligence.<br />Commercial value.</h2>
-            <p>
-              A category-ready name that makes the product promise legible before
-              the first demo, model or transaction.
-            </p>
-          </div>
-
-          <div className="equation" data-reveal>
-            <article>
-              <small>QUANTI</small>
-              <strong>Models</strong>
-              <span>Data, forecasting, precision and machine intelligence.</span>
-            </article>
-            <div className="equation-mark">×</div>
-            <article>
-              <small>VALUE</small>
-              <strong>Outcomes</strong>
-              <span>Valuation, investment insight and strategic decisions.</span>
-            </article>
-            <div className="equation-result">
-              <small>RESULT</small>
-              <strong>QuantiValue</strong>
-            </div>
-          </div>
-        </section>
-
-        <section className="market-opportunity" id="markets">
-          <div className="opportunity-heading" data-reveal>
-            <p className="section-tag">Market opportunity</p>
-            <h2>Positioned where finance, AI and strategic value converge.</h2>
-            <p>
-              QuantiValue is designed to sit at the intersection of categories that
-              increasingly depend on trust, explainability and institutional-grade decision systems.
-            </p>
-          </div>
-
-          <div className="opportunity-signals">
-            {opportunitySignals.map((signal) => (
-              <article key={signal.index} data-reveal>
-                <small>{signal.index}</small>
-                <div>
-                  <span>{signal.label}</span>
-                  <h3>{signal.title}</h3>
-                  <p>{signal.copy}</p>
-                </div>
-                <Arrow />
-              </article>
-            ))}
-          </div>
-
-          <div className="opportunity-categories" data-reveal>
-            <div className="opportunity-orbit" aria-hidden="true">
-              <span className="opportunity-core">QV</span>
-              <i className="opportunity-ring ring-a" />
-              <i className="opportunity-ring ring-b" />
-              <b className="opportunity-dot dot-a" />
-              <b className="opportunity-dot dot-b" />
-              <b className="opportunity-dot dot-c" />
-            </div>
-            <div className="category-list">
-              <p>Category architecture</p>
-              {sectors.map((sector, index) => (
-                <div key={sector}>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                  <strong>{sector}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="brand-film" id="brand">
-          <div className="film-light film-light-a" aria-hidden="true" />
-          <div className="film-light film-light-b" aria-hidden="true" />
-          <div className="film-copy" data-reveal>
-            <p className="section-tag light">Positioning</p>
-            <blockquote>
-              “A name that sounds established before the company is built.”
-            </blockquote>
-          </div>
-          <div className="film-word" aria-hidden="true">QV</div>
-        </section>
-
-        <section className="pillars">
-          <div className="pillars-heading" data-reveal>
-            <p className="section-tag">Why it works</p>
-            <h2>Designed for institutional ambition.</h2>
-          </div>
-
-          <div className="pillar-list">
-            {pillars.map((pillar) => (
-              <article key={pillar.number} data-reveal>
-                <small>{pillar.number}</small>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="asset-package" id="asset-package">
-          <div className="asset-package-heading" data-reveal>
-            <div>
-              <p className="section-tag">Included asset package</p>
-              <h2>More than a domain. A launch-ready brand foundation.</h2>
-            </div>
-            <p>
-              The acquisition is structured to transfer a coherent digital identity,
-              a working commercial website and the strategic system behind the name.
-            </p>
-          </div>
-
-          <div className="asset-package-grid">
-            {includedAssets.map((asset) => (
-              <article key={asset.number} data-reveal>
-                <div className="asset-card-top">
-                  <small>{asset.number}</small>
-                  <span>{asset.meta}</span>
-                </div>
-                <h3>{asset.title}</h3>
-                <p>{asset.copy}</p>
-                <div className="asset-card-line" aria-hidden="true" />
-              </article>
-            ))}
-          </div>
-
-          <div className="asset-package-summary" data-reveal>
-            <div>
-              <span>01</span>
-              <strong>Premium .COM</strong>
-              <small>Direct owner transfer</small>
-            </div>
-            <div>
-              <span>02</span>
-              <strong>Identity system</strong>
-              <small>Brand-ready assets</small>
-            </div>
-            <div>
-              <span>03</span>
-              <strong>Live codebase</strong>
-              <small>React + Cloudflare</small>
-            </div>
-            <div>
-              <span>04</span>
-              <strong>Strategic vision</strong>
-              <small>AI + finance positioning</small>
-            </div>
-          </div>
-        </section>
-
-
-        <section className="investor-room" id="investor-room">
-          <div className="investor-room-heading" data-reveal>
-            <div>
-              <p className="section-tag light">Investor brief</p>
-              <h2>A concise acquisition case, ready for review.</h2>
-            </div>
-            <p>
-              Review the strategic rationale, included assets, transfer process and
-              commercial positioning in a focused one-page acquisition brief.
-            </p>
-          </div>
-
-          <div className="investor-room-grid">
-            <article data-reveal>
-              <span>01</span>
-              <small>POSITIONING</small>
-              <h3>Category-defining name</h3>
-              <p>QuantiValue combines quantitative intelligence with commercial value in one globally legible brand.</p>
-            </article>
-            <article data-reveal>
-              <span>02</span>
-              <small>ASSET PACKAGE</small>
-              <h3>Launch-ready foundation</h3>
-              <p>Premium .COM, identity system, working website, product vision and acquisition infrastructure.</p>
-            </article>
-            <article data-reveal>
-              <span>03</span>
-              <small>TRANSFER</small>
-              <h3>Direct owner transaction</h3>
-              <p>Private discussion, secure payment, registrar transfer and delivery of the included digital assets.</p>
-            </article>
-          </div>
-
-          <div className="investor-room-actions" data-reveal>
-            <a className="investor-brief-button" href="/investor-brief.html" target="_blank" rel="noreferrer">
-              Open investor brief <Arrow />
-            </a>
-            <a className="investor-brief-download" href="/QuantiValue-Investor-Brief.pdf" download>
-              Download PDF
-            </a>
-            <button className="investor-discussion-button" type="button" onClick={openAcquisitionModal}>
-              Begin Acquisition
-            </button>
-          </div>
-        </section>
-
         <InstitutionalTrust onOpenDiscussion={openAcquisitionModal} />
 
         <AcquisitionCenter

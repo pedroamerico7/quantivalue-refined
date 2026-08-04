@@ -5659,3 +5659,154 @@ a{
     background:rgba(239,244,252,.99)!important;
   }
 }
+
+
+/* Sprint 58 — Careful page consolidation */
+
+/* Removed sections stay out of the visual flow even if old selectors remain. */
+.technology,
+.thesis,
+.market-opportunity,
+.brand-film,
+.pillars,
+.asset-package,
+.investor-room,
+.buyer-confidence{
+  display:none!important;
+}
+
+/* More disciplined page rhythm without making the site feel empty. */
+.corporate-overview,
+.strategic-buyer-suite,
+.product-demo,
+.institutional-trust,
+.acquisition-command-center,
+.transaction-faq,
+.acquire{
+  padding-top:clamp(68px,7vw,104px)!important;
+  padding-bottom:clamp(68px,7vw,104px)!important;
+}
+
+.sector-rail{
+  min-height:50px!important;
+}
+
+.corporate-overview{
+  border-top:1px solid var(--corp-line);
+}
+
+.strategic-buyer-suite-compact{
+  background:var(--corp-soft)!important;
+}
+
+.strategic-buyer-suite-compact .strategic-thesis{
+  gap:clamp(34px,5vw,76px)!important;
+}
+
+.strategic-buyer-suite-compact .strategic-thesis-panel{
+  min-height:310px!important;
+}
+
+.strategic-applications-compact{
+  margin-top:clamp(58px,6vw,82px)!important;
+}
+
+.strategic-applications-compact .strategic-application-grid{
+  margin-top:28px!important;
+  gap:10px!important;
+}
+
+.strategic-applications-compact .strategic-application-grid article{
+  min-height:164px!important;
+  padding:21px!important;
+}
+
+.strategic-applications-compact .strategic-application-grid h3{
+  margin-top:21px!important;
+  font-size:18px!important;
+}
+
+.strategic-validation-compact{
+  margin-top:clamp(58px,6vw,82px)!important;
+  padding:clamp(28px,4vw,44px)!important;
+}
+
+.product-demo-heading,
+.command-heading,
+.transaction-faq-heading{
+  margin-bottom:32px!important;
+}
+
+.institutional-signal-grid{
+  margin-top:34px!important;
+}
+
+.institutional-timeline{
+  margin-top:clamp(56px,6vw,82px)!important;
+}
+
+.institutional-cta{
+  margin-top:36px!important;
+}
+
+.command-body,
+.command-transaction{
+  margin-top:12px!important;
+}
+
+.transaction-faq-grid{
+  gap:9px!important;
+}
+
+.acquire{
+  min-height:auto!important;
+}
+
+/* Keep the interactive AI panel visually central. */
+.product-demo{
+  position:relative;
+  background:#fff!important;
+}
+
+.product-demo-shell{
+  box-shadow:0 16px 38px rgba(11,23,48,.10)!important;
+}
+
+@media(max-width:700px){
+  .corporate-overview,
+  .strategic-buyer-suite,
+  .product-demo,
+  .institutional-trust,
+  .acquisition-command-center,
+  .transaction-faq,
+  .acquire{
+    padding-top:54px!important;
+    padding-bottom:54px!important;
+  }
+
+  .strategic-buyer-suite-compact .strategic-thesis-panel{
+    min-height:250px!important;
+  }
+
+  .strategic-applications-compact{
+    margin-top:46px!important;
+  }
+
+  .strategic-applications-compact .strategic-application-grid article{
+    min-height:auto!important;
+    padding:18px!important;
+  }
+
+  .strategic-validation-compact{
+    margin-top:46px!important;
+    padding:22px 18px!important;
+  }
+
+  .institutional-timeline{
+    margin-top:44px!important;
+  }
+
+  .institutional-cta{
+    margin-top:28px!important;
+  }
+}
