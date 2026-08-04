@@ -1284,7 +1284,7 @@ export default function App() {
                   name="amount"
                   type="number"
                   min="1"
-                  step="1000"
+                  step="1"
                   inputMode="numeric"
                   required
                   placeholder="Enter your offer (USD)"
