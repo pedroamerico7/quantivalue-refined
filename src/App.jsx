@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import AcquisitionCenter from "./components/AcquisitionCenter";
+import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
 
 const sectors = [
   "AI Valuation",
@@ -540,8 +541,8 @@ export default function App() {
               <button className="primary-cta" type="button" onClick={openAcquisitionModal}>
                 Begin Acquisition <Arrow />
               </button>
-              <a className="secondary-cta" href="#thesis">
-                Read the brand thesis <span>↓</span>
+              <a className="secondary-cta" href="#strategic-opportunity">
+                Explore the strategic thesis <span>↓</span>
               </a>
             </div>
 
@@ -634,6 +635,8 @@ export default function App() {
           </div>
         </section>
 
+
+        <StrategicBuyerAcquisition onOpenDiscussion={openAcquisitionModal} />
 
         <section className="product-demo" id="platform">
           <div className="product-demo-heading" data-reveal>
