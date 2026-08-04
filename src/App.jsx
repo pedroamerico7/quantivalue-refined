@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
 import BuyerConfidence from "./components/BuyerConfidence";
+import InstitutionalTrust from "./components/InstitutionalTrust";
 import { attributionPayload, captureAttribution } from "./utils/attribution";
 
 const sectors = [
@@ -114,13 +115,10 @@ export default function App() {
   });
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("top");
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [projectProgressOpen, setProjectProgressOpen] = useState(false);
   const [headerCompact, setHeaderCompact] = useState(false);
-  const [atlasNearFooter, setAtlasNearFooter] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -150,20 +148,35 @@ export default function App() {
   }
 
   useEffect(() => {
+    const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("visible"));
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
       }),
-      { threshold: 0.12 }
+      { threshold: 0.04, rootMargin: "0px 0px 120px 0px" }
     );
 
-    document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
+    elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     const storageKey = "quantivalue-view-counted-at";
-    const last = Number(localStorage.getItem(storageKey) || 0);
+    let last = 0;
+    try {
+      last = Number(window.localStorage.getItem(storageKey) || 0);
+    } catch {
+      last = 0;
+    }
     const shouldIncrement = Date.now() - last > 24 * 60 * 60 * 1000;
 
     fetch("/api/views", {
@@ -175,7 +188,11 @@ export default function App() {
         const reportedViews = Number(data?.views);
         setViews(Number.isFinite(reportedViews) ? reportedViews : FALLBACK_VIEWS);
         if (shouldIncrement && data?.persistent !== false) {
-          localStorage.setItem(storageKey, String(Date.now()));
+          try {
+            window.localStorage.setItem(storageKey, String(Date.now()));
+          } catch {
+            // Storage may be unavailable in private browsing.
+          }
         }
       })
       .catch(() => setViews(FALLBACK_VIEWS));
@@ -186,7 +203,6 @@ export default function App() {
       if (event.key === "Escape") {
         setOfferOpen(false);
         setMobileMenuOpen(false);
-        setProjectProgressOpen(false);
       }
     }
     window.addEventListener("keydown", closeOnEscape);
@@ -337,27 +353,7 @@ export default function App() {
     return () => window.removeEventListener("scroll", updateHeaderCompact);
   }, []);
 
-  useEffect(() => {
-    const footer = document.querySelector("footer");
-    if (!footer || !("IntersectionObserver" in window)) return undefined;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setAtlasNearFooter(entry.isIntersecting),
-      {
-        root: null,
-        threshold: 0.05,
-        rootMargin: "0px 0px 100px 0px",
-      }
-    );
-
-    observer.observe(footer);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), 720);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     captureAttribution();
@@ -434,16 +430,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {isLoading && (
-        <div className="brand-loader" role="status" aria-label="Loading QuantiValue">
-          <div className="brand-loader-mark" aria-hidden="true">
-            <img src="/quantum-ring.svg" alt="" width="64" height="64" decoding="async" />
-            <span />
-          </div>
-          <strong>QuantiValue</strong>
-          <small>Financial intelligence · Built on explainability</small>
-        </div>
-      )}
       <div
         className="scroll-progress"
         role="progressbar"
@@ -491,6 +477,7 @@ export default function App() {
           <a className={activeSection === "technology" ? "active" : ""} href="#technology" onClick={() => setMobileMenuOpen(false)}>Technology</a>
           <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" onClick={() => setMobileMenuOpen(false)}>Assets</a>
           <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room" onClick={() => setMobileMenuOpen(false)}>Brief</a>
+          <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Trust</a>
           <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
           <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
           <a className={activeSection === "acquire" ? "active" : ""} href="#acquire" onClick={() => setMobileMenuOpen(false)}>Contact</a>
@@ -502,12 +489,12 @@ export default function App() {
               setOfferOpen(true);
             }}
           >
-            Begin Acquisition <Arrow />
+            Request Confidential Discussion <Arrow />
           </button>
         </nav>
 
         <button className="header-offer" type="button" onClick={openAcquisitionModal}>
-          BEGIN ACQUISITION <Arrow />
+          REQUEST DISCUSSION <Arrow />
         </button>
       </header>
 
@@ -534,19 +521,19 @@ export default function App() {
             </div>
 
             <h1>
-              <span className="hero-title-main">Financial Intelligence.</span>
-              <span className="hero-title-signature">Built on Explainability.</span>
+              <span className="hero-title-main">A premium global brand.</span>
+              <span className="hero-title-signature">Available for acquisition.</span>
             </h1>
 
             <p className="hero-description">
-              Enterprise-grade brand for explainable AI, valuation technology and
-              institutional financial intelligence. Built for investors, M&amp;A advisors,
-              private equity and financial institutions.
+              QuantiValue.com is a strategic .COM asset positioned for artificial
+              intelligence, quantitative finance, valuation technology and enterprise
+              analytics. Offered through a direct and confidential owner process.
             </p>
 
             <div className="hero-actions">
               <button className="primary-cta" type="button" onClick={openAcquisitionModal}>
-                Begin Acquisition <Arrow />
+                Request Confidential Discussion <Arrow />
               </button>
               <a className="secondary-cta" href="#strategic-opportunity">
                 Explore the strategic thesis <span>↓</span>
@@ -554,7 +541,7 @@ export default function App() {
             </div>
 
             <p className="hero-trust">
-              Acquisition <span>•</span> Licensing <span>•</span> Strategic partnership
+              Single owner <span>•</span> Verified communication <span>•</span> Escrow compatible
             </p>
 
             <div className="hero-proof">
@@ -1007,6 +994,8 @@ export default function App() {
           </div>
         </section>
 
+        <InstitutionalTrust onOpenDiscussion={openAcquisitionModal} />
+
         <AcquisitionCenter
           views={views}
           onOpenDiscussion={openAcquisitionModal}
@@ -1118,7 +1107,7 @@ export default function App() {
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
         </a>
-        <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>
+        <span className="footer-signature">Institutional inquiries only <i>·</i> Confidential acquisitions worldwide</span>
         <div className="footer-acquisition-contact">
           <small>Private acquisition</small>
           <a
@@ -1130,22 +1119,6 @@ export default function App() {
           </a>
         </div>
       </footer>
-
-      <button
-        className={`project-progress-trigger ${atlasNearFooter ? "near-footer" : ""}`}
-        type="button"
-        onClick={() => setProjectProgressOpen(true)}
-        aria-label="Open Project Atlas progress"
-      >
-        <span className="project-progress-trigger-ring" aria-hidden="true">
-          <i style={{ "--project-progress": "93%" }} />
-          <b>93</b>
-        </span>
-        <span>
-          <small>Project Atlas</small>
-          <strong>93% complete</strong>
-        </span>
-      </button>
 
       <div className="mobile-conversion-bar">
         <div>
@@ -1166,85 +1139,6 @@ export default function App() {
         ↑
       </button>
 
-      {projectProgressOpen && (
-        <div className="modal-backdrop project-progress-backdrop" onMouseDown={() => setProjectProgressOpen(false)}>
-          <section
-            className="project-progress-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="project-progress-title"
-            onMouseDown={(event) => event.stopPropagation()}
-          >
-            <button
-              className="modal-close"
-              type="button"
-              onClick={() => setProjectProgressOpen(false)}
-              aria-label="Close project progress"
-            >
-              ×
-            </button>
-
-            <div className="project-progress-summary">
-              <p className="section-tag light">Project Atlas</p>
-              <h2 id="project-progress-title">A premium acquisition asset, nearly complete.</h2>
-              <p>
-                This dashboard summarizes the current maturity of the QuantiValue brand,
-                product experience, acquisition materials and technical foundation.
-              </p>
-
-              <div className="project-progress-total">
-                <div className="project-progress-total-ring" aria-hidden="true">
-                  <span>93%</span>
-                </div>
-                <div>
-                  <strong>Overall completion</strong>
-                  <small>Production-ready core with final optimization remaining.</small>
-                </div>
-              </div>
-            </div>
-
-            <div className="project-progress-list">
-              {[
-                ["Identity & brand system", 100],
-                ["Hero & dashboard experience", 96],
-                ["Interactive valuation demo", 100],
-                ["Technology & market narrative", 100],
-                ["Investor brief & diligence room", 100],
-                ["Acquisition workflow", 95],
-                ["SEO & search presence", 96],
-                ["Responsive experience", 96],
-                ["Motion & microinteractions", 92],
-                ["Performance optimization", 80],
-                ["Brand book & sales materials", 74],
-              ].map(([label, value]) => (
-                <div className="project-progress-item" key={label}>
-                  <div>
-                    <span>{label}</span>
-                    <strong>{value}%</strong>
-                  </div>
-                  <div className="project-progress-track" aria-hidden="true">
-                    <span style={{ width: `${value}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="project-progress-footer">
-              <span>Next milestone: performance, final brand book and sales package.</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setProjectProgressOpen(false);
-                  document.querySelector("#acquire")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                View acquisition path <Arrow />
-              </button>
-            </div>
-          </section>
-        </div>
-      )}
-
       {offerOpen && (
         <div className="modal-backdrop" onMouseDown={() => setOfferOpen(false)}>
           <section
@@ -1261,6 +1155,10 @@ export default function App() {
             <div className="modal-brand">
               <p className="section-tag light">Private acquisition</p>
               <h2 id="offer-title">Confidential Offer</h2>
+              <p className="modal-owner-note">
+                Your proposal is reviewed only by the owner. No broker, no public
+                marketplace and no automated negotiation.
+              </p>
               <p>
                 Submit a confidential proposal for QuantiValue.com. Your information
                 is reviewed privately by the owner.
