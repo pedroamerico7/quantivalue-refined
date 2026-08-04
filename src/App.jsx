@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import AcquisitionCenter from "./components/AcquisitionCenter";
 
 const sectors = [
   "AI Valuation",
@@ -925,68 +926,10 @@ export default function App() {
           </div>
         </section>
 
-        <section className="diligence-room" id="diligence">
-          <div className="diligence-heading" data-reveal>
-            <div>
-              <p className="section-tag">Due diligence room</p>
-              <h2>Everything a serious buyer needs to verify.</h2>
-            </div>
-            <p>
-              A structured acquisition checklist makes the opportunity easier to review,
-              compare and move toward a secure transaction.
-            </p>
-          </div>
-
-          <div className="diligence-status" data-reveal>
-            <div className="diligence-score">
-              <strong>92%</strong>
-              <span>Acquisition readiness</span>
-            </div>
-            <div className="diligence-meter" aria-label="Acquisition readiness: 92 percent">
-              <span />
-            </div>
-          </div>
-
-          <div className="diligence-grid">
-            <article data-reveal>
-              <span className="diligence-check">✓</span>
-              <div><small>DOMAIN</small><h3>QuantiValue.com</h3><p>Exact-match premium .COM under direct owner control.</p></div>
-              <b>READY</b>
-            </article>
-            <article data-reveal>
-              <span className="diligence-check">✓</span>
-              <div><small>BRAND</small><h3>Identity system</h3><p>Quantum Ring, wordmark, palette, typography and brand direction.</p></div>
-              <b>READY</b>
-            </article>
-            <article data-reveal>
-              <span className="diligence-check">✓</span>
-              <div><small>PRODUCT</small><h3>Interactive concept</h3><p>Live valuation demonstration and enterprise product narrative.</p></div>
-              <b>READY</b>
-            </article>
-            <article data-reveal>
-              <span className="diligence-check">✓</span>
-              <div><small>TECHNICAL</small><h3>Production codebase</h3><p>React, Vite, Cloudflare Pages and serverless acquisition endpoints.</p></div>
-              <b>READY</b>
-            </article>
-            <article data-reveal>
-              <span className="diligence-check">✓</span>
-              <div><small>DOCUMENTATION</small><h3>Investor materials</h3><p>Investor brief, asset manifest and acquisition process documentation.</p></div>
-              <b>READY</b>
-            </article>
-            <article data-reveal>
-              <span className="diligence-pending">→</span>
-              <div><small>TRANSACTION</small><h3>Buyer-specific terms</h3><p>Final price, escrow route and transfer schedule are agreed privately.</p></div>
-              <b className="pending">DISCUSSION</b>
-            </article>
-          </div>
-
-          <div className="diligence-actions" data-reveal>
-            <a href="/QuantiValue-Asset-Manifest.csv" download>Download asset manifest</a>
-            <a href="/QuantiValue-Investor-Brief.pdf" download>Download investor brief</a>
-            <button type="button" onClick={() => setOfferOpen(true)}>Open a private discussion</button>
-          </div>
-        </section>
-
+        <AcquisitionCenter
+          views={views}
+          onOpenDiscussion={() => setOfferOpen(true)}
+        />
 
         <section className="transaction-faq" id="transaction-faq">
           <div className="transaction-faq-heading" data-reveal>
