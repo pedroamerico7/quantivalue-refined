@@ -1,0 +1,6 @@
+PASS: Original state restored
+PASS: Original 720 ms timer restored
+PASS: Original loader markup restored
+PASS: Original copy restored
+PASS: New qv-splash removed
+PASS: New splash script removed

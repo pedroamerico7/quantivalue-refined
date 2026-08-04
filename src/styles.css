@@ -5937,3 +5937,77 @@ a{
     background:rgba(220,228,242,.98)!important;
   }
 }
+
+
+/* Sprint 62 — restore the original pre-Sprint-56 brand loader */
+
+/* Exact original visual behavior restored from the archived full project. */
+.brand-loader{
+  position:fixed!important;
+  inset:0!important;
+  z-index:5000!important;
+  display:grid!important;
+  place-content:center!important;
+  justify-items:center!important;
+  gap:14px!important;
+  color:#eef2ff!important;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(59,99,255,.20),transparent 32%),
+    #070b14!important;
+  animation:loaderExit .72s ease both!important;
+  pointer-events:none!important;
+  opacity:1;
+  visibility:visible;
+}
+
+.brand-loader-mark{
+  position:relative!important;
+  width:76px!important;
+  height:76px!important;
+  display:grid!important;
+  place-items:center!important;
+}
+
+.brand-loader-mark img{
+  width:62px!important;
+  height:62px!important;
+  filter:drop-shadow(0 0 24px rgba(59,99,255,.35))!important;
+  animation:loaderRing 1.25s cubic-bezier(.4,0,.2,1) infinite!important;
+}
+
+.brand-loader-mark span{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  border:1px solid rgba(158,177,255,.16)!important;
+  border-radius:50%!important;
+  animation:loaderPulse 1.25s ease-out infinite!important;
+}
+
+.brand-loader strong{
+  color:#eef2ff!important;
+  font-size:17px!important;
+  letter-spacing:-.035em!important;
+}
+
+.brand-loader small{
+  color:#8290aa!important;
+  font:500 8px var(--mono)!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+
+@media(max-width:650px){
+  .brand-loader small{
+    max-width:260px!important;
+    text-align:center!important;
+    line-height:1.7!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .brand-loader-mark img,
+  .brand-loader-mark span{
+    animation:none!important;
+  }
+}

@@ -115,6 +115,7 @@ export default function App() {
   });
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("top");
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -356,6 +357,11 @@ export default function App() {
 
 
   useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 720);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     captureAttribution();
   }, []);
 
@@ -430,6 +436,16 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {isLoading && (
+        <div className="brand-loader" role="status" aria-label="Loading QuantiValue">
+          <div className="brand-loader-mark" aria-hidden="true">
+            <img src="/quantum-ring.svg" alt="" />
+            <span />
+          </div>
+          <strong>QuantiValue</strong>
+          <small>Financial intelligence · Built on explainability</small>
+        </div>
+      )}
       <div
         className="scroll-progress"
         role="progressbar"
