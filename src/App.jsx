@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
-import BuyerConfidence from "./components/BuyerConfidence";
 import { attributionPayload, captureAttribution } from "./utils/attribution";
 
 const sectors = [
@@ -644,9 +643,6 @@ export default function App() {
 
 
         <StrategicBuyerAcquisition onOpenDiscussion={openAcquisitionModal} />
-
-        <BuyerConfidence onOpenDiscussion={openAcquisitionModal} />
-
         <section className="product-demo" id="platform">
           <div className="product-demo-heading" data-reveal>
             <div>

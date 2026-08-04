@@ -4591,3 +4591,283 @@ footer{
   color:#2f56dc;
   background:rgba(255,255,255,.68);
 }
+
+
+/* Sprint 47 — Mobile sticky header + conversion consolidation */
+
+/* Keep vertical scrolling on the document so sticky/fixed elements are reliable. */
+html,
+body,
+#root,
+.app-shell{
+  overflow-x:clip;
+}
+
+.app-shell{
+  overflow-y:visible!important;
+}
+
+/* Mobile header remains visible throughout the entire page. */
+@media(max-width:700px){
+  .site-header,
+  .site-header.is-compact{
+    position:fixed!important;
+    top:4px!important;
+    left:8px!important;
+    right:8px!important;
+    width:auto!important;
+    z-index:1500!important;
+    min-height:52px!important;
+    padding:3px 10px!important;
+    border:1px solid rgba(59,99,255,.11)!important;
+    border-radius:15px!important;
+    background:rgba(245,248,255,.68)!important;
+    box-shadow:0 8px 26px rgba(34,53,99,.055)!important;
+    backdrop-filter:blur(20px) saturate(125%)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(125%)!important;
+  }
+
+  .site-header.is-compact{
+    min-height:46px!important;
+    background:rgba(245,248,255,.50)!important;
+    box-shadow:0 5px 18px rgba(34,53,99,.035)!important;
+  }
+
+  .site-header .logo-symbol{
+    width:34px!important;
+    height:34px!important;
+  }
+
+  .site-header.is-compact .logo-symbol{
+    width:30px!important;
+    height:30px!important;
+  }
+
+  .site-header .logo-name{
+    font-size:15px!important;
+  }
+
+  .site-header nav{
+    display:none!important;
+  }
+
+  .site-header .header-offer{
+    min-height:38px!important;
+    padding:0 13px!important;
+    font-size:8px!important;
+    white-space:nowrap;
+  }
+
+  .site-header.is-compact .header-offer{
+    min-height:34px!important;
+    opacity:.76;
+  }
+
+  main{
+    padding-top:62px;
+  }
+
+  .scroll-progress{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    z-index:1600!important;
+  }
+}
+
+/* Shorter, more editorial main narrative. */
+.strategic-buyer-suite{
+  padding-top:clamp(72px,8vw,112px)!important;
+  padding-bottom:clamp(72px,8vw,112px)!important;
+}
+
+.strategic-highlights{
+  margin-top:48px!important;
+}
+
+.strategic-highlights article{
+  min-height:205px!important;
+}
+
+.strategic-applications{
+  margin-top:clamp(66px,7vw,96px)!important;
+}
+
+.strategic-application-grid article{
+  min-height:192px!important;
+}
+
+.strategic-validation{
+  margin-top:clamp(66px,7vw,96px)!important;
+}
+
+.strategic-why-now{
+  display:none!important;
+}
+
+.strategic-final-cta{
+  margin-top:clamp(56px,6vw,82px)!important;
+}
+
+/* The interactive AI panel remains a core section and moves visually forward
+   without changing its code or functionality. */
+.product-demo{
+  content-visibility:visible!important;
+  contain:none!important;
+  padding-top:clamp(72px,8vw,112px)!important;
+  padding-bottom:clamp(72px,8vw,112px)!important;
+}
+
+.product-demo-shell,
+.dashboard-showcase{
+  position:relative;
+  z-index:1;
+}
+
+/* Reduce repetition and total scroll length across legacy sections. */
+.technology,
+.thesis,
+.market-opportunity,
+.film-strip,
+.pillars,
+.asset-package,
+.investor-room{
+  padding-top:clamp(64px,7vw,96px)!important;
+  padding-bottom:clamp(64px,7vw,96px)!important;
+}
+
+.technology-card,
+.asset-card,
+.investor-room article{
+  min-height:auto!important;
+}
+
+/* Keep only the strongest acquisition layer visually prominent. */
+.acquisition-command-center{
+  padding-top:clamp(76px,8vw,116px)!important;
+  padding-bottom:clamp(76px,8vw,116px)!important;
+}
+
+.command-heading{
+  margin-bottom:38px!important;
+}
+
+.command-body{
+  margin-top:14px!important;
+}
+
+.command-transaction{
+  margin-top:14px!important;
+}
+
+/* Existing FAQ stays, but becomes tighter. */
+.transaction-faq{
+  padding-top:clamp(70px,8vw,108px)!important;
+  padding-bottom:clamp(70px,8vw,108px)!important;
+}
+
+.transaction-faq details{
+  margin-bottom:8px!important;
+}
+
+/* Remove duplicated legacy trust-heavy sections from visual flow where they repeat
+   the consolidated strategic and command-center narrative. */
+.diligence-room{
+  display:none!important;
+}
+
+/* Mobile: aggressively reduce vertical repetition while preserving the AI panel,
+   strategic thesis, validation, readiness, FAQ and final CTA. */
+@media(max-width:700px){
+  .strategic-buyer-suite,
+  .product-demo,
+  .acquisition-command-center,
+  .transaction-faq,
+  .acquire{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+
+  .strategic-highlights{
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+  }
+
+  .strategic-highlights article{
+    min-height:165px!important;
+    padding:18px!important;
+  }
+
+  .strategic-highlights h3{
+    margin-top:22px!important;
+    font-size:17px!important;
+  }
+
+  .strategic-highlights p{
+    font-size:11px!important;
+  }
+
+  .strategic-application-grid{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+
+  .strategic-application-grid article{
+    min-height:150px!important;
+    padding:19px!important;
+  }
+
+  .strategic-validation{
+    padding:25px 20px!important;
+  }
+
+  .strategic-final-cta{
+    padding:25px 20px!important;
+  }
+
+  .product-demo{
+    content-visibility:visible!important;
+  }
+
+  .command-overview,
+  .command-body{
+    gap:10px!important;
+  }
+
+  .command-readiness,
+  .command-checklist,
+  .command-downloads,
+  .command-transaction{
+    padding:20px!important;
+  }
+
+  .command-download-grid{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .command-download-card{
+    min-height:135px!important;
+    padding:16px!important;
+  }
+
+  .command-timeline{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .film-strip,
+  .pillars,
+  .investor-room{
+    display:none!important;
+  }
+}
+
+@media(max-width:440px){
+  .strategic-highlights{
+    grid-template-columns:1fr!important;
+  }
+
+  .command-download-grid{
+    grid-template-columns:1fr!important;
+  }
+}
