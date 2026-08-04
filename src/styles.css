@@ -5810,3 +5810,45 @@ a{
     margin-top:28px!important;
   }
 }
+
+
+/* Sprint 59 — precise visibility fixes only */
+
+/* The AI panel section is now white, so its heading must use the corporate dark palette. */
+.product-demo-heading h2{
+  color:#172033!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+
+.product-demo-heading > p{
+  color:#5f6b80!important;
+  opacity:1!important;
+}
+
+.product-demo-heading .section-tag,
+.product-demo-heading .section-tag.light{
+  color:#2854c7!important;
+  opacity:1!important;
+}
+
+/* Keep the top-bar acquisition CTA fully visible before and during scrolling. */
+.site-header .header-offer,
+.site-header.is-compact .header-offer{
+  color:#ffffff!important;
+  background:#2854c7!important;
+  border-color:#2854c7!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.site-header.is-compact .header-offer:hover,
+.site-header.is-compact .header-offer:focus-visible,
+.site-header .header-offer:hover,
+.site-header .header-offer:focus-visible{
+  color:#ffffff!important;
+  background:#1f46ad!important;
+  border-color:#1f46ad!important;
+  opacity:1!important;
+}
