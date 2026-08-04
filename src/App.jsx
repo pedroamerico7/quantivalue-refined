@@ -850,7 +850,7 @@ export default function App() {
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
         </a>
-        <span className="footer-signature">Institutional inquiries only <i>·</i> Confidential acquisitions worldwide</span>
+        <span className="footer-signature">Confidential discussions with qualified buyers. <i>·</i> Confidential acquisitions worldwide</span>
         <div className="footer-acquisition-contact">
           <small>Private acquisition</small>
           <button
