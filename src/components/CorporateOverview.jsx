@@ -1,7 +1,7 @@
 const corporateFacts = [
   ["Asset", "QuantiValue.com"],
   ["Category", "AI · Finance · Valuation"],
-  ["Transaction", "Private acquisition"],
+  ["Process", "Direct owner review"],
   ["Ownership", "Direct owner"],
   ["Transfer", "International · Escrow compatible"],
   ["Response", "Qualified inquiries within 48 hours"],
@@ -15,16 +15,16 @@ export default function CorporateOverview({ onOpenDiscussion }) {
           <p className="section-tag">Executive overview</p>
           <h2>A strategic digital asset for global financial intelligence.</h2>
           <p>
-            QuantiValue.com provides an acquiring organization with a credible,
+            QuantiValue.com gives an organization a credible,
             international identity for AI, quantitative finance, valuation technology
             and enterprise analytics.
           </p>
           <div className="corporate-overview-actions">
             <a className="corporate-overview-primary-link" href="#institutional-trust">
-              Review acquisition process <span aria-hidden="true">→</span>
+              Review ownership process <span aria-hidden="true">→</span>
             </a>
             <a href="/enterprise.html">
-              Review Acquisition Overview <span aria-hidden="true">→</span>
+              Review Brand Overview <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>

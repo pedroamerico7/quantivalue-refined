@@ -17,7 +17,7 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
     <section className="acquisition-command-center" id="diligence">
       <div className="command-heading" data-reveal>
         <div>
-          <p className="section-tag light">Acquisition command center</p>
+          <p className="section-tag light">Diligence center</p>
           <h2>One executive view of the entire opportunity.</h2>
         </div>
         <p>
@@ -62,7 +62,7 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
             <DownloadCard
               type="PDF"
               title="Investor Brief"
-              meta="Acquisition overview"
+              meta="Executive overview"
               href="/QuantiValue-Investor-Brief.pdf"
             />
             <DownloadCard
@@ -73,7 +73,7 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
             />
             <DownloadCard
               type="HTML"
-              title="Acquisition Guide"
+              title="Process Guide"
               meta="Process and terms"
               href="/acquisition.html"
               download={false}
@@ -92,7 +92,7 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
       <div className="command-transaction" data-reveal>
         <div className="command-block-heading">
           <span>Transaction path</span>
-          <small>Direct · confidential · escrow-compatible</small>
+          <small>Direct · private · escrow-compatible</small>
         </div>
         <TransactionTimeline />
       </div>
@@ -100,7 +100,7 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
       <div className="command-cta" data-reveal>
         <div>
           <small>Qualified buyer access</small>
-          <h3>Move from review to a private acquisition discussion.</h3>
+          <h3>Move from review to a private owner discussion.</h3>
         </div>
         <button type="button" onClick={onOpenDiscussion}>
           Request private discussion <span aria-hidden="true">↗</span>

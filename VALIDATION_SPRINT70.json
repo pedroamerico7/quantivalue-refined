@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "Hero CTA preserved": true,
+    "Final CTA preserved": true,
+    "Public visit count removed": true,
+    "International organic traffic present": true,
+    "No continent-specific traffic claim": true,
+    "AI panel preserved": true,
+    "Offer API preserved": true,
+    "Splash preserved": true,
+    "Offer function preserved": true
+  },
+  "rendered_term_counts": {
+    "acquisition": 9,
+    "confidential": 2,
+    "premium": 2
+  }
+}

@@ -425,7 +425,7 @@ export default function App() {
       setOfferReference(result.reference || "QV-RECEIVED");
       setOfferStatus({
         state: "success",
-        message: "Your confidential offer has been received.",
+        message: "Your private offer has been received.",
       });
     } catch (error) {
       setOfferStatus({
@@ -493,7 +493,7 @@ export default function App() {
           <a href="#overview" onClick={() => setMobileMenuOpen(false)}>Overview</a>
           <a href="#strategic-opportunity" onClick={() => setMobileMenuOpen(false)}>Applications</a>
           <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>AI Platform</a>
-          <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Acquisition</a>
+          <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Process</a>
           <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
           <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
           <a
@@ -501,12 +501,12 @@ export default function App() {
             href="#acquire"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Acquisition <Arrow />
+            Contact <Arrow />
           </a>
         </nav>
 
         <a className="header-offer header-offer-link" href="#acquire">
-          Acquisition <Arrow />
+          Contact <Arrow />
         </a>
       </header>
 
@@ -529,7 +529,7 @@ export default function App() {
           <div className="hero-content" data-reveal>
             <div className="availability">
               <span className="live-dot" />
-              Premium .COM available for acquisition
+              Strategic .COM available
             </div>
 
             <h1>
@@ -538,8 +538,8 @@ export default function App() {
             </h1>
 
             <p className="hero-description">
-              A strategic .COM asset for AI, quantitative finance, valuation technology
-              and enterprise analytics — offered through a direct, confidential owner process.
+              A strategic .COM identity for AI, quantitative finance, valuation technology
+              and enterprise analytics — presented directly by its owner.
             </p>
 
             <div className="hero-actions">
@@ -556,12 +556,12 @@ export default function App() {
             </p>
 
             <div className="hero-proof">
-              <div className="visitor-proof" aria-label={views === null ? "Synchronizing recorded site visits" : `${formatViews(views)} recorded site visits`}>
-                <strong><span className="counter-live-dot" aria-hidden="true" />{formatViews(views)}+</strong>
-                <span>recorded site visits</span>
+              <div className="visitor-proof" aria-label="International organic traffic">
+                <strong><span className="counter-live-dot" aria-hidden="true" />Organic</strong>
+                <span>international traffic</span>
               </div>
               <div>
-                <strong>Premium .COM</strong>
+                <strong>Global .COM</strong>
                 <span>global digital asset</span>
               </div>
               <div>
@@ -570,7 +570,7 @@ export default function App() {
               </div>
               <div>
                 <strong>Private</strong>
-                <span>direct owner acquisition</span>
+                <span>direct owner process</span>
               </div>
             </div>
           </div>
@@ -746,23 +746,22 @@ export default function App() {
         <section className="transaction-faq" id="transaction-faq">
           <div className="transaction-faq-heading" data-reveal>
             <div>
-              <p className="section-tag">Transaction FAQ</p>
-              <h2>A clear, confidential path from interest to ownership.</h2>
+              <p className="section-tag">Buyer FAQ</p>
+              <h2>A clear path from initial interest to ownership.</h2>
             </div>
             <p>
-              The acquisition process is designed to reduce uncertainty for qualified
-              buyers while preserving privacy, transaction security and direct access
-              to the domain owner.
+              The process is designed to reduce uncertainty for qualified buyers while
+              preserving privacy, transaction security and direct access to the owner.
             </p>
           </div>
 
           <div className="transaction-faq-grid">
             <details open data-reveal>
-              <summary>What is included in the acquisition?</summary>
+              <summary>What is included?</summary>
               <p>
                 The QuantiValue.com domain, the live website source, the visual identity
                 system, positioning materials, product concepts, technical SEO assets
-                and the downloadable acquisition documents listed in the diligence room.
+                and the downloadable materials listed in the diligence room.
               </p>
             </details>
 
@@ -785,7 +784,7 @@ export default function App() {
             </details>
 
             <details data-reveal>
-              <summary>Is the discussion confidential?</summary>
+              <summary>Is the discussion private?</summary>
               <p>
                 Yes. Inquiries are reviewed privately. Additional diligence materials
                 and transaction details can be shared after buyer identity and serious
@@ -812,11 +811,11 @@ export default function App() {
             </details>
 
             <details data-reveal>
-              <summary>Why is the acquisition process confidential?</summary>
+              <summary>Why is the process private?</summary>
               <p>
-                Confidentiality protects the buyer’s strategic intent, internal planning
-                and negotiating position while allowing ownership, transfer and included
-                assets to be reviewed through a controlled diligence process.
+                Privacy protects the buyer’s strategic intent, internal planning and
+                negotiating position while allowing ownership, transfer and included assets
+                to be reviewed through a controlled diligence process.
               </p>
             </details>
 
@@ -841,21 +840,21 @@ export default function App() {
         <section className="acquire" id="acquire">
           <div className="acquire-grid" aria-hidden="true" />
           <div className="acquire-copy" data-reveal>
-            <p className="section-tag light">Private acquisition</p>
+            <p className="section-tag light">Owner review</p>
             <h2>Acquire the name behind intelligent valuation.</h2>
             <p>
               QuantiValue.com is available through a direct, confidential owner
               transaction. Serious strategic inquiries are welcome.
             </p>
             <div className="acquire-details">
-              <span>Premium .COM</span>
+              <span>Global .COM</span>
               <span>Secure transfer</span>
               <span>Global rights</span>
             </div>
           </div>
 
           <button className="acquire-button" type="button" onClick={openAcquisitionModal}>
-            <span>Private acquisition</span>
+            <span>Private offer</span>
             <strong>Begin Acquisition</strong>
             <Arrow />
           </button>
@@ -868,19 +867,19 @@ export default function App() {
           <span className="logo-name">QuantiValue</span>
         </a>
         <span className="footer-signature">
-          <b>Premium .COM Asset</b>
+          <b>Global .COM Asset</b>
           <i>·</i>
-          Confidential discussions with qualified buyers
+          International organic traffic
           <i>·</i>
           Acquisitions worldwide
         </span>
         <div className="footer-acquisition-contact">
-          <small>Private acquisition</small>
+          <small>Direct contact</small>
           <button
             className="footer-email"
             type="button"
             onClick={openAcquisitionModal}
-            aria-label="Open the confidential acquisition contact form"
+            aria-label="Open the private contact form"
           >
             acquisition@quantivalue.com
           </button>
@@ -890,7 +889,7 @@ export default function App() {
       <div className="mobile-conversion-bar">
         <div>
           <span>QuantiValue.com</span>
-          <strong>Private acquisition</strong>
+          <strong>Direct owner process</strong>
         </div>
         <button type="button" onClick={openAcquisitionModal}>
           Discuss <Arrow />
@@ -920,8 +919,8 @@ export default function App() {
             </button>
 
             <div className="modal-brand">
-              <p className="section-tag light">Private acquisition</p>
-              <h2 id="offer-title">Confidential Offer</h2>
+              <p className="section-tag light">Private offer</p>
+              <h2 id="offer-title">Private Offer</h2>
               <p className="modal-owner-note">
                 Your proposal is reviewed only by the owner. No broker, no public
                 marketplace and no automated negotiation.
@@ -932,7 +931,7 @@ export default function App() {
               </p>
               <div className="modal-stat">
                 <span className="live-dot" />
-                <strong>{views === null ? "Synchronizing visit count…" : `${formatViews(views)}+ recorded site visits`}</strong>
+                <strong>International organic traffic</strong>
               </div>
             </div>
 
@@ -940,14 +939,14 @@ export default function App() {
               <div className="offer-success" role="status" aria-live="polite">
                 <span className="offer-success-mark" aria-hidden="true">✓</span>
                 <p className="section-tag">Offer received</p>
-                <h3>Thank you for your confidential proposal.</h3>
+                <h3>Thank you for your proposal.</h3>
                 <p>
                   Your submission is now in private owner review. Qualified buyers
                   receive a response within 48 hours.
                 </p>
 
                 <div className="offer-reference">
-                  <small>Confidential reference</small>
+                  <small>Private reference</small>
                   <strong>{offerReference || "QV-RECEIVED"}</strong>
                   <button
                     type="button"
@@ -963,10 +962,10 @@ export default function App() {
                   </button>
                   <a
                     href={`mailto:acquisition@quantivalue.com?subject=${encodeURIComponent(
-                      `QuantiValue acquisition follow-up — ${offerReference || "QV-RECEIVED"}`
+                      `QuantiValue follow-up — ${offerReference || "QV-RECEIVED"}`
                     )}`}
                   >
-                    Email acquisition team
+                    Email owner
                   </a>
                 </div>
               </div>
@@ -1043,7 +1042,7 @@ export default function App() {
               </label>
 
               <button type="submit" disabled={offerStatus.state === "sending"}>
-                {offerStatus.state === "sending" ? "Submitting securely…" : "Submit Confidential Offer"}
+                {offerStatus.state === "sending" ? "Submitting securely…" : "Submit Private Offer"}
                 <Arrow />
               </button>
 

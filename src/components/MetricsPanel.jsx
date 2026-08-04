@@ -1,19 +1,19 @@
 function formatMetric(value) {
-  if (value === null || value === undefined) return "Syncing";
+  if (value === null || value === undefined) return "Available";
   if (typeof value === "number") return value.toLocaleString("en-US");
   return value;
 }
 
-export default function MetricsPanel({ views }) {
+export default function MetricsPanel() {
   const metrics = [
-    { label: "Recorded visits", value: views, note: "Live site metric" },
+    { label: "Organic visibility", value: "International", note: "Inbound discovery" },
     { label: "Included assets", value: 4, note: "Transferable package" },
-    { label: "Readiness score", value: "98%", note: "Acquisition preparation" },
+    { label: "Readiness score", value: "98%", note: "Diligence preparation" },
     { label: "Availability", value: "Open", note: "Private discussion" },
   ];
 
   return (
-    <div className="command-metrics" aria-label="Acquisition metrics">
+    <div className="command-metrics" aria-label="Diligence metrics">
       {metrics.map((metric) => (
         <article key={metric.label}>
           <small>{metric.label}</small>

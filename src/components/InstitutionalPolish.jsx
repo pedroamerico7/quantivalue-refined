@@ -1,7 +1,7 @@
-const acquisitionReasons = [
+const strategicReasons = [
   {
     index: "01",
-    title: "Premium .COM",
+    title: "Global .COM",
     copy: "A concise, globally recognized extension suited to a category-level financial technology brand.",
   },
   {
@@ -36,8 +36,8 @@ export default function InstitutionalPolish({ onOpenDiscussion }) {
       <div className="institutional-polish-inner">
         <div className="institutional-polish-heading" data-reveal>
           <div>
-            <p className="section-tag">Acquisition rationale</p>
-            <h2>Why acquire QuantiValue?</h2>
+            <p className="section-tag">Strategic value</p>
+            <h2>Why QuantiValue?</h2>
           </div>
           <p>
             A focused brand asset for organizations building the next generation of
@@ -46,7 +46,7 @@ export default function InstitutionalPolish({ onOpenDiscussion }) {
         </div>
 
         <div className="institutional-polish-grid" data-reveal>
-          {acquisitionReasons.map((reason) => (
+          {strategicReasons.map((reason) => (
             <article key={reason.index}>
               <span>{reason.index}</span>
               <h3>{reason.title}</h3>

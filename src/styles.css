@@ -6482,3 +6482,13 @@ button.footer-email:focus-visible{
     min-height:38px!important;
   }
 }
+
+
+/* Sprint 70 — editorial polish */
+.visitor-proof strong{
+  min-width:0!important;
+}
+
+.visitor-proof strong .counter-live-dot{
+  flex:0 0 auto;
+}

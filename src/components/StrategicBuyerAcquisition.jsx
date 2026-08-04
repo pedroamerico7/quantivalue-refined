@@ -9,9 +9,9 @@ const applications = [
 
 const validationSignals = [
   "Existing international organic traffic",
-  "Audience signals from North America and Europe",
+  "International audience signals",
   "Direct navigation and brand discovery",
-  "Detailed analytics available during due diligence",
+  "Detailed analytics available during buyer review",
 ];
 
 export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
@@ -28,18 +28,18 @@ export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
 
           <div className="strategic-thesis-actions">
             <a className="strategic-rationale-link" href="#why-acquire">
-              Explore acquisition rationale <span aria-hidden="true">→</span>
+              Explore strategic value <span aria-hidden="true">→</span>
             </a>
             <a href="#platform">View the AI platform <span aria-hidden="true">↓</span></a>
           </div>
         </div>
 
-        <div className="strategic-thesis-panel" aria-label="Strategic acquisition summary">
+        <div className="strategic-thesis-panel" aria-label="Strategic brand summary">
           <span className="strategic-panel-kicker">QUANTIVALUE.COM</span>
           <strong>AI · Finance · Valuation</strong>
           <p>
-            A premium digital asset for organizations seeking a credible international
-            identity and a direct acquisition process.
+            A focused digital asset for organizations seeking a credible international
+            identity and a direct owner relationship.
           </p>
           <div>
             <span>Private process</span>
@@ -77,8 +77,8 @@ export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
           <p className="section-tag light">Market validation</p>
           <h2>International attention already exists.</h2>
           <p>
-            QuantiValue receives organic interest from the United States and European
-            markets. Supporting analytics are reserved for qualified buyers.
+            QuantiValue receives international organic traffic. Supporting analytics
+            are reserved for qualified buyers.
           </p>
         </div>
 
