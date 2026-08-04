@@ -1,9 +1,11 @@
 {
   "name": "QuantiValue",
   "short_name": "QuantiValue",
-  "theme_color": "#070B14",
-  "background_color": "#070B14",
+  "description": "QuantiValue.com is a premium .com brand for explainable AI, valuation technology and institutional financial intelligence, available for private acquisition.",
+  "start_url": "/",
   "display": "standalone",
+  "background_color": "#070B14",
+  "theme_color": "#070B14",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -14,6 +16,12 @@
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
