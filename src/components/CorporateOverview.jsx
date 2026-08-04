@@ -20,9 +20,9 @@ export default function CorporateOverview({ onOpenDiscussion }) {
             and enterprise analytics.
           </p>
           <div className="corporate-overview-actions">
-            <button type="button" onClick={onOpenDiscussion}>
-              Request Confidential Discussion <span aria-hidden="true">↗</span>
-            </button>
+            <a className="corporate-overview-primary-link" href="#institutional-trust">
+              Review acquisition process <span aria-hidden="true">→</span>
+            </a>
             <a href="/enterprise.html">
               Review Acquisition Overview <span aria-hidden="true">→</span>
             </a>

@@ -67,9 +67,9 @@ export default function InstitutionalTrust({ onOpenDiscussion }) {
               inquiries are reviewed directly and answered within 48 hours.
             </p>
           </div>
-          <button type="button" onClick={onOpenDiscussion}>
-            Request Confidential Discussion <span aria-hidden="true">↗</span>
-          </button>
+          <a className="institutional-process-link" href="#diligence">
+            Review diligence overview <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
     </section>

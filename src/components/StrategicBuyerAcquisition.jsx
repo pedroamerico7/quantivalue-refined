@@ -27,9 +27,9 @@ export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
           </p>
 
           <div className="strategic-thesis-actions">
-            <button type="button" onClick={onOpenDiscussion}>
-              Request Confidential Discussion <span aria-hidden="true">↗</span>
-            </button>
+            <a className="strategic-rationale-link" href="#why-acquire">
+              Explore acquisition rationale <span aria-hidden="true">→</span>
+            </a>
             <a href="#platform">View the AI platform <span aria-hidden="true">↓</span></a>
           </div>
         </div>

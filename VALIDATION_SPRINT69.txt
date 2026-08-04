@@ -1,0 +1,19 @@
+STATIC VALIDATION PASSED
+PASS: Hero Begin Acquisition present
+PASS: Final Begin Acquisition present
+PASS: No repeated Request Confidential Discussion buttons
+PASS: Top-bar action is an anchor
+PASS: Mobile action is an anchor
+PASS: Overview uses quiet link
+PASS: Strategic section uses quiet link
+PASS: Trust section uses diligence link
+PASS: Why Acquire button removed
+PASS: Offer modal logic preserved
+PASS: Offer API preserved
+PASS: AI panel preserved
+PASS: Splash preserved
+
+CTA strategy after this patch:
+1. Hero: Begin Acquisition — primary conversion CTA.
+2. Intermediate sections: discreet contextual navigation links.
+3. Final acquisition section: Begin Acquisition — final conversion CTA.

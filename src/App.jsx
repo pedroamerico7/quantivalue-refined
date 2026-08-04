@@ -496,21 +496,18 @@ export default function App() {
           <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Acquisition</a>
           <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
           <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-          <button
+          <a
             className="mobile-nav-offer"
-            type="button"
-            onClick={() => {
-              setMobileMenuOpen(false);
-              openAcquisitionModal();
-            }}
+            href="#acquire"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            Request Discussion <Arrow />
-          </button>
+            Acquisition <Arrow />
+          </a>
         </nav>
 
-        <button className="header-offer" type="button" onClick={openAcquisitionModal}>
-          REQUEST DISCUSSION <Arrow />
-        </button>
+        <a className="header-offer header-offer-link" href="#acquire">
+          Acquisition <Arrow />
+        </a>
       </header>
 
       <main id="top">
@@ -547,7 +544,7 @@ export default function App() {
 
             <div className="hero-actions">
               <button className="primary-cta" type="button" onClick={openAcquisitionModal}>
-                Request Confidential Discussion <Arrow />
+                Begin Acquisition <Arrow />
               </button>
               <a className="secondary-cta" href="#strategic-opportunity">
                 Explore the strategic thesis <span>↓</span>
@@ -859,7 +856,7 @@ export default function App() {
 
           <button className="acquire-button" type="button" onClick={openAcquisitionModal}>
             <span>Private acquisition</span>
-            <strong>Request Confidential Discussion</strong>
+            <strong>Begin Acquisition</strong>
             <Arrow />
           </button>
         </section>

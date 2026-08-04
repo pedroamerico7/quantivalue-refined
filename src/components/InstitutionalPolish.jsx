@@ -66,10 +66,6 @@ export default function InstitutionalPolish({ onOpenDiscussion }) {
               <span key={profile}>{profile}</span>
             ))}
           </div>
-
-          <button type="button" onClick={onOpenDiscussion}>
-            Request Confidential Discussion <span aria-hidden="true">↗</span>
-          </button>
         </div>
       </div>
     </section>

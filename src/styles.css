@@ -6369,3 +6369,116 @@ button.footer-email:focus-visible{
     font-size:15px!important;
   }
 }
+
+
+/* Sprint 69 — conversion CTA hierarchy */
+
+/* Header action is now a compact navigation signal, not another dominant conversion button. */
+.site-header .header-offer-link,
+.site-header.is-compact .header-offer-link{
+  color:#2854c7!important;
+  background:rgba(255,255,255,.34)!important;
+  border-color:rgba(40,84,199,.22)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  text-decoration:none!important;
+}
+
+.site-header .header-offer-link:hover,
+.site-header .header-offer-link:focus-visible,
+.site-header.is-compact .header-offer-link:hover,
+.site-header.is-compact .header-offer-link:focus-visible{
+  color:#1f46ad!important;
+  background:rgba(255,255,255,.58)!important;
+  border-color:rgba(40,84,199,.34)!important;
+}
+
+/* Intermediate calls to action become editorial links. */
+.corporate-overview-primary-link,
+.strategic-rationale-link,
+.institutional-process-link{
+  min-height:auto!important;
+  padding:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  border:0!important;
+  border-radius:0!important;
+  color:#2854c7!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  letter-spacing:.02em!important;
+  text-decoration:none!important;
+}
+
+.corporate-overview-primary-link:hover,
+.corporate-overview-primary-link:focus-visible,
+.strategic-rationale-link:hover,
+.strategic-rationale-link:focus-visible,
+.institutional-process-link:hover,
+.institutional-process-link:focus-visible{
+  color:#1f46ad!important;
+  background:transparent!important;
+  text-decoration:underline!important;
+  text-underline-offset:4px;
+}
+
+/* Keep the investor-brief link visually secondary. */
+.corporate-overview-actions{
+  align-items:center;
+}
+
+.corporate-overview-actions .corporate-overview-primary-link{
+  border:0!important;
+  background:transparent!important;
+}
+
+/* Institutional CTA now presents information and a diligence link, not another offer button. */
+.institutional-cta .institutional-process-link{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+
+/* Buyer-profile panel no longer reserves a third column for a repeated button. */
+.buyer-profile-panel{
+  grid-template-columns:minmax(260px,.85fr) minmax(320px,1.45fr)!important;
+}
+
+/* The two strong conversion points are the hero CTA and final acquisition CTA only. */
+.hero-primary,
+.acquire-button{
+  color:#ffffff!important;
+  background:#2854c7!important;
+  border-color:#2854c7!important;
+  opacity:1!important;
+}
+
+@media(max-width:980px){
+  .buyer-profile-panel{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:700px){
+  .site-header .header-offer-link,
+  .site-header.is-compact .header-offer-link{
+    min-height:35px!important;
+    padding:0 10px!important;
+    font-size:7px!important;
+    white-space:nowrap!important;
+  }
+
+  .institutional-cta .institutional-process-link{
+    width:100%;
+    white-space:normal;
+  }
+
+  .corporate-overview-primary-link,
+  .strategic-rationale-link,
+  .institutional-process-link{
+    min-height:38px!important;
+  }
+}
