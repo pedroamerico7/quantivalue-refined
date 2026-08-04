@@ -273,6 +273,7 @@ export default function App() {
           <a href="#platform">Platform</a>
           <a href="#technology">Technology</a>
           <a href="#asset-package">Assets</a>
+          <a href="#investor-room">Brief</a>
           <a href="#acquire">Contact</a>
         </nav>
 
@@ -723,6 +724,50 @@ export default function App() {
               <strong>Strategic vision</strong>
               <small>AI + finance positioning</small>
             </div>
+          </div>
+        </section>
+
+
+        <section className="investor-room" id="investor-room">
+          <div className="investor-room-heading" data-reveal>
+            <div>
+              <p className="section-tag light">Investor brief</p>
+              <h2>A concise acquisition case, ready for review.</h2>
+            </div>
+            <p>
+              Review the strategic rationale, included assets, transfer process and
+              commercial positioning in a focused one-page acquisition brief.
+            </p>
+          </div>
+
+          <div className="investor-room-grid">
+            <article data-reveal>
+              <span>01</span>
+              <small>POSITIONING</small>
+              <h3>Category-defining name</h3>
+              <p>QuantiValue combines quantitative intelligence with commercial value in one globally legible brand.</p>
+            </article>
+            <article data-reveal>
+              <span>02</span>
+              <small>ASSET PACKAGE</small>
+              <h3>Launch-ready foundation</h3>
+              <p>Premium .COM, identity system, working website, product vision and acquisition infrastructure.</p>
+            </article>
+            <article data-reveal>
+              <span>03</span>
+              <small>TRANSFER</small>
+              <h3>Direct owner transaction</h3>
+              <p>Private discussion, secure payment, registrar transfer and delivery of the included digital assets.</p>
+            </article>
+          </div>
+
+          <div className="investor-room-actions" data-reveal>
+            <a className="investor-brief-button" href="/investor-brief.html" target="_blank" rel="noreferrer">
+              Open investor brief <Arrow />
+            </a>
+            <button className="investor-discussion-button" type="button" onClick={() => setOfferOpen(true)}>
+              Request private discussion
+            </button>
           </div>
         </section>
 
