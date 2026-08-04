@@ -275,6 +275,7 @@ export default function App() {
           <a href="#asset-package">Assets</a>
           <a href="#investor-room">Brief</a>
           <a href="#diligence">Diligence</a>
+          <a href="#transaction-faq">FAQ</a>
           <a href="#acquire">Contact</a>
         </nav>
 
@@ -834,6 +835,84 @@ export default function App() {
             <a href="/QuantiValue-Asset-Manifest.csv" download>Download asset manifest</a>
             <a href="/QuantiValue-Investor-Brief.pdf" download>Download investor brief</a>
             <button type="button" onClick={() => setOfferOpen(true)}>Open a private discussion</button>
+          </div>
+        </section>
+
+
+        <section className="transaction-faq" id="transaction-faq">
+          <div className="transaction-faq-heading" data-reveal>
+            <div>
+              <p className="section-tag">Transaction FAQ</p>
+              <h2>A clear, confidential path from interest to ownership.</h2>
+            </div>
+            <p>
+              The acquisition process is designed to reduce uncertainty for qualified
+              buyers while preserving privacy, transaction security and direct access
+              to the domain owner.
+            </p>
+          </div>
+
+          <div className="transaction-faq-grid">
+            <details open data-reveal>
+              <summary>What is included in the acquisition?</summary>
+              <p>
+                The QuantiValue.com domain, the live website source, the visual identity
+                system, positioning materials, product concepts, technical SEO assets
+                and the downloadable acquisition documents listed in the diligence room.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>How is the domain transferred?</summary>
+              <p>
+                After cleared funds or escrow confirmation, the domain can be transferred
+                through the current registrar or moved to the buyer’s preferred registrar,
+                subject to standard transfer eligibility and security checks.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>Can the transaction use escrow?</summary>
+              <p>
+                Yes. A reputable escrow provider may be used so payment and transfer are
+                coordinated through a neutral third party. Provider fees and the exact
+                workflow are agreed before closing.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>Is the discussion confidential?</summary>
+              <p>
+                Yes. Inquiries are reviewed privately. Additional diligence materials
+                and transaction details can be shared after buyer identity and serious
+                intent are established.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>Is the displayed valuation demo a financial opinion?</summary>
+              <p>
+                No. The interactive valuation module is an illustrative product concept.
+                It demonstrates positioning and explainability, but it is not investment,
+                accounting, legal or valuation advice.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>What is the expected next step?</summary>
+              <p>
+                Submit a private inquiry with your company details and indicative offer.
+                Qualified buyers will receive a direct response to confirm fit, diligence
+                scope, transaction structure and timing.
+              </p>
+            </details>
+          </div>
+
+          <div className="transaction-trust-strip" data-reveal>
+            <span><b>01</b> Direct owner contact</span>
+            <span><b>02</b> Escrow compatible</span>
+            <span><b>03</b> Secure registrar transfer</span>
+            <span><b>04</b> Digital asset handoff</span>
           </div>
         </section>
 

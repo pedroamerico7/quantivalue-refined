@@ -1,19 +1,22 @@
-QUANTIVALUE REFINED — SPRINT 21
-DUE DILIGENCE ROOM
+QUANTIVALUE REFINED — SPRINT 22
+TRANSACTION FAQ & SECURE TRANSFER TRUST LAYER
 
-Update these files:
+Update:
 - src/App.jsx
 - src/styles.css
-- public/QuantiValue-Asset-Manifest.csv
 
-VISIBLE CHANGES:
-- New navigation item: Diligence
-- New light section after Investor Brief and before Private Acquisition
-- Acquisition readiness progress bar (92%)
-- Six verification rows with Ready / Discussion status
-- Downloadable asset manifest CSV
-- Direct download for the Investor Brief PDF
-- Private discussion CTA
+Visible changes:
+1. New navigation item: FAQ
+2. New section after Due Diligence and before Private Acquisition
+3. Six expandable acquisition questions
+4. Trust strip:
+   - Direct owner contact
+   - Escrow compatible
+   - Secure registrar transfer
+   - Digital asset handoff
 
-Commit suggested:
-feat: add acquisition due diligence room
+Direct anchor:
+#transaction-faq
+
+Commit:
+feat: add transaction FAQ and secure transfer trust layer
