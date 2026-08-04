@@ -3721,3 +3721,26 @@ footer{
     flex-direction:column;
   }
 }
+
+
+/* Sprint 39 — friendly offer validation */
+.offer-form .field-error{
+  display:block;
+  margin-top:7px;
+  color:#b4232c;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0;
+  text-transform:none;
+}
+
+.offer-form input[aria-invalid="true"],
+.offer-form textarea[aria-invalid="true"]{
+  border-bottom-color:#cf3f48 !important;
+  background:rgba(207,63,72,.055);
+}
+
+.offer-form input[aria-invalid="true"]:focus,
+.offer-form textarea[aria-invalid="true"]:focus{
+  box-shadow:0 2px 0 rgba(207,63,72,.45);
+}

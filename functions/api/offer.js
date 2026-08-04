@@ -13,7 +13,7 @@ function clean(value, maxLength) {
 }
 
 function validEmail(email) {
-  return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function referenceFromId(id) {
@@ -48,7 +48,6 @@ export async function onRequestPost({ request, env }) {
   if (!Number.isFinite(amount) || amount < 1 || amount > 1000000000) {
     return json({ error: "Please enter a valid offer amount in USD." }, 400);
   }
-  if (message.length < 10) return json({ error: "Please include a brief message." }, 400);
 
   const ip = request.headers.get("cf-connecting-ip") || "";
   const country = request.headers.get("cf-ipcountry") || "";

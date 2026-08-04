@@ -1,0 +1,9 @@
+Delete from repository root and public/ if present: favicon.ico
+Delete from repository root and public/ if present: favicon.svg
+Delete from repository root and public/ if present: favicon-16x16.png
+Delete from repository root and public/ if present: favicon-32x32.png
+Delete from repository root and public/ if present: favicon-48x48.png
+Delete from repository root and public/ if present: favicon-96x96.png
+Delete from repository root and public/ if present: apple-touch-icon.png
+Delete from repository root and public/ if present: icon-192.png
+Delete from repository root and public/ if present: icon-512.png

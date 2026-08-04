@@ -102,6 +102,7 @@ export default function App() {
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
   const [offerReference, setOfferReference] = useState("");
+  const [offerErrors, setOfferErrors] = useState({});
   const [demoInputs, setDemoInputs] = useState({
     revenue: 420,
     margin: 24,
@@ -358,6 +359,7 @@ export default function App() {
   function openAcquisitionModal() {
     setOfferStatus({ state: "idle", message: "" });
     setOfferReference("");
+    setOfferErrors({});
     setOfferOpen(true);
   }
 
@@ -367,6 +369,35 @@ export default function App() {
     const data = new FormData(form);
     const payload = Object.fromEntries(data.entries());
 
+    const nextErrors = {};
+    const email = String(payload.email || "").trim();
+    const amount = Number(String(payload.amount || "").replace(/[^0-9]/g, ""));
+
+    if (String(payload.name || "").trim().length < 2) {
+      nextErrors.name = "Please enter your name.";
+    }
+    if (String(payload.company || "").trim().length < 2) {
+      nextErrors.company = "Please enter your company.";
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      nextErrors.email = "Enter a valid email address.";
+    }
+    if (!Number.isFinite(amount) || amount < 1) {
+      nextErrors.amount = "Enter your offer amount in USD.";
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setOfferErrors(nextErrors);
+      setOfferStatus({ state: "idle", message: "" });
+      form.querySelector(`[name="${Object.keys(nextErrors)[0]}"]`)?.focus();
+      return;
+    }
+
+    payload.email = email;
+    payload.amount = String(amount);
+    payload.message = String(payload.message || "").trim();
+
+    setOfferErrors({});
     setOfferReference("");
     setOfferStatus({ state: "sending", message: "Encrypting and submitting your offer…" });
 
@@ -1263,32 +1294,62 @@ export default function App() {
                 </div>
               </div>
             ) : (
-            <form className="offer-form" onSubmit={submitOffer}>
+            <form className="offer-form" onSubmit={submitOffer} noValidate>
               <div className="form-row">
                 <label>
                   Your Name
-                  <input name="name" required minLength="2" maxLength="100" placeholder="Your Name" />
+                  <input
+                    name="name"
+                    maxLength="100"
+                    placeholder="Your Name"
+                    autoComplete="name"
+                    aria-invalid={Boolean(offerErrors.name)}
+                    onInput={() => setOfferErrors((current) => ({ ...current, name: "" }))}
+                  />
+                  {offerErrors.name && <span className="field-error">{offerErrors.name}</span>}
                 </label>
                 <label>
                   Company
-                  <input name="company" required minLength="2" maxLength="120" placeholder="Organization" />
+                  <input
+                    name="company"
+                    maxLength="120"
+                    placeholder="Organization"
+                    autoComplete="organization"
+                    aria-invalid={Boolean(offerErrors.company)}
+                    onInput={() => setOfferErrors((current) => ({ ...current, company: "" }))}
+                  />
+                  {offerErrors.company && <span className="field-error">{offerErrors.company}</span>}
                 </label>
               </div>
               <label>
                 Business Email
-                <input name="email" type="email" required maxLength="160" placeholder="name@company.com" />
+                <input
+                  name="email"
+                  type="text"
+                  inputMode="email"
+                  maxLength="160"
+                  placeholder="name@company.com"
+                  autoComplete="email"
+                  aria-invalid={Boolean(offerErrors.email)}
+                  onInput={() => setOfferErrors((current) => ({ ...current, email: "" }))}
+                />
+                {offerErrors.email && <span className="field-error">{offerErrors.email}</span>}
               </label>
               <label>
                 Enter your offer (USD)
                 <input
                   name="amount"
-                  type="number"
-                  min="1"
-                  step="1"
+                  type="text"
                   inputMode="numeric"
-                  required
+                  autoComplete="off"
                   placeholder="Enter your offer (USD)"
+                  aria-invalid={Boolean(offerErrors.amount)}
+                  onInput={(event) => {
+                    event.currentTarget.value = event.currentTarget.value.replace(/[^0-9]/g, "");
+                    setOfferErrors((current) => ({ ...current, amount: "" }));
+                  }}
                 />
+                {offerErrors.amount && <span className="field-error">{offerErrors.amount}</span>}
               </label>
               <label>
   Strategic Notes
