@@ -111,6 +111,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("platform");
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -171,11 +172,23 @@ export default function App() {
 
   useEffect(() => {
     function closeOnEscape(event) {
-      if (event.key === "Escape") setOfferOpen(false);
+      if (event.key === "Escape") {
+        setOfferOpen(false);
+        setMobileMenuOpen(false);
+      }
     }
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     let frameId = null;
@@ -341,19 +354,45 @@ export default function App() {
       </aside>
 
       <header className="site-header">
-        <a className="logo" href="#top" aria-label="QuantiValue home">
+        <a className="logo" href="#top" aria-label="QuantiValue home" onClick={() => setMobileMenuOpen(false)}>
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />
           <span className="logo-name">QuantiValue</span>
         </a>
 
-        <nav aria-label="Primary navigation">
-          <a className={activeSection === "platform" ? "active" : ""} href="#platform">Platform</a>
-          <a className={activeSection === "technology" ? "active" : ""} href="#technology">Technology</a>
-          <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package">Assets</a>
-          <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room">Brief</a>
-          <a className={activeSection === "diligence" ? "active" : ""} href="#diligence">Diligence</a>
-          <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq">FAQ</a>
-          <a className={activeSection === "acquire" ? "active" : ""} href="#acquire">Contact</a>
+        <button
+          className={`mobile-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+          type="button"
+          aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMobileMenuOpen((current) => !current)}
+        >
+          <span />
+          <span />
+        </button>
+
+        <nav
+          id="primary-navigation"
+          className={mobileMenuOpen ? "mobile-open" : ""}
+          aria-label="Primary navigation"
+        >
+          <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>Platform</a>
+          <a className={activeSection === "technology" ? "active" : ""} href="#technology" onClick={() => setMobileMenuOpen(false)}>Technology</a>
+          <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" onClick={() => setMobileMenuOpen(false)}>Assets</a>
+          <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room" onClick={() => setMobileMenuOpen(false)}>Brief</a>
+          <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
+          <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+          <a className={activeSection === "acquire" ? "active" : ""} href="#acquire" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          <button
+            className="mobile-nav-offer"
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setOfferOpen(true);
+            }}
+          >
+            Request private discussion <Arrow />
+          </button>
         </nav>
 
         <button className="header-offer" type="button" onClick={() => setOfferOpen(true)}>
@@ -1025,6 +1064,16 @@ export default function App() {
         <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>
         <a href="mailto:sales@quantivalue.com">sales@quantivalue.com</a>
       </footer>
+
+      <div className="mobile-conversion-bar">
+        <div>
+          <span>QuantiValue.com</span>
+          <strong>Private acquisition</strong>
+        </div>
+        <button type="button" onClick={() => setOfferOpen(true)}>
+          Discuss <Arrow />
+        </button>
+      </div>
 
       <button
         className={`back-to-top ${showBackToTop ? "visible" : ""}`}
