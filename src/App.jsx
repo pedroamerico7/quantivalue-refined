@@ -853,13 +853,14 @@ export default function App() {
         <span className="footer-signature">Institutional inquiries only <i>·</i> Confidential acquisitions worldwide</span>
         <div className="footer-acquisition-contact">
           <small>Private acquisition</small>
-          <a
+          <button
             className="footer-email"
-            href="mailto:acquisition@quantivalue.com"
-            aria-label="Email QuantiValue acquisition team at acquisition@quantivalue.com"
+            type="button"
+            onClick={openAcquisitionModal}
+            aria-label="Open the confidential acquisition contact form"
           >
             acquisition@quantivalue.com
-          </a>
+          </button>
         </div>
       </footer>
 
