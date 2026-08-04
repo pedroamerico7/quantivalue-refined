@@ -27,3 +27,5 @@ Depois de subir:
 
 Commit sugerido:
 fix: finalize reliable Resend offer notifications
+
+
