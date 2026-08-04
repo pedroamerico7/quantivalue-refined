@@ -1,10 +1,20 @@
-SPRINT 28 - Enterprise SEO Audit
+QUANTIVALUE REFINED — SPRINT 29
+GLASS BLUE HEADER & LOGO REFINEMENT
 
-Arquivos:
-- public/robots.txt
-- public/sitemap.xml
-- public/site.webmanifest
-- index-head-snippet.html
+Substitua:
+- src/styles.css
 
-Copie o conteúdo de index-head-snippet.html para dentro do <head> do seu index.html.
-Depois faça deploy e solicite indexação no Google Search Console.
+Mudanças:
+- header com azul muito claro translúcido;
+- blur e saturação de vidro;
+- linha azul discreta na borda inferior;
+- logo aproximadamente 10% maior;
+- wordmark mais escuro e ligeiramente maior;
+- glow azul suave ao passar o mouse;
+- pequena rotação e escala do símbolo orbital no hover;
+- links do menu com contraste melhor;
+- botão Private Discussion mais integrado ao tema;
+- ajustes responsivos para tablet e celular.
+
+Commit sugerido:
+feat: refine glass blue header and brand mark

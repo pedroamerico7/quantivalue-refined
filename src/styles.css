@@ -2262,3 +2262,166 @@ footer {
   .dashboard-showcase{max-width:100%;transform:none!important}
   .visitor-proof strong{min-width:5ch}
 }
+
+
+/* Sprint 29 — Glass Blue header & logo refinement */
+.site-header{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248,250,255,.92) 0%,
+      rgba(242,246,255,.82) 100%
+    );
+  border-bottom:1px solid rgba(59,99,255,.12);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.85) inset,
+    0 12px 42px rgba(32,55,110,.055);
+  backdrop-filter:blur(24px) saturate(155%);
+  -webkit-backdrop-filter:blur(24px) saturate(155%);
+}
+
+.site-header::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59,99,255,.18) 30%,
+    rgba(109,141,255,.32) 50%,
+    rgba(59,99,255,.18) 70%,
+    transparent 100%
+  );
+}
+
+.logo{
+  position:relative;
+  gap:14px;
+  color:#07101f;
+  text-decoration:none;
+  transition:transform .24s ease;
+}
+
+.logo::before{
+  content:"";
+  position:absolute;
+  left:-10px;
+  width:66px;
+  height:66px;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(
+    circle,
+    rgba(59,99,255,.18) 0%,
+    rgba(59,99,255,.07) 42%,
+    transparent 72%
+  );
+  filter:blur(4px);
+  transform:scale(.78);
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.logo-symbol{
+  position:relative;
+  z-index:1;
+  width:52px;
+  height:52px;
+  filter:
+    drop-shadow(0 8px 18px rgba(59,99,255,.13))
+    drop-shadow(0 0 0 rgba(59,99,255,0));
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),filter .28s ease;
+}
+
+.logo-name{
+  position:relative;
+  z-index:1;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.045em;
+  color:#07101f;
+  transition:color .22s ease;
+}
+
+.logo:hover{
+  transform:translateY(-1px);
+}
+
+.logo:hover::before{
+  opacity:1;
+  transform:scale(1);
+}
+
+.logo:hover .logo-symbol{
+  transform:rotate(-5deg) scale(1.045);
+  filter:
+    drop-shadow(0 10px 22px rgba(59,99,255,.2))
+    drop-shadow(0 0 9px rgba(59,99,255,.16));
+}
+
+.logo:hover .logo-name{
+  color:#152345;
+}
+
+.site-header nav a{
+  color:#465166;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active{
+  color:#2f56dc;
+}
+
+.header-offer{
+  border-color:rgba(59,99,255,.16);
+  background:rgba(255,255,255,.68);
+  box-shadow:0 6px 20px rgba(40,61,112,.035);
+}
+
+.header-offer:hover{
+  border-color:rgba(59,99,255,.45);
+  box-shadow:0 10px 30px rgba(59,99,255,.1);
+}
+
+@media (max-width:1040px){
+  .logo-symbol{
+    width:47px;
+    height:47px;
+  }
+
+  .logo-name{
+    font-size:19px;
+  }
+}
+
+@media (max-width:700px){
+  .site-header{
+    background:rgba(245,248,255,.94);
+  }
+
+  .logo-symbol{
+    width:42px;
+    height:42px;
+  }
+
+  .logo-name{
+    display:inline;
+    font-size:18px;
+  }
+
+  .logo::before{
+    width:56px;
+    height:56px;
+    left:-8px;
+  }
+}
+
+@media (max-width:390px){
+  .logo-name{
+    font-size:16px;
+  }
+}
