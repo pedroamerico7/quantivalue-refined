@@ -544,7 +544,7 @@ export default function App() {
 
             <div className="hero-actions">
               <button className="primary-cta" type="button" onClick={openAcquisitionModal}>
-                Begin Acquisition <Arrow />
+                Request Private Discussion <Arrow />
               </button>
               <a className="secondary-cta" href="#strategic-opportunity">
                 Explore the strategic thesis <span>↓</span>
@@ -855,7 +855,7 @@ export default function App() {
 
           <button className="acquire-button" type="button" onClick={openAcquisitionModal}>
             <span>Private offer</span>
-            <strong>Begin Acquisition</strong>
+            <strong>Submit Private Offer</strong>
             <Arrow />
           </button>
         </section>

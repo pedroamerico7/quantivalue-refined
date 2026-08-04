@@ -6492,3 +6492,114 @@ button.footer-email:focus-visible{
 .visitor-proof strong .counter-live-dot{
   flex:0 0 auto;
 }
+
+
+/* Sprint 71 — final dashboard visibility and CTA audit */
+
+/*
+  The conceptual AI dashboard at the top must fit fully inside the viewport.
+  Older perspective/width rules could extend the panel beyond its grid column,
+  causing the right or lower edge to appear cropped on some desktop sizes.
+*/
+@media(min-width:981px){
+  .hero{
+    grid-template-columns:minmax(0,1fr) minmax(500px,.92fr)!important;
+    align-items:center!important;
+    gap:clamp(34px,4vw,72px)!important;
+    overflow:visible!important;
+    padding-left:clamp(28px,4.5vw,76px)!important;
+    padding-right:clamp(28px,4.5vw,76px)!important;
+  }
+
+  .hero-content{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  .dashboard-showcase,
+  .dashboard-showcase:hover{
+    width:min(100%,820px)!important;
+    max-width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    justify-self:end!important;
+    align-self:center!important;
+    transform:none!important;
+    translate:none!important;
+    animation:none!important;
+    box-sizing:border-box!important;
+  }
+
+  .dashboard-body,
+  .dashboard-main{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  .dashboard-chart,
+  .dashboard-chart svg{
+    max-width:100%!important;
+  }
+}
+
+@media(min-width:981px) and (max-width:1180px){
+  .hero{
+    grid-template-columns:minmax(0,.92fr) minmax(460px,1.08fr)!important;
+  }
+
+  .dashboard-showcase,
+  .dashboard-showcase:hover{
+    width:100%!important;
+  }
+}
+
+/* Tablet and mobile: keep the complete panel inside the available content width. */
+@media(max-width:980px){
+  .hero{
+    overflow:visible!important;
+  }
+
+  .dashboard-showcase,
+  .dashboard-showcase:hover{
+    width:min(100%,840px)!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    transform:none!important;
+    translate:none!important;
+    animation:none!important;
+    box-sizing:border-box!important;
+  }
+
+  .dashboard-body,
+  .dashboard-main{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+}
+
+@media(max-width:700px){
+  .dashboard-showcase,
+  .dashboard-showcase:hover{
+    width:calc(100vw - 32px)!important;
+    max-width:calc(100vw - 32px)!important;
+  }
+}
+
+/*
+  CTA language now reflects intent:
+  - Hero: Request Private Discussion (lower friction)
+  - Final section: Submit Private Offer (high intent)
+*/
+.primary-cta,
+.acquire-button{
+  white-space:normal!important;
+}
+
+.acquire-button strong{
+  max-width:220px!important;
+}

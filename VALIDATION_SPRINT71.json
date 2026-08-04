@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "Hero CTA updated": true,
+    "Final CTA updated": true,
+    "Old hero CTA removed": true,
+    "Old final CTA removed": true,
+    "AI dashboard preserved": true,
+    "Interactive AI platform preserved": true,
+    "Offer modal preserved": true,
+    "Offer API preserved": true,
+    "Splash preserved": true
+  },
+  "build_confirmed": false,
+  "scope": [
+    "Top AI dashboard visibility",
+    "Hero CTA wording",
+    "Final CTA wording"
+  ]
+}
