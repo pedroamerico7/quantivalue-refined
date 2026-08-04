@@ -1,0 +1,3 @@
+BUILD NOT VALIDATED
+
+Command '['npm', 'install', '--no-audit', '--no-fund']' returned non-zero exit status 1.
