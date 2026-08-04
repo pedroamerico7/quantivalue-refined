@@ -4579,3 +4579,15 @@ footer{
     transition:none!important;
   }
 }
+
+
+/* Sprint 45 — outbound conversion links */
+.buyer-enterprise-cta > div:last-child{
+  min-width:300px;
+}
+
+.buyer-enterprise-cta > div:last-child a:first-of-type{
+  border-color:rgba(59,99,255,.22);
+  color:#2f56dc;
+  background:rgba(255,255,255,.68);
+}

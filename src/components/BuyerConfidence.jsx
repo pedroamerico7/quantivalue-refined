@@ -140,8 +140,11 @@ export default function BuyerConfidence({ onOpenDiscussion }) {
             <button type="button" onClick={onOpenDiscussion}>
               Schedule Confidential Discussion <span aria-hidden="true">↗</span>
             </button>
-            <a href="/QuantiValue-Investor-Brief.pdf" download>
-              Download Executive Brief <span aria-hidden="true">↓</span>
+            <a href="/enterprise.html">
+              Enterprise Overview <span aria-hidden="true">↗</span>
+            </a>
+            <a href="/investor-brief.html">
+              Open Executive Brief <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
