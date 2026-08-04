@@ -92,12 +92,12 @@ function Arrow() {
 const FALLBACK_VIEWS = 1070;
 
 function formatViews(value) {
-  const safeValue = Number.isFinite(Number(value)) ? Number(value) : FALLBACK_VIEWS;
-  return safeValue.toLocaleString("en-US");
+  if (!Number.isFinite(Number(value))) return "Syncing";
+  return Number(value).toLocaleString("en-US");
 }
 
 export default function App() {
-  const [views, setViews] = useState(FALLBACK_VIEWS);
+  const [views, setViews] = useState(null);
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
   const [demoInputs, setDemoInputs] = useState({
@@ -109,7 +109,7 @@ export default function App() {
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState("platform");
+  const [activeSection, setActiveSection] = useState("top");
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -164,8 +164,10 @@ export default function App() {
       .then((res) => res.ok ? res.json() : Promise.reject())
       .then((data) => {
         const reportedViews = Number(data?.views);
-        setViews(Number.isFinite(reportedViews) ? Math.max(FALLBACK_VIEWS, reportedViews) : FALLBACK_VIEWS);
-        if (shouldIncrement) localStorage.setItem(storageKey, String(Date.now()));
+        setViews(Number.isFinite(reportedViews) ? reportedViews : FALLBACK_VIEWS);
+        if (shouldIncrement && data?.persistent !== false) {
+          localStorage.setItem(storageKey, String(Date.now()));
+        }
       })
       .catch(() => setViews(FALLBACK_VIEWS));
   }, []);
@@ -231,22 +233,50 @@ export default function App() {
       "transaction-faq",
       "acquire",
     ];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
+    let frameId = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-28% 0px -58% 0px", threshold: [0.08, 0.2, 0.45] }
-    );
+    function updateActiveSection() {
+      if (window.scrollY < Math.max(180, window.innerHeight * 0.42)) {
+        setActiveSection("top");
+        frameId = null;
+        return;
+      }
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      const targetLine = window.innerHeight * 0.38;
+      let current = "platform";
+      let bestDistance = Number.POSITIVE_INFINITY;
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const containsLine = rect.top <= targetLine && rect.bottom >= targetLine;
+        const distance = containsLine ? 0 : Math.min(
+          Math.abs(rect.top - targetLine),
+          Math.abs(rect.bottom - targetLine)
+        );
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          current = id;
+        }
+      });
+
+      setActiveSection(current);
+      frameId = null;
+    }
+
+    function onPositionChange() {
+      if (frameId === null) frameId = window.requestAnimationFrame(updateActiveSection);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", onPositionChange, { passive: true });
+    window.addEventListener("resize", onPositionChange);
+    return () => {
+      window.removeEventListener("scroll", onPositionChange);
+      window.removeEventListener("resize", onPositionChange);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
@@ -346,11 +376,12 @@ export default function App() {
       </div>
 
       <aside className="story-rail" aria-label="Page story progress">
-        <span className={activeSection === "platform" ? "active" : ""}>01</span>
-        <span className={activeSection === "technology" ? "active" : ""}>02</span>
-        <span className={activeSection === "asset-package" ? "active" : ""}>03</span>
-        <span className={activeSection === "investor-room" || activeSection === "diligence" ? "active" : ""}>04</span>
-        <span className={activeSection === "transaction-faq" || activeSection === "acquire" ? "active" : ""}>05</span>
+        <a className={activeSection === "top" ? "active" : ""} href="#top" aria-label="Return to page introduction">00</a>
+        <a className={activeSection === "platform" ? "active" : ""} href="#platform" aria-label="Go to platform">01</a>
+        <a className={activeSection === "technology" ? "active" : ""} href="#technology" aria-label="Go to technology">02</a>
+        <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" aria-label="Go to assets">03</a>
+        <a className={activeSection === "investor-room" || activeSection === "diligence" ? "active" : ""} href="#investor-room" aria-label="Go to investor materials">04</a>
+        <a className={activeSection === "transaction-faq" || activeSection === "acquire" ? "active" : ""} href="#transaction-faq" aria-label="Go to transaction information">05</a>
       </aside>
 
       <header className="site-header">
@@ -447,7 +478,7 @@ export default function App() {
             </p>
 
             <div className="hero-proof">
-              <div className="visitor-proof" aria-label={`${formatViews(views)} recorded site visits`}>
+              <div className="visitor-proof" aria-label={views === null ? "Synchronizing recorded site visits" : `${formatViews(views)} recorded site visits`}>
                 <strong><span className="counter-live-dot" aria-hidden="true" />{formatViews(views)}+</strong>
                 <span>recorded site visits</span>
               </div>
@@ -1106,7 +1137,7 @@ export default function App() {
               </p>
               <div className="modal-stat">
                 <span className="live-dot" />
-                <strong>{formatViews(views)}+ recorded site visits</strong>
+                <strong>{views === null ? "Synchronizing visit count…" : `${formatViews(views)}+ recorded site visits`}</strong>
               </div>
             </div>
 

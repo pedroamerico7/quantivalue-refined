@@ -2228,3 +2228,37 @@ footer {
     transition:none!important;
   }
 }
+
+/* Sprint 25 — regression recovery, mobile stability and persistent counters */
+.story-rail a{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#697386;
+  font:500 9px var(--mono);
+  text-decoration:none;
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+.story-rail a:hover{background:rgba(59,99,255,.1);color:#3b63ff}
+.story-rail a.active{background:#3b63ff;color:#fff;transform:scale(1.08)}
+
+@media (max-width:1040px){
+  .story-rail{display:none!important}
+  .site-header{display:flex!important;align-items:center!important}
+  .site-header .logo{margin-right:auto}
+  .mobile-menu-toggle{display:grid!important}
+  .site-header > nav:not(.mobile-open){display:grid!important}
+}
+
+@media (max-width:700px){
+  html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
+  .app-shell{width:100%;overflow:hidden}
+  .logo-symbol{width:38px;height:38px}
+  .logo-name{font-size:17px}
+  .hero{min-height:auto}
+  .hero-copy,.hero-visual{min-width:0}
+  .dashboard-showcase{max-width:100%;transform:none!important}
+  .visitor-proof strong{min-width:5ch}
+}

@@ -1,25 +1,18 @@
-QUANTIVALUE REFINED — SPRINT 24
-MOBILE NAVIGATION & CONVERSION POLISH
+QUANTIVALUE — SPRINT 15
+Included Asset Package
 
-Atualize somente:
+FILES TO REPLACE
 - src/App.jsx
 - src/styles.css
 
-Alterações:
-- menu hamburger para tablet e celular;
-- menu móvel com todos os links da página;
-- fechamento por Escape e ao clicar em qualquer link;
-- bloqueio do scroll enquanto o menu estiver aberto;
-- CTA de discussão privada dentro do menu;
-- barra fixa de conversão no rodapé do celular;
-- botão voltar ao topo reposicionado acima da barra;
-- correção dos caracteres literais \\n que quebraram o CSS da Sprint 23.
+WHAT CHANGED
+- Added a new dark premium section before the acquisition CTA.
+- Presents the domain, identity system, live codebase and product vision as an integrated acquisition package.
+- Added an Assets navigation link.
+- Added responsive desktop, tablet and mobile layouts.
 
-Commit sugerido:
-feat: add mobile navigation and conversion bar
+COMMIT
+feat: present included brand and product asset package
 
-Validação:
-O CSS foi saneado e não contém mais os caracteres literais \\n.
-Não foi possível executar npm install neste ambiente porque o registry interno
-não possui @vitejs/plugin-react. O projeto deve usar o build do Cloudflare,
-que já instalou essa dependência corretamente nas publicações anteriores.
+VALIDATION NOTE
+The files were edited from the current Sprint 14 package. Build execution was unavailable because this environment's npm registry does not provide @vitejs/plugin-react. No dependencies or build configuration were changed.
