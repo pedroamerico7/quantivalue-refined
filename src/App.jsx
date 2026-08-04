@@ -114,6 +114,7 @@ export default function App() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectProgressOpen, setProjectProgressOpen] = useState(false);
+  const [headerCompact, setHeaderCompact] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -321,6 +322,16 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    function updateHeaderCompact() {
+      setHeaderCompact(window.scrollY > 56);
+    }
+
+    updateHeaderCompact();
+    window.addEventListener("scroll", updateHeaderCompact, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeaderCompact);
+  }, []);
+
+  useEffect(() => {
     const timer = window.setTimeout(() => setIsLoading(false), 720);
     return () => window.clearTimeout(timer);
   }, []);
@@ -387,7 +398,7 @@ export default function App() {
         <a className={activeSection === "transaction-faq" || activeSection === "acquire" ? "active" : ""} href="#transaction-faq" aria-label="Go to transaction information">05</a>
       </aside>
 
-      <header className="site-header">
+      <header className={`site-header ${headerCompact ? "is-compact" : ""}`}>
         <a className="logo" href="#top" aria-label="QuantiValue home" onClick={() => setMobileMenuOpen(false)}>
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
