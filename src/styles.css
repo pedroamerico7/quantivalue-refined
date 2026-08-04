@@ -5852,3 +5852,88 @@ a{
   border-color:#1f46ad!important;
   opacity:1!important;
 }
+
+
+/* Sprint 61 — top bar transparency + progress track refinement */
+
+/* During scroll, only the glass background becomes lighter.
+   Logo, navigation and acquisition CTA remain fully opaque and readable. */
+.site-header.is-compact{
+  background:rgba(231,239,252,.54)!important;
+  border-bottom-color:rgba(40,84,199,.13)!important;
+  box-shadow:0 5px 16px rgba(20,42,86,.045)!important;
+  backdrop-filter:blur(20px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(120%)!important;
+}
+
+.site-header.is-compact .logo,
+.site-header.is-compact .logo-name,
+.site-header.is-compact .logo-symbol,
+.site-header.is-compact nav,
+.site-header.is-compact nav a,
+.site-header.is-compact .header-offer,
+.site-header.is-compact .mobile-menu-toggle{
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.site-header.is-compact .logo-name{
+  color:#07101f!important;
+  mix-blend-mode:normal!important;
+}
+
+.site-header.is-compact .logo-symbol{
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+
+.site-header.is-compact .header-offer{
+  color:#ffffff!important;
+  background:#2854c7!important;
+  border-color:#2854c7!important;
+  box-shadow:0 7px 16px rgba(40,84,199,.18)!important;
+}
+
+/* Give the unused progress track its own neutral surface.
+   This prevents page colors from showing through behind the empty portion. */
+.scroll-progress{
+  height:3px!important;
+  background:rgba(220,228,242,.96)!important;
+  box-shadow:0 1px 0 rgba(40,84,199,.08)!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+
+.scroll-progress::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(
+    90deg,
+    rgba(225,232,245,.98),
+    rgba(235,240,249,.98)
+  );
+  pointer-events:none;
+}
+
+.scroll-progress > span,
+.scroll-progress-bar{
+  position:relative!important;
+  z-index:1!important;
+  height:100%!important;
+  background:linear-gradient(90deg,#2854c7,#5578da)!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:700px){
+  .site-header.is-compact{
+    background:rgba(231,239,252,.58)!important;
+    box-shadow:0 4px 13px rgba(20,42,86,.04)!important;
+  }
+
+  .scroll-progress{
+    height:3px!important;
+    background:rgba(220,228,242,.98)!important;
+  }
+}
