@@ -4593,263 +4593,185 @@ footer{
 }
 
 
-/* Sprint 50 — stable mobile recovery
-   Restores the last stable application structure from Sprint 46. */
+/* Sprint 51 — hard fix for blank mobile rendering */
 
-/* Project Atlas is not shown anywhere. */
-.project-progress-trigger,
-.project-progress-backdrop,
-.project-progress-modal{
-  display:none !important;
+/* Never leave a loading overlay above the page. */
+.brand-loader{
+  display:none!important;
 }
 
-/* The document itself remains the only vertical scroll container.
-   Avoid fixed heights, containment and root overflow rules that caused blank mobile rendering. */
-html{
+/* Keep the browser's normal document flow. */
+html,
+body{
+  min-height:100%;
   overflow-x:hidden;
   overflow-y:auto;
-}
-
-body{
-  overflow-x:hidden;
-  overflow-y:visible;
 }
 
 #root,
 .app-shell{
   min-height:100%;
-  overflow-x:clip;
-  overflow-y:visible !important;
+  overflow:visible!important;
+  transform:none!important;
+  filter:none!important;
+  perspective:none!important;
 }
 
-/* Header is always fixed while scrolling, without depending on sticky ancestors. */
+/* Fixed header independent of section containers. */
 .site-header,
 .site-header.is-compact{
-  position:fixed !important;
-  top:4px !important;
-  left:12px !important;
-  right:12px !important;
-  width:auto !important;
-  z-index:1500 !important;
-  border:1px solid rgba(59,99,255,.11) !important;
-  border-radius:17px !important;
-  background:rgba(246,249,255,.84) !important;
-  box-shadow:0 10px 34px rgba(34,53,99,.075) !important;
-  backdrop-filter:blur(22px) saturate(135%) !important;
-  -webkit-backdrop-filter:blur(22px) saturate(135%) !important;
+  position:fixed!important;
+  top:4px!important;
+  left:12px!important;
+  right:12px!important;
+  width:auto!important;
+  z-index:99999!important;
+  background:rgba(248,250,255,.88)!important;
+  border:1px solid rgba(35,56,105,.10)!important;
+  border-radius:17px!important;
+  box-shadow:0 9px 30px rgba(35,52,92,.07)!important;
+  backdrop-filter:blur(22px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%)!important;
 }
 
 .site-header.is-compact{
-  min-height:54px !important;
-  padding-top:3px !important;
-  padding-bottom:3px !important;
-  background:rgba(246,249,255,.66) !important;
-  box-shadow:0 6px 22px rgba(34,53,99,.045) !important;
+  min-height:52px!important;
+  background:rgba(248,250,255,.72)!important;
 }
 
 body{
-  padding-top:82px;
+  padding-top:82px!important;
 }
 
 .scroll-progress{
-  position:fixed !important;
-  top:0 !important;
-  left:0 !important;
-  right:0 !important;
-  z-index:1600 !important;
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  z-index:100000!important;
 }
 
-/* A moderate reduction in page length without deleting sections or components. */
+/* Force all reveal sections to remain visible if JS animation fails. */
+[data-reveal]{
+  opacity:1!important;
+  transform:none!important;
+  visibility:visible!important;
+}
+
+/* Avoid browser optimization bugs on mobile. */
 .hero,
-.technology,
-.thesis,
-.market-opportunity,
-.film-strip,
-.pillars,
-.asset-package,
-.investor-room,
-.product-demo,
+.dashboard-showcase,
+.dashboard-body,
+.dashboard-main,
 .strategic-buyer-suite,
+.strategic-thesis,
+.strategic-thesis-panel,
+.strategic-highlights,
+.strategic-application-grid,
+.strategic-validation,
+.product-demo,
+.product-demo-shell,
+.demo-control-panel,
+.demo-output-panel,
 .buyer-confidence,
 .acquisition-command-center,
-.diligence-room,
 .transaction-faq,
 .acquire{
-  padding-top:clamp(66px,7vw,100px) !important;
-  padding-bottom:clamp(66px,7vw,100px) !important;
+  content-visibility:visible!important;
+  contain:none!important;
+  visibility:visible!important;
 }
 
-.strategic-highlights,
-.strategic-applications,
-.strategic-validation,
-.strategic-why-now,
-.strategic-final-cta,
-.buyer-process,
-.buyer-faq,
-.buyer-enterprise-cta{
-  margin-top:clamp(46px,6vw,78px) !important;
+/* Project Atlas removed. */
+.project-progress-trigger,
+.project-progress-backdrop,
+.project-progress-modal{
+  display:none!important;
 }
 
-/* Mobile recovery: do not hide or contain core visual components. */
 @media(max-width:700px){
   body{
-    padding-top:66px !important;
+    padding-top:66px!important;
   }
 
   .site-header,
   .site-header.is-compact{
-    top:4px !important;
-    left:8px !important;
-    right:8px !important;
-    min-height:52px !important;
-    padding:4px 9px !important;
-    border-radius:15px !important;
-    background:rgba(248,250,255,.88) !important;
-  }
-
-  .site-header.is-compact{
-    min-height:47px !important;
-    padding-top:2px !important;
-    padding-bottom:2px !important;
-    background:rgba(248,250,255,.72) !important;
+    top:4px!important;
+    left:8px!important;
+    right:8px!important;
+    min-height:50px!important;
+    padding:3px 9px!important;
+    border-radius:15px!important;
   }
 
   .site-header .logo-symbol{
-    width:34px !important;
-    height:34px !important;
-    flex:0 0 34px !important;
-  }
-
-  .site-header.is-compact .logo-symbol{
-    width:30px !important;
-    height:30px !important;
-    flex-basis:30px !important;
+    width:32px!important;
+    height:32px!important;
+    flex:0 0 32px!important;
   }
 
   .site-header .logo-name{
-    display:inline-block !important;
-    max-width:118px;
+    display:inline-block!important;
+    max-width:112px;
     overflow:hidden;
-    white-space:nowrap;
     text-overflow:ellipsis;
-    font-size:15px !important;
+    white-space:nowrap;
+    font-size:14px!important;
   }
 
   .site-header .header-offer{
-    min-height:36px !important;
-    padding:0 10px !important;
-    font-size:7.5px !important;
+    min-height:34px!important;
+    padding:0 9px!important;
+    font-size:7px!important;
     white-space:nowrap;
   }
 
   .site-header nav{
-    position:fixed !important;
-    top:62px !important;
-    left:10px !important;
-    right:10px !important;
-    width:auto !important;
-    z-index:1499 !important;
-    max-height:calc(100dvh - 76px) !important;
-    overflow-y:auto !important;
+    position:fixed!important;
+    top:60px!important;
+    left:10px!important;
+    right:10px!important;
+    width:auto!important;
+    max-height:calc(100dvh - 72px)!important;
+    overflow-y:auto!important;
+    z-index:99998!important;
   }
 
   main{
-    padding-top:0 !important;
-  }
-
-  /* Force normal rendering on Safari/Chrome mobile. */
-  [data-reveal],
-  .hero,
-  .dashboard-showcase,
-  .dashboard-body,
-  .dashboard-main,
-  .strategic-buyer-suite,
-  .strategic-thesis,
-  .strategic-thesis-panel,
-  .strategic-highlights,
-  .strategic-application-grid,
-  .strategic-validation,
-  .product-demo,
-  .product-demo-shell,
-  .demo-control-panel,
-  .demo-output-panel,
-  .buyer-confidence,
-  .acquisition-command-center,
-  .transaction-faq,
-  .acquire{
-    content-visibility:visible !important;
-    contain:none !important;
-    visibility:visible !important;
-  }
-
-  [data-reveal]{
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .dashboard-showcase,
-  .dashboard-body,
-  .dashboard-main,
-  .product-demo-shell,
-  .demo-control-panel,
-  .demo-output-panel{
-    min-width:0 !important;
-    max-width:100% !important;
+    padding-top:0!important;
   }
 
   .dashboard-sidebar{
-    display:none !important;
+    display:none!important;
   }
 
-  .dashboard-body{
-    display:block !important;
+  .dashboard-body,
+  .dashboard-main{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
   }
 
-  .dashboard-kpis{
-    display:grid !important;
-    grid-template-columns:1fr 1fr !important;
-  }
-
-  .dashboard-kpis article:last-child{
-    grid-column:1 / -1;
-  }
-
-  .dashboard-chart,
-  .dashboard-chart svg{
-    width:100% !important;
-    max-width:100% !important;
-  }
-
+  .dashboard-kpis,
   .strategic-highlights,
   .strategic-application-grid,
   .buyer-trust-grid,
   .buyer-process-grid,
-  .buyer-faq-list{
-    grid-template-columns:1fr !important;
-  }
-
+  .buyer-faq-list,
   .command-metrics,
   .command-download-grid,
   .command-timeline{
-    grid-template-columns:1fr !important;
+    grid-template-columns:1fr!important;
   }
 
-  .hero,
-  .technology,
-  .thesis,
-  .market-opportunity,
-  .film-strip,
-  .pillars,
-  .asset-package,
-  .investor-room,
-  .product-demo,
-  .strategic-buyer-suite,
-  .buyer-confidence,
-  .acquisition-command-center,
-  .diligence-room,
-  .transaction-faq,
-  .acquire{
-    padding-top:56px !important;
-    padding-bottom:56px !important;
+  .dashboard-chart,
+  .dashboard-chart svg,
+  .product-demo-shell,
+  .demo-control-panel,
+  .demo-output-panel{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
   }
 }
