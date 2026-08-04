@@ -1,34 +1,23 @@
-QUANTIVALUE REFINED — SPRINT 42
-FINAL RESEND PATCH
+QUANTIVALUE REFINED — SPRINT 50
+STABLE MOBILE RECOVERY
 
-Atualize:
-- functions/api/offer.js
+Atualize juntos:
+- src/App.jsx
+- src/styles.css
 
-Este patch:
-- exige RESEND_API_KEY, OFFER_FROM_EMAIL e OFFER_NOTIFICATION_TO;
-- aceita mais de um destinatário separado por vírgula;
-- usa Reply-To com o e-mail do comprador;
-- tenta novamente uma vez em erros temporários 429/5xx;
-- registra no Cloudflare Logs o ID da mensagem enviada pela Resend;
-- retorna notificationSent, notificationId e notificationError na resposta da API;
-- mantém a oferta salva no D1 mesmo se a notificação falhar.
+Esta correção volta para a última estrutura estável da Sprint 46 e aplica
+somente mudanças seguras:
 
-Variáveis esperadas no Cloudflare Pages — Production:
-RESEND_API_KEY = re_...
-OFFER_NOTIFICATION_TO = seuemail@gmail.com
-OFFER_FROM_EMAIL = QuantiValue Offers <offers@send.quantivalue.com>
+1. Project Atlas removido visualmente.
+2. Top bar realmente fixa em desktop e mobile.
+3. Barra de progresso fixa acima da top bar.
+4. Removidas regras de overflow/containment que podiam deixar a página branca.
+5. Painel de IA, dashboard, cards e formulários forçados a renderizar normalmente.
+6. Página moderadamente encurtada por espaçamento, sem apagar seções inteiras.
 
-Depois de subir:
-1. Faça novo deploy.
-2. Envie uma oferta de teste.
-3. Abra Resend > Emails.
-4. Abra Cloudflare > Deployments > Functions > Logs.
-5. Procure por "Offer notification sent".
+Importante:
+Substitua App.jsx e styles.css juntos. Não aplique somente o CSS sobre a Sprint 49,
+porque o App.jsx da Sprint 49 já havia removido blocos estruturais.
 
-Commit sugerido:
-fix: finalize reliable Resend offer notifications
-
-
-
-
-
+Commit:
+fix: restore stable mobile rendering and persistent header

@@ -4593,805 +4593,173 @@ footer{
 }
 
 
-/* Sprint 47 — Mobile sticky header + conversion consolidation */
+/* Sprint 50 — stable mobile recovery
+   Restores the last stable application structure from Sprint 46. */
 
-/* Keep vertical scrolling on the document so sticky/fixed elements are reliable. */
-html,
-body,
+/* Project Atlas is not shown anywhere. */
+.project-progress-trigger,
+.project-progress-backdrop,
+.project-progress-modal{
+  display:none !important;
+}
+
+/* The document itself remains the only vertical scroll container.
+   Avoid fixed heights, containment and root overflow rules that caused blank mobile rendering. */
+html{
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+body{
+  overflow-x:hidden;
+  overflow-y:visible;
+}
+
 #root,
 .app-shell{
+  min-height:100%;
   overflow-x:clip;
+  overflow-y:visible !important;
 }
 
-.app-shell{
-  overflow-y:visible!important;
+/* Header is always fixed while scrolling, without depending on sticky ancestors. */
+.site-header,
+.site-header.is-compact{
+  position:fixed !important;
+  top:4px !important;
+  left:12px !important;
+  right:12px !important;
+  width:auto !important;
+  z-index:1500 !important;
+  border:1px solid rgba(59,99,255,.11) !important;
+  border-radius:17px !important;
+  background:rgba(246,249,255,.84) !important;
+  box-shadow:0 10px 34px rgba(34,53,99,.075) !important;
+  backdrop-filter:blur(22px) saturate(135%) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%) !important;
 }
 
-/* Mobile header remains visible throughout the entire page. */
-@media(max-width:700px){
-  .site-header,
-  .site-header.is-compact{
-    position:fixed!important;
-    top:4px!important;
-    left:8px!important;
-    right:8px!important;
-    width:auto!important;
-    z-index:1500!important;
-    min-height:52px!important;
-    padding:3px 10px!important;
-    border:1px solid rgba(59,99,255,.11)!important;
-    border-radius:15px!important;
-    background:rgba(245,248,255,.68)!important;
-    box-shadow:0 8px 26px rgba(34,53,99,.055)!important;
-    backdrop-filter:blur(20px) saturate(125%)!important;
-    -webkit-backdrop-filter:blur(20px) saturate(125%)!important;
-  }
-
-  .site-header.is-compact{
-    min-height:46px!important;
-    background:rgba(245,248,255,.50)!important;
-    box-shadow:0 5px 18px rgba(34,53,99,.035)!important;
-  }
-
-  .site-header .logo-symbol{
-    width:34px!important;
-    height:34px!important;
-  }
-
-  .site-header.is-compact .logo-symbol{
-    width:30px!important;
-    height:30px!important;
-  }
-
-  .site-header .logo-name{
-    font-size:15px!important;
-  }
-
-  .site-header nav{
-    display:none!important;
-  }
-
-  .site-header .header-offer{
-    min-height:38px!important;
-    padding:0 13px!important;
-    font-size:8px!important;
-    white-space:nowrap;
-  }
-
-  .site-header.is-compact .header-offer{
-    min-height:34px!important;
-    opacity:.76;
-  }
-
-  main{
-    padding-top:62px;
-  }
-
-  .scroll-progress{
-    position:fixed!important;
-    top:0!important;
-    left:0!important;
-    right:0!important;
-    z-index:1600!important;
-  }
+.site-header.is-compact{
+  min-height:54px !important;
+  padding-top:3px !important;
+  padding-bottom:3px !important;
+  background:rgba(246,249,255,.66) !important;
+  box-shadow:0 6px 22px rgba(34,53,99,.045) !important;
 }
 
-/* Shorter, more editorial main narrative. */
-.strategic-buyer-suite{
-  padding-top:clamp(72px,8vw,112px)!important;
-  padding-bottom:clamp(72px,8vw,112px)!important;
+body{
+  padding-top:82px;
 }
 
-.strategic-highlights{
-  margin-top:48px!important;
+.scroll-progress{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  z-index:1600 !important;
 }
 
-.strategic-highlights article{
-  min-height:205px!important;
-}
-
-.strategic-applications{
-  margin-top:clamp(66px,7vw,96px)!important;
-}
-
-.strategic-application-grid article{
-  min-height:192px!important;
-}
-
-.strategic-validation{
-  margin-top:clamp(66px,7vw,96px)!important;
-}
-
-.strategic-why-now{
-  display:none!important;
-}
-
-.strategic-final-cta{
-  margin-top:clamp(56px,6vw,82px)!important;
-}
-
-/* The interactive AI panel remains a core section and moves visually forward
-   without changing its code or functionality. */
-.product-demo{
-  content-visibility:visible!important;
-  contain:none!important;
-  padding-top:clamp(72px,8vw,112px)!important;
-  padding-bottom:clamp(72px,8vw,112px)!important;
-}
-
-.product-demo-shell,
-.dashboard-showcase{
-  position:relative;
-  z-index:1;
-}
-
-/* Reduce repetition and total scroll length across legacy sections. */
+/* A moderate reduction in page length without deleting sections or components. */
+.hero,
 .technology,
 .thesis,
 .market-opportunity,
 .film-strip,
 .pillars,
 .asset-package,
-.investor-room{
-  padding-top:clamp(64px,7vw,96px)!important;
-  padding-bottom:clamp(64px,7vw,96px)!important;
-}
-
-.technology-card,
-.asset-card,
-.investor-room article{
-  min-height:auto!important;
-}
-
-/* Keep only the strongest acquisition layer visually prominent. */
-.acquisition-command-center{
-  padding-top:clamp(76px,8vw,116px)!important;
-  padding-bottom:clamp(76px,8vw,116px)!important;
-}
-
-.command-heading{
-  margin-bottom:38px!important;
-}
-
-.command-body{
-  margin-top:14px!important;
-}
-
-.command-transaction{
-  margin-top:14px!important;
-}
-
-/* Existing FAQ stays, but becomes tighter. */
-.transaction-faq{
-  padding-top:clamp(70px,8vw,108px)!important;
-  padding-bottom:clamp(70px,8vw,108px)!important;
-}
-
-.transaction-faq details{
-  margin-bottom:8px!important;
-}
-
-/* Remove duplicated legacy trust-heavy sections from visual flow where they repeat
-   the consolidated strategic and command-center narrative. */
-.diligence-room{
-  display:none!important;
-}
-
-/* Mobile: aggressively reduce vertical repetition while preserving the AI panel,
-   strategic thesis, validation, readiness, FAQ and final CTA. */
-@media(max-width:700px){
-  .strategic-buyer-suite,
-  .product-demo,
-  .acquisition-command-center,
-  .transaction-faq,
-  .acquire{
-    padding-left:18px!important;
-    padding-right:18px!important;
-  }
-
-  .strategic-highlights{
-    grid-template-columns:1fr 1fr!important;
-    gap:10px!important;
-  }
-
-  .strategic-highlights article{
-    min-height:165px!important;
-    padding:18px!important;
-  }
-
-  .strategic-highlights h3{
-    margin-top:22px!important;
-    font-size:17px!important;
-  }
-
-  .strategic-highlights p{
-    font-size:11px!important;
-  }
-
-  .strategic-application-grid{
-    grid-template-columns:1fr!important;
-    gap:10px!important;
-  }
-
-  .strategic-application-grid article{
-    min-height:150px!important;
-    padding:19px!important;
-  }
-
-  .strategic-validation{
-    padding:25px 20px!important;
-  }
-
-  .strategic-final-cta{
-    padding:25px 20px!important;
-  }
-
-  .product-demo{
-    content-visibility:visible!important;
-  }
-
-  .command-overview,
-  .command-body{
-    gap:10px!important;
-  }
-
-  .command-readiness,
-  .command-checklist,
-  .command-downloads,
-  .command-transaction{
-    padding:20px!important;
-  }
-
-  .command-download-grid{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  .command-download-card{
-    min-height:135px!important;
-    padding:16px!important;
-  }
-
-  .command-timeline{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  .film-strip,
-  .pillars,
-  .investor-room{
-    display:none!important;
-  }
-}
-
-@media(max-width:440px){
-  .strategic-highlights{
-    grid-template-columns:1fr!important;
-  }
-
-  .command-download-grid{
-    grid-template-columns:1fr!important;
-  }
-}
-
-
-/* Sprint 48 — Mobile recovery + Apple-like editorial consolidation */
-
-/* Recovery: do not apply overflow clipping to root elements.
-   This avoids blank/locked rendering on some mobile browsers. */
-html{
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-}
-
-body,
-#root,
-.app-shell{
-  overflow:visible!important;
-}
-
-body{
-  overflow-x:hidden!important;
-}
-
-.app-shell{
-  min-height:100%;
-}
-
-/* Stable sticky header instead of the riskier fixed mobile implementation. */
-.site-header{
-  position:sticky!important;
-  top:4px!important;
-  z-index:1500!important;
-}
-
-@media(max-width:700px){
-  .site-header,
-  .site-header.is-compact{
-    position:sticky!important;
-    top:4px!important;
-    left:auto!important;
-    right:auto!important;
-    width:calc(100% - 16px)!important;
-    margin:0 8px!important;
-    min-height:52px!important;
-    padding:4px 10px!important;
-    border:1px solid rgba(30,53,103,.10)!important;
-    border-radius:16px!important;
-    background:rgba(248,250,255,.78)!important;
-    box-shadow:0 8px 28px rgba(31,48,91,.06)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-  }
-
-  .site-header.is-compact{
-    min-height:48px!important;
-    background:rgba(248,250,255,.66)!important;
-    box-shadow:0 5px 20px rgba(31,48,91,.045)!important;
-  }
-
-  main{
-    padding-top:0!important;
-  }
-
-  .scroll-progress{
-    position:fixed!important;
-    top:0!important;
-    left:0!important;
-    right:0!important;
-    z-index:1600!important;
-  }
-
-  .site-header nav{
-    position:fixed!important;
-    top:62px!important;
-    left:10px!important;
-    right:10px!important;
-    max-height:calc(100dvh - 76px)!important;
-    overflow-y:auto!important;
-  }
-}
-
-/* Apple-like visual rhythm: more white space, fewer borders, calmer surfaces. */
-:root{
-  --apple-surface:#f5f5f7;
-  --apple-white:#ffffff;
-  --apple-ink:#1d1d1f;
-  --apple-muted:#6e6e73;
-  --apple-blue:#0071e3;
-}
-
-.strategic-buyer-suite,
+.investor-room,
 .product-demo,
+.strategic-buyer-suite,
+.buyer-confidence,
 .acquisition-command-center,
+.diligence-room,
 .transaction-faq,
 .acquire{
-  scroll-margin-top:80px;
+  padding-top:clamp(66px,7vw,100px) !important;
+  padding-bottom:clamp(66px,7vw,100px) !important;
 }
 
-/* Hero is cleaner and less visually noisy. */
-.hero{
-  min-height:auto!important;
-  padding-top:clamp(76px,9vw,120px)!important;
-  padding-bottom:clamp(70px,8vw,108px)!important;
+.strategic-highlights,
+.strategic-applications,
+.strategic-validation,
+.strategic-why-now,
+.strategic-final-cta,
+.buyer-process,
+.buyer-faq,
+.buyer-enterprise-cta{
+  margin-top:clamp(46px,6vw,78px) !important;
 }
 
-.hero-noise,
-.hero-aura{
-  opacity:.34!important;
-}
-
-.hero-support-grid{
-  gap:12px!important;
-}
-
-.sector-rail{
-  min-height:54px!important;
-  padding-top:10px!important;
-  padding-bottom:10px!important;
-}
-
-/* Strategic section: retain only the strongest message and reduce card density. */
-.strategic-buyer-suite{
-  padding-top:clamp(74px,8vw,112px)!important;
-  padding-bottom:clamp(74px,8vw,112px)!important;
-  background:linear-gradient(180deg,#fff 0%,#f5f5f7 100%)!important;
-}
-
-.strategic-buyer-suite::before{
-  opacity:.12!important;
-}
-
-.strategic-thesis{
-  gap:clamp(30px,5vw,72px)!important;
-}
-
-.strategic-thesis-panel{
-  min-height:330px!important;
-  border-radius:26px!important;
-}
-
-.strategic-highlights{
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:10px!important;
-  margin-top:44px!important;
-}
-
-.strategic-highlights article{
-  min-height:184px!important;
-  padding:22px!important;
-  border-color:rgba(0,0,0,.055)!important;
-  border-radius:22px!important;
-  background:rgba(255,255,255,.82)!important;
-  box-shadow:none!important;
-}
-
-.strategic-highlights h3{
-  margin-top:28px!important;
-  font-size:18px!important;
-}
-
-.strategic-highlights p{
-  color:var(--apple-muted)!important;
-  font-size:12px!important;
-}
-
-.strategic-applications{
-  margin-top:68px!important;
-}
-
-.strategic-application-grid{
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:10px!important;
-  margin-top:30px!important;
-}
-
-.strategic-application-grid article{
-  min-height:166px!important;
-  padding:22px!important;
-  border-color:rgba(0,0,0,.055)!important;
-  border-radius:22px!important;
-  box-shadow:none!important;
-}
-
-.strategic-application-grid h3{
-  margin-top:22px!important;
-  font-size:18px!important;
-}
-
-.strategic-validation{
-  margin-top:68px!important;
-  padding:clamp(30px,4vw,48px)!important;
-  border-radius:28px!important;
-}
-
-.strategic-final-cta{
-  display:none!important;
-}
-
-/* AI panel remains central and receives a cleaner premium frame. */
-.product-demo{
-  padding-top:clamp(76px,8vw,112px)!important;
-  padding-bottom:clamp(76px,8vw,112px)!important;
-  background:#fff!important;
-}
-
-.product-demo-shell{
-  border:1px solid rgba(0,0,0,.07)!important;
-  border-radius:28px!important;
-  box-shadow:0 24px 70px rgba(28,39,68,.09)!important;
-}
-
-.product-demo-heading{
-  margin-bottom:32px!important;
-}
-
-/* Acquisition center: preserve function, remove visual heaviness. */
-.acquisition-command-center{
-  padding-top:clamp(76px,8vw,112px)!important;
-  padding-bottom:clamp(76px,8vw,112px)!important;
-  background:#0b1220!important;
-}
-
-.command-heading h2{
-  font-size:clamp(42px,5vw,70px)!important;
-}
-
-.command-readiness,
-.command-metrics,
-.command-checklist,
-.command-downloads,
-.command-transaction{
-  border-radius:22px!important;
-  box-shadow:none!important;
-}
-
-.command-cta{
-  display:none!important;
-}
-
-/* FAQ and final CTA are compact. */
-.transaction-faq{
-  padding-top:72px!important;
-  padding-bottom:72px!important;
-  background:#fff!important;
-}
-
-.transaction-faq-heading{
-  margin-bottom:30px!important;
-}
-
-.transaction-faq-grid{
-  gap:10px!important;
-}
-
-.acquire{
-  min-height:auto!important;
-  padding-top:72px!important;
-  padding-bottom:72px!important;
-}
-
-/* Hide legacy UI that no longer has a matching section. */
-.story-rail{
-  display:none!important;
-}
-
-@media(max-width:1000px){
-  .strategic-highlights{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  }
-}
-
-@media(max-width:700px){
-  .hero{
-    padding-top:62px!important;
-    padding-bottom:62px!important;
-  }
-
-  .hero h1{
-    font-size:clamp(47px,15vw,68px)!important;
-    line-height:.94!important;
-  }
-
-  .hero-copy > p{
-    font-size:15px!important;
-    line-height:1.65!important;
-  }
-
-  .sector-rail{
-    overflow-x:auto!important;
-    justify-content:flex-start!important;
-    scrollbar-width:none;
-  }
-
-  .sector-rail::-webkit-scrollbar{
-    display:none;
-  }
-
-  .strategic-buyer-suite,
-  .product-demo,
-  .acquisition-command-center,
-  .transaction-faq,
-  .acquire{
-    padding-left:16px!important;
-    padding-right:16px!important;
-  }
-
-  .strategic-thesis h2,
-  .strategic-section-heading h2,
-  .strategic-validation h2{
-    font-size:clamp(38px,12vw,54px)!important;
-  }
-
-  .strategic-thesis-panel{
-    min-height:280px!important;
-    padding:26px!important;
-  }
-
-  .strategic-highlights{
-    grid-template-columns:1fr!important;
-    margin-top:30px!important;
-  }
-
-  .strategic-highlights article{
-    min-height:auto!important;
-    padding:20px!important;
-  }
-
-  .strategic-highlights h3{
-    margin-top:18px!important;
-  }
-
-  .strategic-applications{
-    margin-top:54px!important;
-  }
-
-  .strategic-application-grid{
-    grid-template-columns:1fr!important;
-  }
-
-  .strategic-application-grid article{
-    min-height:auto!important;
-    padding:20px!important;
-  }
-
-  .strategic-validation{
-    margin-top:54px!important;
-    padding:24px 20px!important;
-  }
-
-  .strategic-validation ul{
-    gap:8px!important;
-  }
-
-  .strategic-validation li{
-    min-height:46px!important;
-    padding:0 13px!important;
-  }
-
-  .product-demo{
-    padding-top:62px!important;
-    padding-bottom:62px!important;
-  }
-
-  .product-demo-shell{
-    border-radius:22px!important;
-  }
-
-  .acquisition-command-center{
-    padding-top:62px!important;
-    padding-bottom:62px!important;
-  }
-
-  .command-heading{
-    margin-bottom:28px!important;
-  }
-
-  .command-heading h2{
-    font-size:clamp(38px,12vw,52px)!important;
-  }
-
-  .command-metrics{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  .command-download-grid{
-    grid-template-columns:1fr!important;
-  }
-
-  .command-timeline{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  .transaction-faq{
-    padding-top:58px!important;
-    padding-bottom:58px!important;
-  }
-
-  .acquire{
-    padding-top:58px!important;
-    padding-bottom:58px!important;
-  }
-}
-
-@media(max-width:420px){
-  .command-metrics{
-    grid-template-columns:1fr!important;
-  }
-
-  .command-timeline{
-    grid-template-columns:1fr!important;
-  }
-}
-
-
-/* Sprint 49 — remove Project Atlas, restore fixed mobile header and balanced content */
-
-/* Project Atlas is permanently removed from the public interface. */
-.project-progress-trigger,
-.project-progress-backdrop,
-.project-progress-modal{
-  display:none!important;
-}
-
-/* Reliable fixed mobile bar: fixed only on the header itself.
-   Root containers remain normally scrollable to avoid blank mobile rendering. */
+/* Mobile recovery: do not hide or contain core visual components. */
 @media(max-width:700px){
   body{
-    padding-top:62px!important;
+    padding-top:66px !important;
   }
 
   .site-header,
   .site-header.is-compact{
-    position:fixed!important;
-    top:4px!important;
-    left:8px!important;
-    right:8px!important;
-    width:auto!important;
-    margin:0!important;
-    z-index:1500!important;
-    min-height:52px!important;
-    padding:4px 10px!important;
-    border:1px solid rgba(30,53,103,.10)!important;
-    border-radius:16px!important;
-    background:rgba(248,250,255,.80)!important;
-    box-shadow:0 8px 28px rgba(31,48,91,.06)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    top:4px !important;
+    left:8px !important;
+    right:8px !important;
+    min-height:52px !important;
+    padding:4px 9px !important;
+    border-radius:15px !important;
+    background:rgba(248,250,255,.88) !important;
   }
 
   .site-header.is-compact{
-    min-height:46px!important;
-    padding-top:2px!important;
-    padding-bottom:2px!important;
-    background:rgba(248,250,255,.62)!important;
-    box-shadow:0 5px 20px rgba(31,48,91,.04)!important;
-  }
-
-  .site-header .logo{
-    min-width:0;
-    flex:0 1 auto;
+    min-height:47px !important;
+    padding-top:2px !important;
+    padding-bottom:2px !important;
+    background:rgba(248,250,255,.72) !important;
   }
 
   .site-header .logo-symbol{
-    width:34px!important;
-    height:34px!important;
-    flex:0 0 34px!important;
+    width:34px !important;
+    height:34px !important;
+    flex:0 0 34px !important;
   }
 
   .site-header.is-compact .logo-symbol{
-    width:30px!important;
-    height:30px!important;
-    flex-basis:30px!important;
+    width:30px !important;
+    height:30px !important;
+    flex-basis:30px !important;
   }
 
   .site-header .logo-name{
-    display:inline-block!important;
-    max-width:130px;
+    display:inline-block !important;
+    max-width:118px;
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-    font-size:15px!important;
+    font-size:15px !important;
   }
 
   .site-header .header-offer{
-    min-height:36px!important;
-    padding:0 11px!important;
-    font-size:7.5px!important;
-    letter-spacing:.08em!important;
-  }
-
-  .mobile-menu-toggle{
-    flex:0 0 auto;
+    min-height:36px !important;
+    padding:0 10px !important;
+    font-size:7.5px !important;
+    white-space:nowrap;
   }
 
   .site-header nav{
-    position:fixed!important;
-    top:62px!important;
-    left:10px!important;
-    right:10px!important;
-    width:auto!important;
-    max-height:calc(100dvh - 78px)!important;
-    overflow-y:auto!important;
-    z-index:1499!important;
-  }
-
-  .scroll-progress{
-    position:fixed!important;
-    top:0!important;
-    left:0!important;
-    right:0!important;
-    z-index:1600!important;
+    position:fixed !important;
+    top:62px !important;
+    left:10px !important;
+    right:10px !important;
+    width:auto !important;
+    z-index:1499 !important;
+    max-height:calc(100dvh - 76px) !important;
+    overflow-y:auto !important;
   }
 
   main{
-    padding-top:0!important;
+    padding-top:0 !important;
   }
-}
 
-/* Mobile rendering guard: make visual panels explicit instead of relying on
-   content-visibility or containment optimizations. */
-@media(max-width:700px){
+  /* Force normal rendering on Safari/Chrome mobile. */
+  [data-reveal],
   .hero,
-  .hero-content,
   .dashboard-showcase,
   .dashboard-body,
   .dashboard-main,
@@ -5399,193 +4767,89 @@ body{
   .strategic-thesis,
   .strategic-thesis-panel,
   .strategic-highlights,
-  .strategic-applications,
   .strategic-application-grid,
   .strategic-validation,
   .product-demo,
   .product-demo-shell,
   .demo-control-panel,
   .demo-output-panel,
-  .acquisition-command-center,
   .buyer-confidence,
+  .acquisition-command-center,
   .transaction-faq,
   .acquire{
-    content-visibility:visible!important;
-    contain:none!important;
-    visibility:visible!important;
-    opacity:1;
+    content-visibility:visible !important;
+    contain:none !important;
+    visibility:visible !important;
   }
 
   [data-reveal]{
-    opacity:1!important;
-    transform:none!important;
+    opacity:1 !important;
+    transform:none !important;
   }
 
   .dashboard-showcase,
+  .dashboard-body,
+  .dashboard-main,
   .product-demo-shell,
-  .strategic-thesis-panel{
-    display:block!important;
-  }
-
-  .dashboard-body{
-    display:grid!important;
+  .demo-control-panel,
+  .demo-output-panel{
+    min-width:0 !important;
+    max-width:100% !important;
   }
 
   .dashboard-sidebar{
-    display:none!important;
+    display:none !important;
   }
 
-  .dashboard-main{
-    min-width:0!important;
+  .dashboard-body{
+    display:block !important;
   }
 
   .dashboard-kpis{
-    grid-template-columns:1fr 1fr!important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
   }
 
   .dashboard-kpis article:last-child{
     grid-column:1 / -1;
   }
 
+  .dashboard-chart,
   .dashboard-chart svg{
-    width:100%!important;
-    min-height:130px!important;
-  }
-}
-
-/* Balanced restoration: keep confidence/process material, but in a compact
-   editorial format rather than the original long section. */
-.buyer-confidence{
-  display:block!important;
-  padding-top:clamp(68px,7vw,96px)!important;
-  padding-bottom:clamp(68px,7vw,96px)!important;
-}
-
-.buyer-executive-summary{
-  grid-template-columns:minmax(0,1fr) minmax(260px,.62fr)!important;
-}
-
-.buyer-trust-grid{
-  grid-template-columns:repeat(5,minmax(0,1fr))!important;
-  margin-top:38px!important;
-}
-
-.buyer-trust-grid article{
-  min-height:176px!important;
-  padding:20px!important;
-}
-
-.buyer-trust-grid h3{
-  margin-top:26px!important;
-  font-size:17px!important;
-}
-
-.buyer-trust-grid p{
-  font-size:11px!important;
-}
-
-.buyer-process{
-  margin-top:72px!important;
-}
-
-.buyer-process-grid article{
-  min-height:184px!important;
-  padding:22px!important;
-}
-
-.buyer-secure-transaction{
-  margin-top:24px!important;
-}
-
-.buyer-faq{
-  display:none!important;
-}
-
-.buyer-enterprise-cta{
-  margin-top:64px!important;
-  padding:36px!important;
-}
-
-@media(max-width:1050px){
-  .buyer-trust-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:100% !important;
+    max-width:100% !important;
   }
 
-  .buyer-trust-grid article:last-child{
-    grid-column:auto!important;
-  }
-}
-
-@media(max-width:700px){
-  .buyer-confidence{
-    padding:58px 16px!important;
-  }
-
-  .buyer-executive-summary{
-    grid-template-columns:1fr!important;
-    gap:22px!important;
-  }
-
-  .buyer-executive-summary h2{
-    font-size:clamp(38px,12vw,52px)!important;
-  }
-
-  .buyer-trust-grid{
-    grid-template-columns:1fr 1fr!important;
-    gap:9px!important;
-    margin-top:28px!important;
-  }
-
-  .buyer-trust-grid article{
-    min-height:144px!important;
-    padding:16px!important;
-  }
-
-  .buyer-trust-grid h3{
-    margin-top:18px!important;
-    font-size:15px!important;
-  }
-
-  .buyer-trust-grid p{
-    font-size:10.5px!important;
-    line-height:1.5!important;
-  }
-
-  .buyer-process{
-    margin-top:50px!important;
-  }
-
-  .buyer-process-grid{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  .buyer-process-grid article{
-    min-height:155px!important;
-    padding:17px!important;
-  }
-
-  .buyer-process-grid h3{
-    margin-top:22px!important;
-    font-size:17px!important;
-  }
-
-  .buyer-process-grid p{
-    font-size:10.5px!important;
-  }
-
-  .buyer-secure-transaction{
-    padding:20px!important;
-  }
-
-  .buyer-enterprise-cta{
-    margin-top:46px!important;
-    padding:25px 20px!important;
-  }
-}
-
-@media(max-width:430px){
+  .strategic-highlights,
+  .strategic-application-grid,
   .buyer-trust-grid,
-  .buyer-process-grid{
-    grid-template-columns:1fr!important;
+  .buyer-process-grid,
+  .buyer-faq-list{
+    grid-template-columns:1fr !important;
+  }
+
+  .command-metrics,
+  .command-download-grid,
+  .command-timeline{
+    grid-template-columns:1fr !important;
+  }
+
+  .hero,
+  .technology,
+  .thesis,
+  .market-opportunity,
+  .film-strip,
+  .pillars,
+  .asset-package,
+  .investor-room,
+  .product-demo,
+  .strategic-buyer-suite,
+  .buyer-confidence,
+  .acquisition-command-center,
+  .diligence-room,
+  .transaction-faq,
+  .acquire{
+    padding-top:56px !important;
+    padding-bottom:56px !important;
   }
 }
