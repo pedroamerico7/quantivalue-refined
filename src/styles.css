@@ -4871,3 +4871,413 @@ body,
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* Sprint 48 — Mobile recovery + Apple-like editorial consolidation */
+
+/* Recovery: do not apply overflow clipping to root elements.
+   This avoids blank/locked rendering on some mobile browsers. */
+html{
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+}
+
+body,
+#root,
+.app-shell{
+  overflow:visible!important;
+}
+
+body{
+  overflow-x:hidden!important;
+}
+
+.app-shell{
+  min-height:100%;
+}
+
+/* Stable sticky header instead of the riskier fixed mobile implementation. */
+.site-header{
+  position:sticky!important;
+  top:4px!important;
+  z-index:1500!important;
+}
+
+@media(max-width:700px){
+  .site-header,
+  .site-header.is-compact{
+    position:sticky!important;
+    top:4px!important;
+    left:auto!important;
+    right:auto!important;
+    width:calc(100% - 16px)!important;
+    margin:0 8px!important;
+    min-height:52px!important;
+    padding:4px 10px!important;
+    border:1px solid rgba(30,53,103,.10)!important;
+    border-radius:16px!important;
+    background:rgba(248,250,255,.78)!important;
+    box-shadow:0 8px 28px rgba(31,48,91,.06)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+
+  .site-header.is-compact{
+    min-height:48px!important;
+    background:rgba(248,250,255,.66)!important;
+    box-shadow:0 5px 20px rgba(31,48,91,.045)!important;
+  }
+
+  main{
+    padding-top:0!important;
+  }
+
+  .scroll-progress{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    z-index:1600!important;
+  }
+
+  .site-header nav{
+    position:fixed!important;
+    top:62px!important;
+    left:10px!important;
+    right:10px!important;
+    max-height:calc(100dvh - 76px)!important;
+    overflow-y:auto!important;
+  }
+}
+
+/* Apple-like visual rhythm: more white space, fewer borders, calmer surfaces. */
+:root{
+  --apple-surface:#f5f5f7;
+  --apple-white:#ffffff;
+  --apple-ink:#1d1d1f;
+  --apple-muted:#6e6e73;
+  --apple-blue:#0071e3;
+}
+
+.strategic-buyer-suite,
+.product-demo,
+.acquisition-command-center,
+.transaction-faq,
+.acquire{
+  scroll-margin-top:80px;
+}
+
+/* Hero is cleaner and less visually noisy. */
+.hero{
+  min-height:auto!important;
+  padding-top:clamp(76px,9vw,120px)!important;
+  padding-bottom:clamp(70px,8vw,108px)!important;
+}
+
+.hero-noise,
+.hero-aura{
+  opacity:.34!important;
+}
+
+.hero-support-grid{
+  gap:12px!important;
+}
+
+.sector-rail{
+  min-height:54px!important;
+  padding-top:10px!important;
+  padding-bottom:10px!important;
+}
+
+/* Strategic section: retain only the strongest message and reduce card density. */
+.strategic-buyer-suite{
+  padding-top:clamp(74px,8vw,112px)!important;
+  padding-bottom:clamp(74px,8vw,112px)!important;
+  background:linear-gradient(180deg,#fff 0%,#f5f5f7 100%)!important;
+}
+
+.strategic-buyer-suite::before{
+  opacity:.12!important;
+}
+
+.strategic-thesis{
+  gap:clamp(30px,5vw,72px)!important;
+}
+
+.strategic-thesis-panel{
+  min-height:330px!important;
+  border-radius:26px!important;
+}
+
+.strategic-highlights{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin-top:44px!important;
+}
+
+.strategic-highlights article{
+  min-height:184px!important;
+  padding:22px!important;
+  border-color:rgba(0,0,0,.055)!important;
+  border-radius:22px!important;
+  background:rgba(255,255,255,.82)!important;
+  box-shadow:none!important;
+}
+
+.strategic-highlights h3{
+  margin-top:28px!important;
+  font-size:18px!important;
+}
+
+.strategic-highlights p{
+  color:var(--apple-muted)!important;
+  font-size:12px!important;
+}
+
+.strategic-applications{
+  margin-top:68px!important;
+}
+
+.strategic-application-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin-top:30px!important;
+}
+
+.strategic-application-grid article{
+  min-height:166px!important;
+  padding:22px!important;
+  border-color:rgba(0,0,0,.055)!important;
+  border-radius:22px!important;
+  box-shadow:none!important;
+}
+
+.strategic-application-grid h3{
+  margin-top:22px!important;
+  font-size:18px!important;
+}
+
+.strategic-validation{
+  margin-top:68px!important;
+  padding:clamp(30px,4vw,48px)!important;
+  border-radius:28px!important;
+}
+
+.strategic-final-cta{
+  display:none!important;
+}
+
+/* AI panel remains central and receives a cleaner premium frame. */
+.product-demo{
+  padding-top:clamp(76px,8vw,112px)!important;
+  padding-bottom:clamp(76px,8vw,112px)!important;
+  background:#fff!important;
+}
+
+.product-demo-shell{
+  border:1px solid rgba(0,0,0,.07)!important;
+  border-radius:28px!important;
+  box-shadow:0 24px 70px rgba(28,39,68,.09)!important;
+}
+
+.product-demo-heading{
+  margin-bottom:32px!important;
+}
+
+/* Acquisition center: preserve function, remove visual heaviness. */
+.acquisition-command-center{
+  padding-top:clamp(76px,8vw,112px)!important;
+  padding-bottom:clamp(76px,8vw,112px)!important;
+  background:#0b1220!important;
+}
+
+.command-heading h2{
+  font-size:clamp(42px,5vw,70px)!important;
+}
+
+.command-readiness,
+.command-metrics,
+.command-checklist,
+.command-downloads,
+.command-transaction{
+  border-radius:22px!important;
+  box-shadow:none!important;
+}
+
+.command-cta{
+  display:none!important;
+}
+
+/* FAQ and final CTA are compact. */
+.transaction-faq{
+  padding-top:72px!important;
+  padding-bottom:72px!important;
+  background:#fff!important;
+}
+
+.transaction-faq-heading{
+  margin-bottom:30px!important;
+}
+
+.transaction-faq-grid{
+  gap:10px!important;
+}
+
+.acquire{
+  min-height:auto!important;
+  padding-top:72px!important;
+  padding-bottom:72px!important;
+}
+
+/* Hide legacy UI that no longer has a matching section. */
+.story-rail{
+  display:none!important;
+}
+
+@media(max-width:1000px){
+  .strategic-highlights{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:700px){
+  .hero{
+    padding-top:62px!important;
+    padding-bottom:62px!important;
+  }
+
+  .hero h1{
+    font-size:clamp(47px,15vw,68px)!important;
+    line-height:.94!important;
+  }
+
+  .hero-copy > p{
+    font-size:15px!important;
+    line-height:1.65!important;
+  }
+
+  .sector-rail{
+    overflow-x:auto!important;
+    justify-content:flex-start!important;
+    scrollbar-width:none;
+  }
+
+  .sector-rail::-webkit-scrollbar{
+    display:none;
+  }
+
+  .strategic-buyer-suite,
+  .product-demo,
+  .acquisition-command-center,
+  .transaction-faq,
+  .acquire{
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+
+  .strategic-thesis h2,
+  .strategic-section-heading h2,
+  .strategic-validation h2{
+    font-size:clamp(38px,12vw,54px)!important;
+  }
+
+  .strategic-thesis-panel{
+    min-height:280px!important;
+    padding:26px!important;
+  }
+
+  .strategic-highlights{
+    grid-template-columns:1fr!important;
+    margin-top:30px!important;
+  }
+
+  .strategic-highlights article{
+    min-height:auto!important;
+    padding:20px!important;
+  }
+
+  .strategic-highlights h3{
+    margin-top:18px!important;
+  }
+
+  .strategic-applications{
+    margin-top:54px!important;
+  }
+
+  .strategic-application-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .strategic-application-grid article{
+    min-height:auto!important;
+    padding:20px!important;
+  }
+
+  .strategic-validation{
+    margin-top:54px!important;
+    padding:24px 20px!important;
+  }
+
+  .strategic-validation ul{
+    gap:8px!important;
+  }
+
+  .strategic-validation li{
+    min-height:46px!important;
+    padding:0 13px!important;
+  }
+
+  .product-demo{
+    padding-top:62px!important;
+    padding-bottom:62px!important;
+  }
+
+  .product-demo-shell{
+    border-radius:22px!important;
+  }
+
+  .acquisition-command-center{
+    padding-top:62px!important;
+    padding-bottom:62px!important;
+  }
+
+  .command-heading{
+    margin-bottom:28px!important;
+  }
+
+  .command-heading h2{
+    font-size:clamp(38px,12vw,52px)!important;
+  }
+
+  .command-metrics{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .command-download-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .command-timeline{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .transaction-faq{
+    padding-top:58px!important;
+    padding-bottom:58px!important;
+  }
+
+  .acquire{
+    padding-top:58px!important;
+    padding-bottom:58px!important;
+  }
+}
+
+@media(max-width:420px){
+  .command-metrics{
+    grid-template-columns:1fr!important;
+  }
+
+  .command-timeline{
+    grid-template-columns:1fr!important;
+  }
+}
