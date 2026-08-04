@@ -3,6 +3,7 @@ import AcquisitionCenter from "./components/AcquisitionCenter";
 import StrategicBuyerAcquisition from "./components/StrategicBuyerAcquisition";
 import InstitutionalTrust from "./components/InstitutionalTrust";
 import CorporateOverview from "./components/CorporateOverview";
+import InstitutionalPolish from "./components/InstitutionalPolish";
 import { attributionPayload, captureAttribution } from "./utils/attribution";
 
 const sectors = [
@@ -540,9 +541,8 @@ export default function App() {
             </h1>
 
             <p className="hero-description">
-              QuantiValue.com is a strategic .COM asset positioned for artificial
-              intelligence, quantitative finance, valuation technology and enterprise
-              analytics. Offered through a direct and confidential owner process.
+              A strategic .COM asset for AI, quantitative finance, valuation technology
+              and enterprise analytics — offered through a direct, confidential owner process.
             </p>
 
             <div className="hero-actions">
@@ -737,6 +737,8 @@ export default function App() {
             </div>
           </div>
         </section>
+        <InstitutionalPolish onOpenDiscussion={openAcquisitionModal} />
+
         <InstitutionalTrust onOpenDiscussion={openAcquisitionModal} />
 
         <AcquisitionCenter
@@ -804,6 +806,24 @@ export default function App() {
             </details>
 
             <details data-reveal>
+              <summary>Why QuantiValue instead of another financial brand?</summary>
+              <p>
+                The name combines quantitative intelligence and value creation in a
+                concise global .COM. It can support multiple product categories without
+                limiting the buyer to a single financial workflow or technology.
+              </p>
+            </details>
+
+            <details data-reveal>
+              <summary>Why is the acquisition process confidential?</summary>
+              <p>
+                Confidentiality protects the buyer’s strategic intent, internal planning
+                and negotiating position while allowing ownership, transfer and included
+                assets to be reviewed through a controlled diligence process.
+              </p>
+            </details>
+
+            <details data-reveal>
               <summary>What is the expected next step?</summary>
               <p>
                 Submit a private inquiry with your company details and indicative offer.
@@ -839,7 +859,7 @@ export default function App() {
 
           <button className="acquire-button" type="button" onClick={openAcquisitionModal}>
             <span>Private acquisition</span>
-            <strong>Begin Acquisition</strong>
+            <strong>Request Confidential Discussion</strong>
             <Arrow />
           </button>
         </section>
@@ -850,7 +870,13 @@ export default function App() {
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
           <span className="logo-name">QuantiValue</span>
         </a>
-        <span className="footer-signature">Confidential discussions with qualified buyers. <i>·</i> Confidential acquisitions worldwide</span>
+        <span className="footer-signature">
+          <b>Premium .COM Asset</b>
+          <i>·</i>
+          Confidential discussions with qualified buyers
+          <i>·</i>
+          Acquisitions worldwide
+        </span>
         <div className="footer-acquisition-contact">
           <small>Private acquisition</small>
           <button

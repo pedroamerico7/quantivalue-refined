@@ -6146,3 +6146,226 @@ button.footer-email:focus-visible{
   background:rgba(59,99,255,.07)!important;
   border-color:rgba(59,99,255,.13)!important;
 }
+
+
+/* Sprint 68 — Institutional polish */
+
+/* More restrained internal typography while preserving the hero scale. */
+.corporate-overview-copy h2,
+.strategic-section-heading h2,
+.product-demo-heading h2,
+.institutional-trust-heading h2,
+.institutional-timeline-heading h2,
+.command-heading h2,
+.transaction-faq-heading h2{
+  font-size:clamp(36px,4.35vw,62px)!important;
+  letter-spacing:-.05em!important;
+}
+
+/* Compact acquisition-rationale section. */
+.institutional-polish{
+  padding:clamp(68px,7vw,104px) clamp(22px,7vw,112px);
+  color:#172033;
+  background:#ffffff;
+  border-top:1px solid #d8deea;
+  border-bottom:1px solid #d8deea;
+}
+
+.institutional-polish-inner{
+  width:min(1240px,100%);
+  margin:0 auto;
+}
+
+.institutional-polish-heading{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.7fr);
+  gap:clamp(34px,6vw,86px);
+  align-items:end;
+}
+
+.institutional-polish-heading h2{
+  margin:12px 0 0;
+  font-size:clamp(38px,4.65vw,64px);
+  line-height:1;
+  letter-spacing:-.052em;
+}
+
+.institutional-polish-heading>p{
+  margin:0;
+  color:#647087;
+  line-height:1.72;
+}
+
+.institutional-polish-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:34px;
+}
+
+.institutional-polish-grid article{
+  min-height:184px;
+  padding:22px;
+  border:1px solid #d8deea;
+  border-radius:4px;
+  background:#f8faff;
+}
+
+.institutional-polish-grid article>span{
+  color:#2854c7;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+
+.institutional-polish-grid h3{
+  margin:30px 0 10px;
+  font-size:19px;
+  letter-spacing:-.025em;
+}
+
+.institutional-polish-grid p{
+  margin:0;
+  color:#647087;
+  font-size:13px;
+  line-height:1.65;
+}
+
+.buyer-profile-panel{
+  display:grid;
+  grid-template-columns:minmax(260px,.85fr) minmax(320px,1.25fr) auto;
+  gap:28px;
+  align-items:center;
+  margin-top:12px;
+  padding:26px;
+  color:#ffffff;
+  background:#0b1730;
+  border:1px solid #253655;
+  border-radius:4px;
+}
+
+.buyer-profile-panel h3{
+  max-width:430px;
+  margin:9px 0 0;
+  font-size:24px;
+  line-height:1.12;
+  letter-spacing:-.035em;
+}
+
+.buyer-profile-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.buyer-profile-tags span{
+  padding:9px 11px;
+  border:1px solid rgba(165,184,226,.2);
+  border-radius:3px;
+  color:#c8d4ed;
+  background:rgba(255,255,255,.035);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.buyer-profile-panel button{
+  min-height:48px;
+  padding:0 17px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:1px solid #416bd5;
+  border-radius:4px;
+  color:#ffffff;
+  background:#2854c7;
+  font-size:10px;
+  font-weight:850;
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+/* Keep the expanded FAQ compact and scan-friendly. */
+.transaction-faq-grid{
+  gap:8px!important;
+}
+
+.transaction-faq-grid details{
+  border-radius:4px!important;
+}
+
+/* Refined footer hierarchy. */
+.footer-signature{
+  color:#667189;
+  line-height:1.55;
+}
+
+.footer-signature b{
+  color:#172033!important;
+  font-weight:850!important;
+}
+
+/* The final CTA must remain readable with its longer wording. */
+.acquire-button strong{
+  max-width:250px;
+  line-height:1.1;
+}
+
+@media(max-width:980px){
+  .institutional-polish-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .buyer-profile-panel{
+    grid-template-columns:1fr;
+  }
+
+  .buyer-profile-panel button{
+    width:100%;
+  }
+}
+
+@media(max-width:700px){
+  .institutional-polish{
+    padding:54px 16px;
+  }
+
+  .institutional-polish-heading{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .institutional-polish-heading h2{
+    font-size:clamp(37px,11.5vw,50px);
+  }
+
+  .institutional-polish-grid{
+    grid-template-columns:1fr;
+    margin-top:26px;
+  }
+
+  .institutional-polish-grid article{
+    min-height:auto;
+    padding:19px;
+  }
+
+  .institutional-polish-grid h3{
+    margin-top:20px;
+  }
+
+  .buyer-profile-panel{
+    gap:22px;
+    padding:21px 18px;
+  }
+
+  .buyer-profile-panel h3{
+    font-size:22px;
+  }
+
+  .acquire-button strong{
+    max-width:190px;
+    font-size:15px!important;
+  }
+}
