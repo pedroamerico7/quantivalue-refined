@@ -1,17 +1,17 @@
 {
   "name": "QuantiValue",
   "short_name": "QuantiValue",
-  "description": "The premium global brand for intelligent value.",
+  "description": "Financial intelligence built on explainability.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#070b14",
-  "theme_color": "#070b14",
+  "background_color": "#070B14",
+  "theme_color": "#070B14",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
