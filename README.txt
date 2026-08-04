@@ -1,22 +1,18 @@
-QUANTIVALUE REFINED — SPRINT 22
-TRANSACTION FAQ & SECURE TRANSFER TRUST LAYER
+QUANTIVALUE REFINED — SPRINT 23
+PREMIUM MOTION & STORYTELLING
 
 Update:
 - src/App.jsx
 - src/styles.css
 
 Visible changes:
-1. New navigation item: FAQ
-2. New section after Due Diligence and before Private Acquisition
-3. Six expandable acquisition questions
-4. Trust strip:
-   - Direct owner contact
-   - Escrow compatible
-   - Secure registrar transfer
-   - Digital asset handoff
-
-Direct anchor:
-#transaction-faq
+- Active navigation according to the visible section
+- Right-side story rail on desktop
+- Dashboard mouse parallax and cursor glow
+- Animated chart drawing
+- Richer scroll reveals
+- Back-to-top button
+- Reduced-motion accessibility support
 
 Commit:
-feat: add transaction FAQ and secure transfer trust layer
+feat: add premium motion and storytelling navigation

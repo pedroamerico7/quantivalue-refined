@@ -109,6 +109,8 @@ export default function App() {
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSection, setActiveSection] = useState("platform");
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -205,6 +207,73 @@ export default function App() {
     };
   }, []);
 
+
+  useEffect(() => {
+    const sectionIds = [
+      "platform",
+      "technology",
+      "asset-package",
+      "investor-room",
+      "diligence",
+      "transaction-faq",
+      "acquire",
+    ];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-28% 0px -58% 0px", threshold: [0.08, 0.2, 0.45] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const dashboard = document.querySelector(".dashboard-showcase");
+    if (!dashboard || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    function onPointerMove(event) {
+      const rect = dashboard.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      dashboard.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+      dashboard.style.setProperty("--tilt-y", `${(x * 6).toFixed(2)}deg`);
+      dashboard.style.setProperty("--glow-x", `${((x + 0.5) * 100).toFixed(1)}%`);
+      dashboard.style.setProperty("--glow-y", `${((y + 0.5) * 100).toFixed(1)}%`);
+    }
+
+    function resetTilt() {
+      dashboard.style.setProperty("--tilt-x", "0deg");
+      dashboard.style.setProperty("--tilt-y", "0deg");
+      dashboard.style.setProperty("--glow-x", "68%");
+      dashboard.style.setProperty("--glow-y", "34%");
+    }
+
+    dashboard.addEventListener("pointermove", onPointerMove);
+    dashboard.addEventListener("pointerleave", resetTilt);
+    return () => {
+      dashboard.removeEventListener("pointermove", onPointerMove);
+      dashboard.removeEventListener("pointerleave", resetTilt);
+    };
+  }, []);
+
+  useEffect(() => {
+    function updateBackToTop() {
+      setShowBackToTop(window.scrollY > window.innerHeight * 0.85);
+    }
+    updateBackToTop();
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    return () => window.removeEventListener("scroll", updateBackToTop);
+  }, []);
+
   useEffect(() => {
     const timer = window.setTimeout(() => setIsLoading(false), 720);
     return () => window.clearTimeout(timer);
@@ -263,6 +332,14 @@ export default function App() {
         <span style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
 
+      <aside className="story-rail" aria-label="Page story progress">
+        <span className={activeSection === "platform" ? "active" : ""}>01</span>
+        <span className={activeSection === "technology" ? "active" : ""}>02</span>
+        <span className={activeSection === "asset-package" ? "active" : ""}>03</span>
+        <span className={activeSection === "investor-room" || activeSection === "diligence" ? "active" : ""}>04</span>
+        <span className={activeSection === "transaction-faq" || activeSection === "acquire" ? "active" : ""}>05</span>
+      </aside>
+
       <header className="site-header">
         <a className="logo" href="#top" aria-label="QuantiValue home">
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />
@@ -270,13 +347,13 @@ export default function App() {
         </a>
 
         <nav aria-label="Primary navigation">
-          <a href="#platform">Platform</a>
-          <a href="#technology">Technology</a>
-          <a href="#asset-package">Assets</a>
-          <a href="#investor-room">Brief</a>
-          <a href="#diligence">Diligence</a>
-          <a href="#transaction-faq">FAQ</a>
-          <a href="#acquire">Contact</a>
+          <a className={activeSection === "platform" ? "active" : ""} href="#platform">Platform</a>
+          <a className={activeSection === "technology" ? "active" : ""} href="#technology">Technology</a>
+          <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package">Assets</a>
+          <a className={activeSection === "investor-room" ? "active" : ""} href="#investor-room">Brief</a>
+          <a className={activeSection === "diligence" ? "active" : ""} href="#diligence">Diligence</a>
+          <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq">FAQ</a>
+          <a className={activeSection === "acquire" ? "active" : ""} href="#acquire">Contact</a>
         </nav>
 
         <button className="header-offer" type="button" onClick={() => setOfferOpen(true)}>
@@ -948,6 +1025,15 @@ export default function App() {
         <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>
         <a href="mailto:sales@quantivalue.com">sales@quantivalue.com</a>
       </footer>
+
+      <button
+        className={`back-to-top ${showBackToTop ? "visible" : ""}`}
+        type="button"
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        ↑
+      </button>
 
       {offerOpen && (
         <div className="modal-backdrop" onMouseDown={() => setOfferOpen(false)}>
