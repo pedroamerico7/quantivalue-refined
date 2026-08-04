@@ -1,18 +1,26 @@
-QUANTIVALUE — SPRINT 15
-Included Asset Package
+QUANTIVALUE REFINED — SPRINT 33
+UI HOTFIX: PROJECT ATLAS + STICKY TOP BAR + FAVICON
 
-FILES TO REPLACE
-- src/App.jsx
+Atualize:
 - src/styles.css
+- index.html
+- todos os arquivos incluídos em public/
 
-WHAT CHANGED
-- Added a new dark premium section before the acquisition CTA.
-- Presents the domain, identity system, live codebase and product vision as an integrated acquisition package.
-- Added an Assets navigation link.
-- Added responsive desktop, tablet and mobile layouts.
+Correções:
+1. Project Atlas não cobre mais a logo do rodapé.
+   Desktop: fica no canto inferior direito, ao lado do botão voltar ao topo.
+   Mobile: fica compacto, acima da barra de conversão.
 
-COMMIT
-feat: present included brand and product asset package
+2. Top bar permanece visível durante a rolagem.
+   O problema era o overflow:hidden no wrapper, que interferia no sticky header.
 
-VALIDATION NOTE
-The files were edited from the current Sprint 14 package. Build execution was unavailable because this environment's npm registry does not provide @vitejs/plugin-react. No dependencies or build configuration were changed.
+3. Favicon redesenhado e padronizado:
+   - favicon.ico
+   - favicon.svg
+   - PNGs 16, 32, 48 e 96
+   - Apple Touch Icon
+   - ícones 192 e 512
+   - manifest atualizado
+
+Commit sugerido:
+fix: prevent Atlas overlap and restore sticky header favicon
