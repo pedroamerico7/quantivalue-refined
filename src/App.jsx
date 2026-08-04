@@ -108,6 +108,7 @@ export default function App() {
   });
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const valuationDemo = useMemo(() => {
     const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
@@ -204,6 +205,11 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 720);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   async function submitOffer(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -236,6 +242,16 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {isLoading && (
+        <div className="brand-loader" role="status" aria-label="Loading QuantiValue">
+          <div className="brand-loader-mark" aria-hidden="true">
+            <img src="/quantum-ring.svg" alt="" />
+            <span />
+          </div>
+          <strong>QuantiValue</strong>
+          <small>Financial intelligence · Built on explainability</small>
+        </div>
+      )}
       <div
         className="scroll-progress"
         role="progressbar"
@@ -257,6 +273,7 @@ export default function App() {
           <a href="#platform">Platform</a>
           <a href="#technology">Technology</a>
           <a href="#asset-package">Assets</a>
+          <a href="#investor-room">Brief</a>
           <a href="#acquire">Contact</a>
         </nav>
 
@@ -710,6 +727,53 @@ export default function App() {
           </div>
         </section>
 
+
+        <section className="investor-room" id="investor-room">
+          <div className="investor-room-heading" data-reveal>
+            <div>
+              <p className="section-tag light">Investor brief</p>
+              <h2>A concise acquisition case, ready for review.</h2>
+            </div>
+            <p>
+              Review the strategic rationale, included assets, transfer process and
+              commercial positioning in a focused one-page acquisition brief.
+            </p>
+          </div>
+
+          <div className="investor-room-grid">
+            <article data-reveal>
+              <span>01</span>
+              <small>POSITIONING</small>
+              <h3>Category-defining name</h3>
+              <p>QuantiValue combines quantitative intelligence with commercial value in one globally legible brand.</p>
+            </article>
+            <article data-reveal>
+              <span>02</span>
+              <small>ASSET PACKAGE</small>
+              <h3>Launch-ready foundation</h3>
+              <p>Premium .COM, identity system, working website, product vision and acquisition infrastructure.</p>
+            </article>
+            <article data-reveal>
+              <span>03</span>
+              <small>TRANSFER</small>
+              <h3>Direct owner transaction</h3>
+              <p>Private discussion, secure payment, registrar transfer and delivery of the included digital assets.</p>
+            </article>
+          </div>
+
+          <div className="investor-room-actions" data-reveal>
+            <a className="investor-brief-button" href="/investor-brief.html" target="_blank" rel="noreferrer">
+              Open investor brief <Arrow />
+            </a>
+            <a className="investor-brief-download" href="/QuantiValue-Investor-Brief.pdf" download>
+              Download PDF
+            </a>
+            <button className="investor-discussion-button" type="button" onClick={() => setOfferOpen(true)}>
+              Request private discussion
+            </button>
+          </div>
+        </section>
+
         <section className="acquire" id="acquire">
           <div className="acquire-grid" aria-hidden="true" />
           <div className="acquire-copy" data-reveal>
@@ -739,7 +803,7 @@ export default function App() {
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" />
           <span className="logo-name">QuantiValue</span>
         </a>
-        <span>Premium brand available for acquisition</span>
+        <span className="footer-signature">Built for <b>AI</b> <i>·</i> <b>Finance</b> <i>·</i> <b>Valuation</b></span>
         <a href="mailto:sales@quantivalue.com">sales@quantivalue.com</a>
       </footer>
 
