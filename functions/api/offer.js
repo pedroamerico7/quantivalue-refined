@@ -16,8 +16,12 @@ function validEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function referenceFromId(id) {
-  return `QV-${String(id).padStart(6, "0")}`;
+function createPublicReference() {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const bytes = new Uint8Array(10);
+  crypto.getRandomValues(bytes);
+  const token = Array.from(bytes, (byte) => alphabet[byte % alphabet.length]).join("");
+  return `QV-${token.slice(0, 5)}-${token.slice(5)}`;
 }
 
 export async function onRequestPost({ request, env }) {
@@ -65,7 +69,7 @@ export async function onRequestPost({ request, env }) {
     const id = result.meta?.last_row_id;
     return json({
       ok: true,
-      reference: id ? referenceFromId(id) : "QV-RECEIVED",
+      reference: id ? createPublicReference() : "QV-RECEIVED",
       receivedAt: new Date().toISOString(),
     });
   } catch (error) {

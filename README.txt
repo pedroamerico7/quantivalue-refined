@@ -1,19 +1,13 @@
-QUANTIVALUE REFINED — SPRINT 38
-CONFIDENTIAL OFFER CONFIRMATION
+SPRINT 40 — FAVICON ROLLBACK + PRIVATE OFFER REFERENCE
 
 Atualize:
-- src/App.jsx
-- src/styles.css
+- index.html
 - functions/api/offer.js
+- todos os arquivos v7 em public/
 
-Novidades:
-- tela de confirmação após uma oferta enviada;
-- referência confidencial destacada;
-- botão para copiar a referência;
-- link para contato direto com acquisition@quantivalue.com;
-- fallback por e-mail quando a API falhar;
-- modal sempre reabre limpo;
-- resposta da API inclui data/hora de recebimento.
+O favicon volta ao desenho anterior aprovado.
+A referência deixa de ser sequencial e passa a ser aleatória, por exemplo:
+QV-X7K9P-M4T2Q
 
-Commit sugerido:
-feat: add confidential offer confirmation experience
+Commit:
+fix: restore approved favicon and hide offer sequence
