@@ -72,30 +72,22 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-v7.png" />
 
   <style id="qv-critical-mobile-css">
-    /*
-      Critical fallback styles.
-      These render the page correctly even if a cached Vite HTML file temporarily
-      points to an expired hashed stylesheet.
-    */
     :root{
-      --qv-bg:#070b14;
-      --qv-panel:#0d1525;
-      --qv-panel-2:#111c31;
-      --qv-line:rgba(135,158,205,.18);
-      --qv-text:#f7f9ff;
-      --qv-muted:#9da9be;
+      --qv-ink:#07101f;
+      --qv-text:#101828;
+      --qv-muted:#667189;
       --qv-blue:#3f66ff;
-      --qv-green:#20d891;
+      --qv-header:rgba(236,243,255,.92);
+      --qv-header-compact:rgba(225,235,252,.82);
+      --qv-line:rgba(63,102,255,.20);
       --qv-sans:Inter,Arial,Helvetica,sans-serif;
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--qv-bg)}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       min-width:320px;
       overflow-x:hidden;
-      color:var(--qv-text);
-      background:var(--qv-bg);
       font-family:var(--qv-sans);
       -webkit-font-smoothing:antialiased;
     }
@@ -110,12 +102,12 @@
       inset:0 0 auto;
       height:3px;
       z-index:100001;
-      background:rgba(255,255,255,.07);
+      background:rgba(63,102,255,.10);
     }
     .scroll-progress>span,.scroll-progress-bar{
       display:block;
       height:100%;
-      background:var(--qv-blue);
+      background:linear-gradient(90deg,#3f66ff,#7f9cff);
       transform-origin:left center;
     }
 
@@ -125,7 +117,7 @@
       left:0!important;
       right:0!important;
       width:100%!important;
-      min-height:68px!important;
+      min-height:70px!important;
       margin:0!important;
       padding:9px clamp(14px,4vw,72px)!important;
       display:flex!important;
@@ -134,23 +126,24 @@
       gap:18px!important;
       z-index:100000!important;
       border:0!important;
-      border-bottom:1px solid rgba(144,166,210,.18)!important;
+      border-bottom:1px solid var(--qv-line)!important;
       border-radius:0!important;
-      background:rgba(9,17,31,.78)!important;
-      box-shadow:0 12px 35px rgba(0,0,0,.18)!important;
+      background:var(--qv-header)!important;
+      box-shadow:0 10px 26px rgba(42,70,127,.09)!important;
       backdrop-filter:blur(18px) saturate(130%)!important;
       -webkit-backdrop-filter:blur(18px) saturate(130%)!important;
     }
     .site-header.is-compact{
-      min-height:58px!important;
-      background:rgba(9,17,31,.66)!important;
+      min-height:60px!important;
+      background:var(--qv-header-compact)!important;
+      box-shadow:0 7px 20px rgba(42,70,127,.06)!important;
     }
     .site-header .logo{
       display:flex!important;
       align-items:center!important;
       gap:11px!important;
       min-width:0;
-      color:#fff!important;
+      color:var(--qv-ink)!important;
       text-decoration:none!important;
     }
     .site-header .logo-symbol{
@@ -164,13 +157,13 @@
     }
     .site-header .logo-name{
       display:inline-block!important;
-      color:#fff!important;
+      color:var(--qv-ink)!important;
       font-size:19px!important;
       font-weight:850!important;
       letter-spacing:-.04em!important;
       opacity:1!important;
       mix-blend-mode:normal!important;
-      text-shadow:0 1px 8px rgba(0,0,0,.3);
+      text-shadow:none!important;
     }
     .site-header nav{
       display:flex;
@@ -179,14 +172,14 @@
       margin-left:auto;
     }
     .site-header nav a{
-      color:#bbc6d9;
+      color:#4d5a73;
       font-size:10px;
       font-weight:800;
       letter-spacing:.12em;
       text-decoration:none;
       text-transform:uppercase;
     }
-    .site-header nav a.active{color:#6f8cff}
+    .site-header nav a.active{color:#315cff}
     .site-header .header-offer,.mobile-nav-offer{
       min-height:43px;
       padding:0 19px;
@@ -194,7 +187,7 @@
       align-items:center;
       justify-content:center;
       gap:12px;
-      border:1px solid rgba(90,123,255,.55);
+      border:1px solid rgba(63,102,255,.42);
       border-radius:4px!important;
       color:#fff;
       background:linear-gradient(135deg,#315cff,#4770ff);
@@ -204,26 +197,31 @@
       text-transform:uppercase;
       text-decoration:none;
       cursor:pointer;
+      box-shadow:0 8px 18px rgba(49,92,255,.18);
     }
     .mobile-menu-toggle{display:none}
-    main{display:block;padding-top:68px}
-    section{max-width:100%}
-    .hero,.technology,.thesis,.market-opportunity,.film-strip,.pillars,
-    .asset-package,.investor-room,.product-demo,.strategic-buyer-suite,
-    .buyer-confidence,.acquisition-command-center,.diligence-room,
-    .transaction-faq,.acquire{
-      width:100%;
-      visibility:visible!important;
-      content-visibility:visible!important;
-      contain:none!important;
+    main{display:block;padding-top:70px}
+
+    /* Straighter surfaces across the page. */
+    .technology-card,.asset-card,.investor-room article,
+    .strategic-thesis-panel,.strategic-highlights article,
+    .strategic-application-grid article,.strategic-validation,
+    .product-demo-shell,.demo-control-panel,.demo-output-panel,
+    .buyer-trust-grid article,.buyer-secure-transaction,
+    .buyer-faq-list details,.buyer-enterprise-cta,
+    .command-readiness,.command-metrics,.command-checklist,
+    .command-downloads,.command-download-card,.command-transaction,
+    .transaction-faq details,.acquisition-modal,
+    .offer-success-card,.modal-card{
+      border-radius:5px!important;
     }
 
     @media(max-width:700px){
       .site-header,.site-header.is-compact{
-        min-height:57px!important;
+        min-height:58px!important;
         padding:6px 12px!important;
       }
-      .site-header.is-compact{min-height:52px!important}
+      .site-header.is-compact{min-height:53px!important}
       .site-header .logo{gap:8px!important}
       .site-header .logo-symbol{
         width:32px!important;
@@ -250,28 +248,30 @@
         display:grid!important;
         place-items:center!important;
         flex:0 0 38px!important;
-        border:1px solid rgba(255,255,255,.14)!important;
+        border:1px solid rgba(63,102,255,.20)!important;
         border-radius:3px!important;
-        color:#fff!important;
-        background:rgba(255,255,255,.055)!important;
+        color:var(--qv-ink)!important;
+        background:rgba(255,255,255,.45)!important;
       }
       .site-header nav{
         position:fixed!important;
-        top:60px!important;
-        left:8px!important;
-        right:8px!important;
-        width:auto!important;
-        max-height:calc(100dvh - 70px)!important;
+        top:61px!important;
+        left:0!important;
+        right:0!important;
+        width:100%!important;
+        max-height:calc(100dvh - 68px)!important;
         padding:16px!important;
         display:none!important;
         overflow-y:auto!important;
         flex-direction:column!important;
         align-items:stretch!important;
         gap:5px!important;
-        border:1px solid var(--qv-line)!important;
-        border-radius:4px!important;
-        background:rgba(9,17,31,.98)!important;
-        box-shadow:0 22px 55px rgba(0,0,0,.4)!important;
+        border:0!important;
+        border-top:1px solid var(--qv-line)!important;
+        border-bottom:1px solid var(--qv-line)!important;
+        border-radius:0!important;
+        background:rgba(236,243,255,.98)!important;
+        box-shadow:0 18px 40px rgba(42,70,127,.16)!important;
       }
       .site-header nav.mobile-open{display:flex!important}
       .site-header nav a{
@@ -279,10 +279,11 @@
         padding:0 12px;
         display:flex;
         align-items:center;
-        border-bottom:1px solid rgba(255,255,255,.06);
+        color:#39465e!important;
+        border-bottom:1px solid rgba(63,102,255,.10);
         font-size:10px;
       }
-      main{padding-top:57px}
+      main{padding-top:58px}
       .hero,.technology,.thesis,.market-opportunity,.film-strip,.pillars,
       .asset-package,.investor-room,.product-demo,.strategic-buyer-suite,
       .buyer-confidence,.acquisition-command-center,.diligence-room,
@@ -290,6 +291,9 @@
         min-width:0!important;
         max-width:100%!important;
         overflow:hidden!important;
+        content-visibility:visible!important;
+        contain:none!important;
+        visibility:visible!important;
       }
       .hero-content,.dashboard-showcase,.dashboard-body,.dashboard-main,
       .strategic-thesis,.strategic-highlights,.strategic-application-grid,
@@ -307,10 +311,6 @@
       .command-metrics,.command-download-grid,.command-timeline{
         display:grid!important;
         grid-template-columns:1fr!important;
-      }
-      .dashboard-chart,.dashboard-chart svg{
-        width:100%!important;
-        min-height:130px!important;
       }
     }
   </style>
