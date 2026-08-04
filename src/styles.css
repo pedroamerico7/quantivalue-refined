@@ -3574,3 +3574,150 @@ footer{
     overflow-wrap:anywhere;
   }
 }
+
+
+/* Sprint 38 — confidential offer confirmation */
+.offer-success{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(30px,5vw,58px);
+  color:#07101f;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(59,99,255,.12),transparent 36%),
+    #f7f9fd;
+}
+
+.offer-success-mark{
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  margin-bottom:24px;
+  border-radius:50%;
+  color:#fff;
+  background:#3b63ff;
+  box-shadow:0 14px 36px rgba(59,99,255,.24);
+  font-size:24px;
+  font-weight:900;
+}
+
+.offer-success h3{
+  max-width:560px;
+  margin:10px 0 16px;
+  font-size:clamp(32px,4vw,52px);
+  line-height:1.02;
+  letter-spacing:-.05em;
+}
+
+.offer-success > p{
+  max-width:600px;
+  color:#697386;
+  line-height:1.7;
+}
+
+.offer-reference{
+  margin-top:30px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:7px 20px;
+  align-items:center;
+  border:1px solid rgba(59,99,255,.15);
+  border-radius:17px;
+  background:#fff;
+}
+
+.offer-reference small{
+  color:#7b879d;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.offer-reference strong{
+  grid-column:1;
+  font-size:20px;
+  letter-spacing:.03em;
+}
+
+.offer-reference button{
+  grid-column:2;
+  grid-row:1 / span 2;
+  min-height:40px;
+  padding:0 14px;
+  border:1px solid rgba(59,99,255,.2);
+  border-radius:10px;
+  color:#2f56dc;
+  background:rgba(59,99,255,.06);
+  font-weight:800;
+  cursor:pointer;
+}
+
+.offer-success-actions{
+  margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.offer-success-actions button,
+.offer-success-actions a{
+  min-height:48px;
+  padding:0 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.offer-success-actions button{
+  border:0;
+  background:#07101f;
+  color:#fff;
+  cursor:pointer;
+}
+
+.offer-success-actions a{
+  border:1px solid rgba(7,16,31,.14);
+  color:#07101f;
+  background:#fff;
+}
+
+.offer-form .status{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.offer-form .status a{
+  color:inherit;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+@media(max-width:600px){
+  .offer-reference{
+    grid-template-columns:1fr;
+  }
+
+  .offer-reference button{
+    grid-column:1;
+    grid-row:auto;
+    width:100%;
+  }
+
+  .offer-success-actions{
+    display:grid;
+  }
+
+  .offer-form .status{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}

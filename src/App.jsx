@@ -101,6 +101,7 @@ export default function App() {
   const [views, setViews] = useState(null);
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
+  const [offerReference, setOfferReference] = useState("");
   const [demoInputs, setDemoInputs] = useState({
     revenue: 420,
     margin: 24,
@@ -354,12 +355,19 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  function openAcquisitionModal() {
+    setOfferStatus({ state: "idle", message: "" });
+    setOfferReference("");
+    setOfferOpen(true);
+  }
+
   async function submitOffer(event) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
     const payload = Object.fromEntries(data.entries());
 
+    setOfferReference("");
     setOfferStatus({ state: "sending", message: "Encrypting and submitting your offer…" });
 
     try {
@@ -372,9 +380,10 @@ export default function App() {
       if (!response.ok) throw new Error(result.error || "Unable to submit the offer.");
 
       form.reset();
+      setOfferReference(result.reference || "QV-RECEIVED");
       setOfferStatus({
         state: "success",
-        message: `Offer received. Confidential reference: ${result.reference}`,
+        message: "Your confidential offer has been received.",
       });
     } catch (error) {
       setOfferStatus({
@@ -458,7 +467,7 @@ export default function App() {
           </button>
         </nav>
 
-        <button className="header-offer" type="button" onClick={() => setOfferOpen(true)}>
+        <button className="header-offer" type="button" onClick={openAcquisitionModal}>
           BEGIN ACQUISITION <Arrow />
         </button>
       </header>
@@ -497,7 +506,7 @@ export default function App() {
             </p>
 
             <div className="hero-actions">
-              <button className="primary-cta" type="button" onClick={() => setOfferOpen(true)}>
+              <button className="primary-cta" type="button" onClick={openAcquisitionModal}>
                 Begin Acquisition <Arrow />
               </button>
               <a className="secondary-cta" href="#thesis">
@@ -949,7 +958,7 @@ export default function App() {
             <a className="investor-brief-download" href="/QuantiValue-Investor-Brief.pdf" download>
               Download PDF
             </a>
-            <button className="investor-discussion-button" type="button" onClick={() => setOfferOpen(true)}>
+            <button className="investor-discussion-button" type="button" onClick={openAcquisitionModal}>
               Begin Acquisition
             </button>
           </div>
@@ -957,7 +966,7 @@ export default function App() {
 
         <AcquisitionCenter
           views={views}
-          onOpenDiscussion={() => setOfferOpen(true)}
+          onOpenDiscussion={openAcquisitionModal}
         />
 
         <section className="transaction-faq" id="transaction-faq">
@@ -1053,7 +1062,7 @@ export default function App() {
             </div>
           </div>
 
-          <button className="acquire-button" type="button" onClick={() => setOfferOpen(true)}>
+          <button className="acquire-button" type="button" onClick={openAcquisitionModal}>
             <span>Private acquisition</span>
             <strong>Begin Acquisition</strong>
             <Arrow />
@@ -1100,7 +1109,7 @@ export default function App() {
           <span>QuantiValue.com</span>
           <strong>Private acquisition</strong>
         </div>
-        <button type="button" onClick={() => setOfferOpen(true)}>
+        <button type="button" onClick={openAcquisitionModal}>
           Discuss <Arrow />
         </button>
       </div>
@@ -1219,6 +1228,41 @@ export default function App() {
               </div>
             </div>
 
+            {offerStatus.state === "success" ? (
+              <div className="offer-success" role="status" aria-live="polite">
+                <span className="offer-success-mark" aria-hidden="true">✓</span>
+                <p className="section-tag">Offer received</p>
+                <h3>Thank you for your confidential proposal.</h3>
+                <p>
+                  Your submission is now in private owner review. Qualified buyers
+                  receive a response within 48 hours.
+                </p>
+
+                <div className="offer-reference">
+                  <small>Confidential reference</small>
+                  <strong>{offerReference || "QV-RECEIVED"}</strong>
+                  <button
+                    type="button"
+                    onClick={() => navigator.clipboard?.writeText(offerReference || "QV-RECEIVED")}
+                  >
+                    Copy reference
+                  </button>
+                </div>
+
+                <div className="offer-success-actions">
+                  <button type="button" onClick={() => setOfferOpen(false)}>
+                    Return to QuantiValue
+                  </button>
+                  <a
+                    href={`mailto:acquisition@quantivalue.com?subject=${encodeURIComponent(
+                      `QuantiValue acquisition follow-up — ${offerReference || "QV-RECEIVED"}`
+                    )}`}
+                  >
+                    Email acquisition team
+                  </a>
+                </div>
+              </div>
+            ) : (
             <form className="offer-form" onSubmit={submitOffer}>
               <div className="form-row">
                 <label>
@@ -1272,11 +1316,17 @@ export default function App() {
               </p>
 
               {offerStatus.state !== "idle" && (
-                <p className={`status ${offerStatus.state}`} role="status">
-                  {offerStatus.message}
-                </p>
+                <div className={`status ${offerStatus.state}`} role="status">
+                  <span>{offerStatus.message}</span>
+                  {offerStatus.state === "error" && (
+                    <a href="mailto:acquisition@quantivalue.com">
+                      Submit directly by email
+                    </a>
+                  )}
+                </div>
               )}
             </form>
+            )}
           </section>
         </div>
       )}

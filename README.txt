@@ -1,36 +1,19 @@
-QUANTIVALUE REFINED — SPRINT 37
-ACQUISITION COPY & CONTACT UPDATE
+QUANTIVALUE REFINED — SPRINT 38
+CONFIDENTIAL OFFER CONFIRMATION
 
 Atualize:
 - src/App.jsx
 - src/styles.css
+- functions/api/offer.js
 
-Alterações:
-- E-mail do rodapé:
-  Private acquisition
-  acquisition@quantivalue.com
-
-- Botão superior:
-  BEGIN ACQUISITION
-
-- CTAs principais:
-  Begin Acquisition
-
-- Modal:
-  Confidential Offer
-  Your Name
-  Company
-  Business Email
-  Enter your offer (USD)
-  Strategic Notes
-  Submit Confidential Offer
-
-- Campo de oferta:
-  vazio, sem valor pré-preenchido;
-  placeholder: Enter your offer (USD)
-
-- Nota:
-  All inquiries are handled confidentially. Qualified buyers receive a response within 48 hours.
+Novidades:
+- tela de confirmação após uma oferta enviada;
+- referência confidencial destacada;
+- botão para copiar a referência;
+- link para contato direto com acquisition@quantivalue.com;
+- fallback por e-mail quando a API falhar;
+- modal sempre reabre limpo;
+- resposta da API inclui data/hora de recebimento.
 
 Commit sugerido:
-feat: refine acquisition contact and confidential offer flow
+feat: add confidential offer confirmation experience

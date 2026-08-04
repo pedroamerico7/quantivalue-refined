@@ -67,6 +67,7 @@ export async function onRequestPost({ request, env }) {
     return json({
       ok: true,
       reference: id ? referenceFromId(id) : "QV-RECEIVED",
+      receivedAt: new Date().toISOString(),
     });
   } catch (error) {
     console.error("Offer insert failed", error);
