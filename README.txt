@@ -16,3 +16,4 @@ Correções:
 
 Commit:
 fix: eliminate blank mobile rendering and harden fixed header
+
