@@ -1,18 +1,12 @@
-QUANTIVALUE REFINED — SPRINT 23
-PREMIUM MOTION & STORYTELLING
+QUANTIVALUE REFINED — HOTFIX BUILD
 
-Update:
-- src/App.jsx
+Problema corrigido:
+O styles.css continha caracteres literais "\n" no início do bloco da Sprint 23.
+O PostCSS interpretava isso como CSS inválido e falhava na linha 1975 com:
+Unknown word position
+
+Atualize somente:
 - src/styles.css
 
-Visible changes:
-- Active navigation according to the visible section
-- Right-side story rail on desktop
-- Dashboard mouse parallax and cursor glow
-- Animated chart drawing
-- Richer scroll reveals
-- Back-to-top button
-- Reduced-motion accessibility support
-
-Commit:
-feat: add premium motion and storytelling navigation
+Commit sugerido:
+fix: remove escaped line breaks from motion css
