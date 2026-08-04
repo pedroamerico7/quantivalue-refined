@@ -1,18 +1,10 @@
-QUANTIVALUE — SPRINT 15
-Included Asset Package
+SPRINT 28 - Enterprise SEO Audit
 
-FILES TO REPLACE
-- src/App.jsx
-- src/styles.css
+Arquivos:
+- public/robots.txt
+- public/sitemap.xml
+- public/site.webmanifest
+- index-head-snippet.html
 
-WHAT CHANGED
-- Added a new dark premium section before the acquisition CTA.
-- Presents the domain, identity system, live codebase and product vision as an integrated acquisition package.
-- Added an Assets navigation link.
-- Added responsive desktop, tablet and mobile layouts.
-
-COMMIT
-feat: present included brand and product asset package
-
-VALIDATION NOTE
-The files were edited from the current Sprint 14 package. Build execution was unavailable because this environment's npm registry does not provide @vitejs/plugin-react. No dependencies or build configuration were changed.
+Copie o conteúdo de index-head-snippet.html para dentro do <head> do seu index.html.
+Depois faça deploy e solicite indexação no Google Search Console.
