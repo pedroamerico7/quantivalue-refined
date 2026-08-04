@@ -2425,3 +2425,58 @@ footer {
     font-size:16px;
   }
 }
+
+
+/* Sprint 29.1 — visibly blue glass header */
+.site-header{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(225,233,255,.96) 0%,
+      rgba(235,241,255,.90) 55%,
+      rgba(244,247,255,.86) 100%
+    ) !important;
+  border-bottom:1px solid rgba(59,99,255,.28) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.72) inset,
+    0 12px 38px rgba(59,99,255,.10) !important;
+  backdrop-filter:blur(24px) saturate(165%) !important;
+  -webkit-backdrop-filter:blur(24px) saturate(165%) !important;
+}
+
+.site-header::after{
+  height:2px !important;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59,99,255,.18) 14%,
+    rgba(59,99,255,.62) 50%,
+    rgba(59,99,255,.18) 86%,
+    transparent 100%
+  ) !important;
+}
+
+.logo-name{
+  color:#07101f !important;
+  font-weight:820 !important;
+}
+
+.site-header nav a{
+  color:#33405a !important;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active{
+  color:#244bd3 !important;
+}
+
+.header-offer{
+  background:rgba(255,255,255,.52) !important;
+  border-color:rgba(59,99,255,.30) !important;
+}
+
+@media (max-width:700px){
+  .site-header{
+    background:rgba(228,236,255,.96) !important;
+  }
+}
