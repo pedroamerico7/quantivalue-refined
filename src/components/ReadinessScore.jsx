@@ -1,20 +1,18 @@
-export default function ReadinessScore({ score = 98 }) {
-  const safeScore = Math.max(0, Math.min(100, Number(score) || 0));
-
+export default function ReadinessScore() {
   return (
     <div className="command-readiness">
       <div
         className="command-readiness-ring"
-        style={{ "--readiness": `${safeScore}%` }}
+        style={{ "--readiness": "100%" }}
         role="img"
-        aria-label={`Diligence readiness: ${safeScore} percent`}
+        aria-label="Acquisition package prepared"
       >
-        <span>{safeScore}%</span>
+        <span>✓</span>
       </div>
 
       <div>
-        <small>Diligence readiness</small>
-        <h3>Launch-ready foundation</h3>
+        <small>Acquisition package</small>
+        <h3>Prepared for buyer review</h3>
         <p>
           Core brand, product, technical and transaction materials are assembled
           for qualified buyer review.

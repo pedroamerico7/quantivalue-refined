@@ -63,8 +63,8 @@ export default function InstitutionalTrust({ onOpenDiscussion }) {
             <span>PRIVATE OWNER REVIEW</span>
             <h2>Move forward through a private owner review.</h2>
             <p>
-              No broker, no public negotiation and no automated response. Qualified
-              inquiries are reviewed directly and answered within 48 hours.
+              Qualified inquiries are reviewed directly by the owner. A recognized
+              marketplace or escrow-supported process can be used for closing.
             </p>
           </div>
           <a className="institutional-process-link" href="#diligence">

@@ -6,9 +6,9 @@ function formatMetric(value) {
 
 export default function MetricsPanel() {
   const metrics = [
-    { label: "Organic visibility", value: "International", note: "Inbound discovery" },
+    { label: "Brand structure", value: "Quanti + Value", note: "Category-relevant naming" },
     { label: "Included assets", value: 4, note: "Transferable package" },
-    { label: "Readiness score", value: "98%", note: "Diligence preparation" },
+    { label: "Acquisition status", value: "Prepared", note: "Buyer review package" },
     { label: "Availability", value: "Open", note: "Private discussion" },
   ];
 

@@ -8,11 +8,11 @@ const checklist = [
   ["Brand", "Quantum Ring, wordmark, palette and positioning"],
   ["Product", "Interactive valuation demonstration"],
   ["Technical", "React, Vite and Cloudflare deployment"],
-  ["Documentation", "Investor brief and asset manifest"],
+  ["Documentation", "Acquisition brief and asset manifest"],
   ["Transaction", "Buyer-specific terms agreed privately"],
 ];
 
-export default function AcquisitionCenter({ views, onOpenDiscussion }) {
+export default function AcquisitionCenter({ onOpenDiscussion }) {
   return (
     <section className="acquisition-command-center" id="diligence">
       <div className="command-heading" data-reveal>
@@ -21,14 +21,14 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
           <h2>One executive view of the entire opportunity.</h2>
         </div>
         <p>
-          Review readiness, transferable assets, live site interest and the
+          Review readiness, transferable assets, buyer materials and the
           proposed path from first inquiry to secure ownership.
         </p>
       </div>
 
       <div className="command-overview">
-        <ReadinessScore score={98} />
-        <MetricsPanel views={views} />
+        <ReadinessScore />
+        <MetricsPanel />
       </div>
 
       <div className="command-body">
@@ -61,9 +61,9 @@ export default function AcquisitionCenter({ views, onOpenDiscussion }) {
           <div className="command-download-grid">
             <DownloadCard
               type="PDF"
-              title="Investor Brief"
+              title="Acquisition Brief"
               meta="Executive overview"
-              href="/QuantiValue-Investor-Brief.pdf"
+              href="/QuantiValue-Acquisition-Brief.pdf"
             />
             <DownloadCard
               type="CSV"

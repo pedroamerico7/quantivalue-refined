@@ -8,10 +8,10 @@ const applications = [
 ];
 
 const validationSignals = [
-  "Existing international organic traffic",
-  "International audience signals",
-  "Direct navigation and brand discovery",
-  "Detailed analytics available during buyer review",
+  "Clear quantitative-finance association",
+  "Natural fit across AI and valuation",
+  "Memorable two-word construction",
+  "Transferable brand and product assets",
 ];
 
 export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
@@ -43,7 +43,7 @@ export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
           </p>
           <div>
             <span>Private process</span>
-            <span>Global rights</span>
+            <span>Transferable assets</span>
             <span>Direct owner</span>
           </div>
         </div>
@@ -74,11 +74,11 @@ export default function StrategicBuyerAcquisition({ onOpenDiscussion }) {
 
       <div className="strategic-validation strategic-validation-compact" data-reveal>
         <div>
-          <p className="section-tag light">Market validation</p>
-          <h2>International attention already exists.</h2>
+          <p className="section-tag light">Brand validation</p>
+          <h2>The name communicates its category.</h2>
           <p>
-            QuantiValue receives international organic traffic. Supporting analytics
-            are reserved for qualified buyers.
+            QuantiValue connects quantitative intelligence with value in a form that
+            can extend across financial software, AI and enterprise analytics.
           </p>
         </div>
 

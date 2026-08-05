@@ -42,7 +42,7 @@ const includedAssets = [
   {
     number: "01",
     title: "QuantiValue.com",
-    copy: "The exact-match premium .COM domain with direct owner transfer and global commercial flexibility.",
+    copy: "A distinctive .COM domain with direct owner transfer and broad commercial flexibility.",
     meta: "DOMAIN · DIGITAL IDENTITY",
   },
   {
@@ -95,21 +95,13 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
-const FALLBACK_VIEWS = 1070;
-
-function formatViews(value) {
-  if (!Number.isFinite(Number(value))) return "Syncing";
-  return Number(value).toLocaleString("en-US");
-}
-
 export default function App() {
-  const [views, setViews] = useState(null);
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerStatus, setOfferStatus] = useState({ state: "idle", message: "" });
   const [offerReference, setOfferReference] = useState("");
   const [offerErrors, setOfferErrors] = useState({});
   const [demoInputs, setDemoInputs] = useState({
-    revenue: 420,
+    revenue: 28,
     margin: 24,
     growth: 18,
     industry: "Software",
@@ -117,24 +109,21 @@ export default function App() {
   const [demoRunning, setDemoRunning] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState("top");
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerCompact, setHeaderCompact] = useState(false);
 
   const valuationDemo = useMemo(() => {
-    const revenue = Math.max(10, Number(demoInputs.revenue) || 10);
+    const revenue = Math.min(100, Math.max(1, Number(demoInputs.revenue) || 1));
     const margin = Math.max(1, Number(demoInputs.margin) || 1);
     const growth = Math.max(0, Number(demoInputs.growth) || 0);
     const baseMultiple = industryMultiples[demoInputs.industry] || 6;
     const qualityAdjustment = 1 + margin / 100 * 0.8 + growth / 100 * 1.15;
     const enterpriseValue = revenue * baseMultiple * qualityAdjustment;
-    const confidence = Math.min(98, Math.round(78 + margin * 0.35 + growth * 0.25));
     return {
       enterpriseValue,
       low: enterpriseValue * 0.88,
       high: enterpriseValue * 1.12,
-      confidence,
       multiple: baseMultiple * qualityAdjustment,
     };
   }, [demoInputs]);
@@ -169,35 +158,6 @@ export default function App() {
 
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const storageKey = "quantivalue-view-counted-at";
-    let last = 0;
-    try {
-      last = Number(window.localStorage.getItem(storageKey) || 0);
-    } catch {
-      last = 0;
-    }
-    const shouldIncrement = Date.now() - last > 24 * 60 * 60 * 1000;
-
-    fetch("/api/views", {
-      method: shouldIncrement ? "POST" : "GET",
-      headers: { Accept: "application/json" },
-    })
-      .then((res) => res.ok ? res.json() : Promise.reject())
-      .then((data) => {
-        const reportedViews = Number(data?.views);
-        setViews(Number.isFinite(reportedViews) ? reportedViews : FALLBACK_VIEWS);
-        if (shouldIncrement && data?.persistent !== false) {
-          try {
-            window.localStorage.setItem(storageKey, String(Date.now()));
-          } catch {
-            // Storage may be unavailable in private browsing.
-          }
-        }
-      })
-      .catch(() => setViews(FALLBACK_VIEWS));
   }, []);
 
   useEffect(() => {
@@ -246,63 +206,6 @@ export default function App() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-    };
-  }, []);
-
-
-  useEffect(() => {
-    const sectionIds = [
-      "platform",
-      "technology",
-      "asset-package",
-      "investor-room",
-      "diligence",
-      "transaction-faq",
-      "acquire",
-    ];
-    let frameId = null;
-
-    function updateActiveSection() {
-      if (window.scrollY < Math.max(180, window.innerHeight * 0.42)) {
-        setActiveSection("top");
-        frameId = null;
-        return;
-      }
-
-      const targetLine = window.innerHeight * 0.38;
-      let current = "platform";
-      let bestDistance = Number.POSITIVE_INFINITY;
-
-      sectionIds.forEach((id) => {
-        const section = document.getElementById(id);
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        const containsLine = rect.top <= targetLine && rect.bottom >= targetLine;
-        const distance = containsLine ? 0 : Math.min(
-          Math.abs(rect.top - targetLine),
-          Math.abs(rect.bottom - targetLine)
-        );
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          current = id;
-        }
-      });
-
-      setActiveSection(current);
-      frameId = null;
-    }
-
-    function onPositionChange() {
-      if (frameId === null) frameId = window.requestAnimationFrame(updateActiveSection);
-    }
-
-    updateActiveSection();
-    window.addEventListener("scroll", onPositionChange, { passive: true });
-    window.addEventListener("resize", onPositionChange);
-    return () => {
-      window.removeEventListener("scroll", onPositionChange);
-      window.removeEventListener("resize", onPositionChange);
       if (frameId !== null) window.cancelAnimationFrame(frameId);
     };
   }, []);
@@ -458,15 +361,6 @@ export default function App() {
         <span style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
 
-      <aside className="story-rail" aria-label="Page story progress">
-        <a className={activeSection === "top" ? "active" : ""} href="#top" aria-label="Return to page introduction">00</a>
-        <a className={activeSection === "platform" ? "active" : ""} href="#platform" aria-label="Go to platform">01</a>
-        <a className={activeSection === "technology" ? "active" : ""} href="#technology" aria-label="Go to technology">02</a>
-        <a className={activeSection === "asset-package" ? "active" : ""} href="#asset-package" aria-label="Go to assets">03</a>
-        <a className={activeSection === "investor-room" || activeSection === "diligence" ? "active" : ""} href="#investor-room" aria-label="Go to investor materials">04</a>
-        <a className={activeSection === "transaction-faq" || activeSection === "acquire" ? "active" : ""} href="#transaction-faq" aria-label="Go to transaction information">05</a>
-      </aside>
-
       <header className={`site-header ${headerCompact ? "is-compact" : ""}`}>
         <a className="logo" href="#top" aria-label="QuantiValue home" onClick={() => setMobileMenuOpen(false)}>
           <img className="logo-symbol" src="/quantum-ring.svg" alt="" aria-hidden="true" width="64" height="64" decoding="async" />
@@ -492,10 +386,10 @@ export default function App() {
         >
           <a href="#overview" onClick={() => setMobileMenuOpen(false)}>Overview</a>
           <a href="#strategic-opportunity" onClick={() => setMobileMenuOpen(false)}>Applications</a>
-          <a className={activeSection === "platform" ? "active" : ""} href="#platform" onClick={() => setMobileMenuOpen(false)}>AI Platform</a>
+          <a href="#platform" onClick={() => setMobileMenuOpen(false)}>AI Platform</a>
           <a href="#institutional-trust" onClick={() => setMobileMenuOpen(false)}>Process</a>
-          <a className={activeSection === "diligence" ? "active" : ""} href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
-          <a className={activeSection === "transaction-faq" ? "active" : ""} href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+          <a href="#diligence" onClick={() => setMobileMenuOpen(false)}>Diligence</a>
+          <a href="#transaction-faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
           <a
             className="mobile-nav-offer"
             href="#acquire"
@@ -556,9 +450,9 @@ export default function App() {
             </p>
 
             <div className="hero-proof">
-              <div className="visitor-proof" aria-label="International organic traffic">
-                <strong><span className="counter-live-dot" aria-hidden="true" />Organic</strong>
-                <span>international traffic</span>
+              <div>
+                <strong>Memorable</strong>
+                <span>clear two-word construction</span>
               </div>
               <div>
                 <strong>Global .COM</strong>
@@ -581,7 +475,7 @@ export default function App() {
                 <img src="/quantum-ring.svg" alt="" aria-hidden="true" width="48" height="48" decoding="async" />
                 <span>QuantiValue Intelligence</span>
               </div>
-              <div className="dashboard-status"><i /> Live model</div>
+              <div className="dashboard-status"><i /> Concept preview</div>
             </div>
 
             <div className="dashboard-body">
@@ -598,17 +492,17 @@ export default function App() {
                     <small>ENTERPRISE OVERVIEW</small>
                     <strong>Northstar Analytics</strong>
                   </div>
-                  <span>Updated now</span>
+                  <span>Illustrative scenario</span>
                 </div>
 
                 <div className="dashboard-kpis">
-                  <article><small>Enterprise value</small><strong>$2.43B</strong><span>+4.2%</span></article>
-                  <article><small>AI confidence</small><strong>98%</strong><span>High</span></article>
-                  <article><small>Risk score</small><strong>18</strong><span>Low</span></article>
+                  <article><small>Enterprise value</small><strong>$243M</strong><span>+4.2%</span></article>
+                  <article><small>Model mode</small><strong>AI</strong><span>Illustrative</span></article>
+                  <article><small>Risk view</small><strong>Low</strong><span>Scenario</span></article>
                 </div>
 
                 <div className="dashboard-chart">
-                  <div className="chart-meta"><span>Valuation range</span><strong>$2.18B — $2.67B</strong></div>
+                  <div className="chart-meta"><span>Valuation range</span><strong>$218M — $267M</strong></div>
                   <svg viewBox="0 0 520 180" role="img" aria-label="Conceptual valuation trend chart">
                     <defs>
                       <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
@@ -625,7 +519,7 @@ export default function App() {
                 <div className="dashboard-insight">
                   <div className="insight-mark">AI</div>
                   <div><small>EXPLAINABLE INSIGHT</small><p>Value increased as recurring revenue improved and the discount rate declined.</p></div>
-                  <strong>94%</strong>
+                  <strong>Traceable</strong>
                 </div>
               </div>
             </div>
@@ -663,7 +557,7 @@ export default function App() {
                 Annual revenue
                 <span className="demo-input-wrap">
                   <i>$</i>
-                  <input name="revenue" type="number" min="10" step="10" value={demoInputs.revenue} onChange={updateDemoInput} />
+                  <input name="revenue" type="number" min="1" max="100" step="1" value={demoInputs.revenue} onChange={updateDemoInput} />
                   <b>M</b>
                 </span>
               </label>
@@ -700,21 +594,21 @@ export default function App() {
               <div className="demo-results-top">
                 <div>
                   <span>Enterprise value</span>
-                  <strong>${(valuationDemo.enterpriseValue / 1000).toFixed(2)}B</strong>
+                  <strong>${Math.round(valuationDemo.enterpriseValue)}M</strong>
                 </div>
                 <div>
-                  <span>AI confidence</span>
-                  <strong>{valuationDemo.confidence}%</strong>
+                  <span>Model mode</span>
+                  <strong>Illustrative</strong>
                 </div>
               </div>
               <div className="demo-range-card">
                 <div>
                   <span>Comparable range</span>
-                  <strong>${(valuationDemo.low / 1000).toFixed(2)}B — ${(valuationDemo.high / 1000).toFixed(2)}B</strong>
+                  <strong>${Math.round(valuationDemo.low)}M — ${Math.round(valuationDemo.high)}M</strong>
                 </div>
                 <div className="demo-range-track" aria-hidden="true">
-                  <i style={{ width: `${Math.min(92, valuationDemo.confidence)}%` }} />
-                  <b style={{ left: `${Math.min(90, Math.max(18, valuationDemo.confidence - 8))}%` }} />
+                  <i style={{ width: "68%" }} />
+                  <b style={{ left: "58%" }} />
                 </div>
               </div>
               <div className="demo-explainability">
@@ -738,10 +632,7 @@ export default function App() {
 
         <InstitutionalTrust onOpenDiscussion={openAcquisitionModal} />
 
-        <AcquisitionCenter
-          views={views}
-          onOpenDiscussion={openAcquisitionModal}
-        />
+        <AcquisitionCenter onOpenDiscussion={openAcquisitionModal} />
 
         <section className="transaction-faq" id="transaction-faq">
           <div className="transaction-faq-heading" data-reveal>
@@ -849,7 +740,7 @@ export default function App() {
             <div className="acquire-details">
               <span>Global .COM</span>
               <span>Secure transfer</span>
-              <span>Global rights</span>
+              <span>Transferable assets</span>
             </div>
           </div>
 
@@ -869,7 +760,7 @@ export default function App() {
         <span className="footer-signature">
           <b>Global .COM Asset</b>
           <i>·</i>
-          International organic traffic
+          Buyer-ready brand package
           <i>·</i>
           Acquisitions worldwide
         </span>
@@ -922,8 +813,8 @@ export default function App() {
               <p className="section-tag light">Private offer</p>
               <h2 id="offer-title">Private Offer</h2>
               <p className="modal-owner-note">
-                Your proposal is reviewed only by the owner. No broker, no public
-                marketplace and no automated negotiation.
+                Your proposal is reviewed by the owner. A secure marketplace or
+                escrow-supported process can be used to complete the transaction.
               </p>
               <p>
                 Submit a confidential proposal for QuantiValue.com. Your information
@@ -931,7 +822,7 @@ export default function App() {
               </p>
               <div className="modal-stat">
                 <span className="live-dot" />
-                <strong>International organic traffic</strong>
+                <strong>Secure acquisition process</strong>
               </div>
             </div>
 

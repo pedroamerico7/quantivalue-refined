@@ -2888,7 +2888,7 @@ footer {
   padding:28px;
 }
 .command-readiness-ring{
-  --readiness:98%;
+  --readiness:100%;
   position:relative;
   flex:0 0 auto;
   width:116px;

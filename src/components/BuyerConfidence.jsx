@@ -143,8 +143,8 @@ export default function BuyerConfidence({ onOpenDiscussion }) {
             <a href="/enterprise.html">
               Enterprise Overview <span aria-hidden="true">↗</span>
             </a>
-            <a href="/investor-brief.html">
-              Open Executive Brief <span aria-hidden="true">↗</span>
+            <a href="/acquisition-brief.html">
+              Open Acquisition Brief <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
