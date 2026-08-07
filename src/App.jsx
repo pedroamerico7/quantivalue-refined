@@ -766,14 +766,15 @@ export default function App() {
         </span>
         <div className="footer-acquisition-contact">
           <small>Direct contact</small>
-          <button
+          <a
             className="footer-email"
-            type="button"
-            onClick={openAcquisitionModal}
-            aria-label="Open the private contact form"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=acquisition%40quantivalue.com&su=QuantiValue.com%20acquisition%20inquiry"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Compose an email to acquisition@quantivalue.com in Gmail"
           >
             acquisition@quantivalue.com
-          </button>
+          </a>
         </div>
       </footer>
 
@@ -852,9 +853,11 @@ export default function App() {
                     Return to QuantiValue
                   </button>
                   <a
-                    href={`mailto:acquisition@quantivalue.com?subject=${encodeURIComponent(
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=acquisition%40quantivalue.com&su=${encodeURIComponent(
                       `QuantiValue follow-up — ${offerReference || "QV-RECEIVED"}`
                     )}`}
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Email owner
                   </a>
@@ -945,7 +948,11 @@ export default function App() {
                 <div className={`status ${offerStatus.state}`} role="status">
                   <span>{offerStatus.message}</span>
                   {offerStatus.state === "error" && (
-                    <a href="mailto:acquisition@quantivalue.com">
+                    <a
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=acquisition%40quantivalue.com&su=QuantiValue.com%20acquisition%20inquiry"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Submit directly by email
                     </a>
                   )}
